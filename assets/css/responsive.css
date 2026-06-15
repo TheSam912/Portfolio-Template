@@ -1,0 +1,879 @@
+/* ===================================
+   LARGE LAPTOP
+=================================== */
+
+@media (max-width: 1200px){
+
+}
+
+
+/* ===================================
+   TABLET LANDSCAPE
+=================================== */
+
+@media (max-width: 1150px){
+
+   
+    /* NAVBAR */
+
+    .navbar{
+
+        position:fixed;
+
+        top:15px;
+
+        left:5%;
+
+        right:5%;
+
+        width:auto;
+
+        margin:0;
+
+        z-index:9997;
+    }
+
+    .nav-links{
+
+        display:none;
+    }
+
+    .talk-btn{
+
+        display:none;
+    }
+
+    .menu-toggle{
+
+        display:flex;
+    }
+
+    .mobile-menu{
+
+        display:flex;
+    }
+
+
+    /* HERO */
+
+    .hero{
+
+        flex-direction:column-reverse;
+
+        gap:50px;
+    }
+
+    .hero-left{
+
+        width:100%;
+
+        max-width:none;
+    }
+
+    .hero-right{
+
+        width:calc(100% + 10%);
+
+        margin-left:-5%;
+
+        margin-right:-5%;
+
+          margin-top:45px;
+
+        display:block;
+    }
+
+    .hero-right img{
+
+        width:100%;
+
+        max-width:none;
+
+        height:auto;
+
+        display:block;
+    }
+
+    
+    
+    .hero-btn-primary,
+    .hero-btn-secondary{
+
+        min-width:220px;
+
+        height:58px;
+
+        font-size:15px;
+    }
+
+    /* stats */
+
+    .stats-wrapper{
+
+        grid-template-columns:repeat(2,1fr) !important;
+
+        gap:20px;
+    } 
+
+    /* about */
+
+        .about-wrapper{
+
+        grid-template-columns:1fr;
+
+        gap:40px;
+    }
+
+    .about-left{
+
+        order:1;
+    }
+
+    .about-right{
+
+        order:2;
+    }
+
+    .about-title{
+
+        max-width:100%;
+    }
+
+    .about-text{
+
+        max-width:100%;
+    }
+
+    /* services */
+
+    .services-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:20px;
+
+    /* banner */ 
+
+    }
+
+       .banner-section img{
+
+        height:auto;
+    }
+
+    /* skills */
+
+     .skills-wrapper{
+
+        grid-template-columns:
+        repeat(4,1fr);
+    }
+
+    /* experience */
+
+    .experience-section{
+
+        margin-top:60px;
+    }
+
+    .timeline{
+
+        padding-left:34px;
+    }
+
+    .timeline-dot{
+
+        left:-28px;
+    }
+
+    /* portfolio */
+
+    .portfolio-section{
+
+        margin-top:60px;
+    }
+
+    .portfolio-grid{
+
+        gap:20px;
+    }
+
+    /* contact */
+
+    .contact-wrapper{
+
+        grid-template-columns:1fr;
+
+        gap:30px;
+    }
+
+    .contact-form{
+
+        order:1;
+    }
+
+    .contact-info{
+
+        order:2;
+
+        margin-top:0;
+    }
+
+
+
+}
+
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media (max-width: 768px){
+
+   .hero{
+
+        gap:35px;
+    }
+
+    .hero-title{
+
+        font-size:34px;
+
+        line-height:1.35;
+    }
+
+    .hero-description{
+
+        font-size:16px;
+
+        line-height:1.8;
+
+        max-width:100%;
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        gap:14px;
+
+        width:100%;
+    }
+
+    .hero-btn-primary,
+    .hero-btn-secondary{
+
+        width:100%;
+
+        justify-content:center;
+
+        box-sizing:border-box;
+    }
+
+    /* stats */
+
+    .stats-section{
+
+        margin-top:50px;
+    }
+
+    .stats-wrapper{
+
+        grid-template-columns:1fr !important;
+
+        gap:16px;
+    }
+    .stats-item{
+
+        padding:22px 20px;
+    }
+
+    .stats-item h3{
+
+        font-size:28px;
+    }
+
+    /* about */
+
+      .about-section{
+
+        margin-top:60px;
+    }
+
+    .about-wrapper{
+
+        gap:30px;
+    }
+
+    .about-title{
+
+        font-size:28px;
+
+        line-height:1.35;
+    }
+
+    .about-text{
+
+        font-size:15px;
+
+        line-height:1.9;
+    }
+
+    .info-card{
+
+        padding:24px;
+    }
+
+    .info-item{
+
+        gap:14px;
+    }
+
+    .info-item i{
+
+        width:44px;
+
+        height:44px;
+
+        min-width:44px;
+
+        font-size:15px;
+    }
+    
+    /* services */
+
+     .services-section{
+
+        margin-top:60px;
+    }
+
+    .services-title{
+
+        font-size:28px;
+
+        line-height:1.35;
+    }
+
+    .services-grid{
+
+        grid-template-columns:1fr;
+
+        gap:16px;
+    }
+
+    .service-card{
+
+        padding:22px;
+    }
+
+    .service-top{
+
+        margin-bottom:14px;
+    }
+    
+    /* banner */
+
+       .banner-section{
+
+        margin-top:0;
+    }
+
+    .banner-section img{
+
+        width:100%;
+
+        height:auto;
+
+        display:block;
+    }
+
+    /* skills */
+
+     .skills-section{
+
+        margin-top:40px;
+    }
+
+    .skills-title{
+
+        font-size:28px;
+
+        line-height:1.35;
+    }
+
+    .skills-wrapper{
+
+        grid-template-columns:
+        repeat(3,1fr);
+
+        padding:14px;
+
+        gap:10px;
+    }
+
+    .skill-item{
+
+        flex-direction:column;
+
+        gap:8px;
+
+        min-height:110px;
+
+        padding:14px 10px;
+    }
+
+    .skill-item img{
+
+        width:42px;
+
+        height:42px;
+    }
+
+    .skill-item span{
+
+        font-size:13px;
+
+        text-align:center;
+    }
+
+    /* experience */
+
+     .experience-title{
+
+        font-size:28px;
+    }
+
+    .experience-head{
+
+        margin-bottom:30px;
+    }
+
+    .timeline{
+
+        padding-left:28px;
+    }
+
+    .timeline::before{
+
+        left:8px;
+    }
+
+    .timeline-dot{
+
+        left:-24px;
+
+        width:10px;
+
+        height:10px;
+    }
+
+    .timeline-card{
+
+        padding:22px;
+    }
+
+    .timeline-card h3{
+
+        font-size:17px;
+    }
+
+    .timeline-card h4{
+
+        font-size:13px;
+    }
+
+    .timeline-card li{
+
+        font-size:13px;
+
+        line-height:1.75;
+    }
+
+    /* portfolio */
+
+      .portfolio-title{
+
+        font-size:28px;
+    }
+
+    .portfolio-grid{
+
+        grid-template-columns:1fr;
+
+        gap:16px;
+    }
+
+    .portfolio-item{
+
+        padding:16px;
+
+        border-radius:20px;
+    }
+
+    /* contact */ 
+
+      .contact-section{
+
+        margin-top:60px;
+    }
+
+    .contact-title{
+
+        font-size:28px;
+
+        line-height:1.35;
+
+        margin-bottom:24px;
+    }
+
+    .contact-info{
+
+        padding:24px;
+    }
+
+    .input-box{
+
+        height:54px;
+
+        padding:0 16px;
+    }
+
+    .textarea-box{
+
+        height:150px;
+        padding-top:20px;
+    }
+
+    .textarea-box i{
+
+    margin-top:4px;
+}
+
+
+.input-box input,
+.input-box textarea{
+
+    font-size:16px;
+}
+
+/* footer */
+
+  .footer-wrapper{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+        justify-items:center;
+
+        text-align:center;
+    }
+
+    .footer-logo{
+
+        justify-self:center;
+    }
+
+    .footer-socials{
+
+        justify-self:center;
+
+        order:2;
+    }
+
+    .footer-copy{
+
+        justify-self:center;
+
+        order:3;
+
+        white-space:normal;
+    }
+
+     .footer-logo{
+
+        display:none;
+    }
+
+    /* success modal */
+
+     .success-modal-content{
+
+        width:90%;
+
+        padding:28px 22px;
+
+        border-radius:20px;
+    }
+
+    .success-icon{
+
+        width:68px;
+
+        height:68px;
+
+        font-size:26px;
+
+        margin-bottom:18px;
+    }
+
+    .success-modal h3{
+
+        font-size:22px;
+    }
+
+    .success-modal p{
+
+        font-size:14px;
+
+        line-height:1.8;
+    }
+
+    .success-modal button{
+
+        height:50px;
+    }
+
+}
+
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width: 576px){
+
+     .hero-title{
+
+        font-size:28px;
+    }
+
+    .hero-description{
+
+        font-size:15px;
+    }
+
+    .hero-badge{
+
+        font-size:13px;
+    }
+
+    /* stats */
+
+     .stats-item{
+
+        gap:14px;
+
+        padding:20px 18px;
+    }
+
+    .stats-icon{
+
+        width:52px;
+
+        height:52px;
+
+        min-width:52px;
+
+        font-size:18px;
+    }
+
+    .stats-item h3{
+
+        font-size:26px;
+    }
+
+    .stats-item p{
+
+        font-size:13px;
+    }
+
+    /*about*/
+
+     .about-title{
+
+        font-size:24px;
+    }
+
+    .about-text{
+
+        font-size:14px;
+    }
+
+    .section-tag{
+
+        font-size:11px;
+    }
+
+    .info-card{
+
+        padding:20px;
+    }
+
+    /* services */
+
+      .services-title{
+
+        font-size:24px;
+    }
+
+    .service-card{
+
+        padding:20px;
+    }
+
+    .service-icon{
+
+        width:48px;
+
+        height:48px;
+
+        min-width:48px;
+
+        font-size:16px;
+    }
+
+    .service-top h3{
+
+        font-size:16px;
+    }
+
+    .service-card p{
+
+        font-size:13px;
+
+        line-height:1.75;
+    }
+
+    /* skills */
+
+    .skills-title{
+
+        font-size:24px;
+    }
+
+    .skill-item{
+
+        min-height:95px;
+    }
+
+    .skill-item img{
+
+        width:38px;
+
+        height:38px;
+    }
+
+    .skill-item span{
+
+        font-size:12px;
+    }
+
+    /* experience */
+
+    .experience-title{
+
+        font-size:24px;
+    }
+
+    .timeline{
+
+        padding-left:22px;
+    }
+
+    .timeline::before{
+
+        left:6px;
+    }
+
+    .timeline-dot{
+
+        left:-18px;
+
+        width:9px;
+
+        height:9px;
+    }
+
+    .timeline-card{
+
+        padding:18px;
+    }
+
+    .experience-date{
+
+        font-size:12px;
+    }
+
+    .timeline-card h3{
+
+        font-size:16px;
+    }
+
+    /* portfolio */
+
+    .portfolio-title{
+
+        font-size:24px;
+    }
+
+    .portfolio-item{
+
+        padding:14px;
+
+        border-radius:18px;
+    }
+
+    /* footer */
+
+     .footer-copy{
+
+        font-size:12px;
+
+        line-height:1.6;
+    }
+
+    .footer-socials{
+
+        gap:16px;
+    }
+
+    /* success modal */
+
+     .success-modal-content{
+
+        width:92%;
+
+        padding:24px 18px;
+    }
+
+    .success-icon{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:22px;
+    }
+
+    .success-modal h3{
+
+        font-size:20px;
+    }
+
+    .success-modal p{
+
+        font-size:13px;
+
+        line-height:1.7;
+    }
+
+    .success-modal button{
+
+        width:100%;
+
+        height:48px;
+
+        font-size:14px;
+    }
+}

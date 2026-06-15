@@ -1,3 +1,9 @@
+<?php
+
+/** @var array $content */
+
+?>
+
 <section class="stats-section">
 
     <div class="stats-wrapper">
@@ -12,9 +18,9 @@
 
             <div class="stats-content">
 
-                <h3>80+</h3>
+                <h3><?= $content['stats_projects_count']; ?></h3>
 
-                <p>Projects Completed</p>
+                <p><?= $content['stats_projects_text']; ?></p>
 
             </div>
 
@@ -30,9 +36,9 @@
 
             <div class="stats-content">
 
-                <h3>98%</h3>
+                <h3><?= $content['stats_satisfaction_count']; ?></h3>
 
-                <p>Client Satisfaction</p>
+                <p><?= $content['stats_satisfaction_text']; ?></p>
 
             </div>
 
@@ -48,9 +54,9 @@
 
             <div class="stats-content">
 
-                <h3>20+</h3>
+                <h3><?= $content['stats_clients_count']; ?></h3>
 
-                <p>Happy Clients</p>
+                <p><?= $content['stats_clients_text']; ?></p>
 
             </div>
 
@@ -66,9 +72,9 @@
 
             <div class="stats-content">
 
-                <h3>7+</h3>
+                <h3><?= $content['stats_experience_count']; ?></h3>
 
-                <p>Years Experience</p>
+                <p><?= $content['stats_experience_text']; ?></p>
 
             </div>
 

@@ -1,3 +1,9 @@
+<?php
+
+/** @var array $content */
+
+?>
+
 <section id="contact" class="contact-section">
 
     <div class="contact-wrapper">
@@ -10,15 +16,19 @@
 
                 <span class="tag-dot"></span>
 
-                LET'S WORK TOGETHER
+                <?= $content['contact_tag']; ?>
 
             </span>
 
             <h2 class="contact-title">
 
-                Have a project in mind?
+                <?= $content['contact_title_line_1']; ?>
 
-                <span>Let's build it together.</span>
+                <span>
+
+                    <?= $content['contact_title_line_2']; ?>
+
+                </span>
 
             </h2>
 
@@ -26,7 +36,7 @@
                 id="contactForm"
                 action="https://api.web3forms.com/submit"
                 method="POST">
-                
+
                 <input
                     type="hidden"
                     name="access_key"
@@ -39,7 +49,7 @@
                     <input
                         type="text"
                         name="name"
-                        placeholder="Your Name"
+                        placeholder="<?= $content['contact_name_placeholder']; ?>"
                         required>
 
                 </div>
@@ -51,7 +61,7 @@
                     <input
                         type="email"
                         name="email"
-                        placeholder="Your Email"
+                        placeholder="<?= $content['contact_email_placeholder']; ?>"
                         required>
 
                 </div>
@@ -62,7 +72,7 @@
 
                     <textarea
                         name="message"
-                        placeholder="Tell me about your project..."
+                        placeholder="<?= $content['contact_message_placeholder']; ?>"
                         required></textarea>
 
                 </div>
@@ -71,7 +81,7 @@
                     type="submit"
                     class="primary-btn">
 
-                    Send Message
+                    <?= $content['contact_button']; ?>
 
                 </button>
 
@@ -88,43 +98,52 @@
 
                 <span class="tag-dot"></span>
 
-                CONTACT INFO
+                <?= $content['contact_info_tag']; ?>
 
             </span>
 
             <div class="contact-links">
 
-                <a href="mailto:The.Sam.Nolan1998@gmail.com"
+                <a
+                    href="mailto:<?= $content['contact_email']; ?>"
                     class="contact-link">
 
                     <i class="fa-regular fa-envelope"></i>
 
                     <span>
-                        The.Sam.Nolan1998@gmail.com
+
+                        <?= $content['contact_email']; ?>
+
                     </span>
 
                 </a>
 
-                <a href="https://linkedin.com/in/sam912"
+                <a
+                    href="<?= $content['contact_linkedin']; ?>"
                     target="_blank"
                     class="contact-link">
 
                     <i class="fa-brands fa-linkedin-in"></i>
 
                     <span>
-                        Linkedin.com/in/sam912
+
+                        <?= $content['contact_linkedin_text']; ?>
+
                     </span>
 
                 </a>
 
-                <a href="https://github.com/TheSam912"
+                <a
+                    href="<?= $content['contact_github']; ?>"
                     target="_blank"
                     class="contact-link">
 
                     <i class="fa-brands fa-github"></i>
 
                     <span>
-                        Github.com/TheSam912
+
+                        <?= $content['contact_github_text']; ?>
+
                     </span>
 
                 </a>
@@ -134,7 +153,9 @@
                     <i class="fa-solid fa-location-dot"></i>
 
                     <span>
-                        Remote / Worldwide
+
+                        <?= $content['contact_location']; ?>
+
                     </span>
 
                 </div>

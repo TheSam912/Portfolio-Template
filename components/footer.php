@@ -1,3 +1,9 @@
+<?php
+
+/** @var array $content */
+
+?>
+
 <!-- ===================================
      FOOTER IMAGE
 =================================== -->
@@ -22,6 +28,7 @@
         <!-- LOGO -->
 
         <a href="#hero" class="footer-logo">
+
             <img
                 src="./assets/images/logo.png"
                 alt="Sam Nolan Logo">
@@ -33,7 +40,7 @@
 
         <div class="footer-copy">
 
-            © 2025 Sam Nolan. All rights reserved.
+            <?= $content['footer_copyright']; ?>
 
         </div>
 
@@ -42,21 +49,24 @@
 
         <div class="footer-socials">
 
-            <a href="https://github.com/TheSam912"
-               target="_blank">
+            <a
+                href="<?= $content['footer_github']; ?>"
+                target="_blank">
 
                 <i class="fa-brands fa-github"></i>
 
             </a>
 
-            <a href="https://linkedin.com/in/sam912"
-               target="_blank">
+            <a
+                href="<?= $content['footer_linkedin']; ?>"
+                target="_blank">
 
                 <i class="fa-brands fa-linkedin-in"></i>
 
             </a>
 
-            <a href="mailto:The.Sam.Nolan1998@gmail.com">
+            <a
+                href="mailto:<?= $content['footer_email']; ?>">
 
                 <i class="fa-solid fa-envelope"></i>
 

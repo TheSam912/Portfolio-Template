@@ -1,3 +1,9 @@
+<?php
+
+/** @var array $content */
+
+?>
+
 <section id="services" class="services-section">
 
     <div class="services-head">
@@ -6,15 +12,19 @@
 
             <span class="tag-dot"></span>
 
-            WHAT I DO
+            <?= $content['services_tag']; ?>
 
         </span>
 
         <h2 class="services-title">
 
-            Turning ideas into powerful
+            <?= $content['services_title_line_1']; ?>
 
-            <span>digital products.</span>
+            <span>
+
+                <?= $content['services_title_line_2']; ?>
+
+            </span>
 
         </h2>
 
@@ -34,13 +44,17 @@
 
                 </div>
 
-                <h3>Cross-Platform Apps</h3>
+                <h3>
+
+                    <?= $content['service_1_title']; ?>
+
+                </h3>
 
             </div>
 
             <p>
 
-                Developing high-performance applications using Flutter for both Android and iOS , ensuring a consistent user experience across platforms.
+                <?= $content['service_1_description']; ?>
 
             </p>
 
@@ -58,13 +72,17 @@
 
                 </div>
 
-                <h3>Native Apps</h3>
+                <h3>
+
+                    <?= $content['service_2_title']; ?>
+
+                </h3>
 
             </div>
 
             <p>
 
-                Building robust and feature-rich native Android apps with Java, tailored to meet your specific requirements.
+                <?= $content['service_2_description']; ?>
 
             </p>
 
@@ -82,13 +100,17 @@
 
                 </div>
 
-                <h3>Backend Development</h3>
+                <h3>
+
+                    <?= $content['service_3_title']; ?>
+
+                </h3>
 
             </div>
 
             <p>
 
-                Creating secure and scalable RESTful APIs and managing databases (SQL and NoSQL) to build a reliable backend for your applications.
+                <?= $content['service_3_description']; ?>
 
             </p>
 
@@ -106,13 +128,17 @@
 
                 </div>
 
-                <h3>App Redesign & Optimization</h3>
+                <h3>
+
+                    <?= $content['service_4_title']; ?>
+
+                </h3>
 
             </div>
 
             <p>
 
-                Redesigning, optimizing, and upgrading existing apps with modern methods to enhance performance and usability.
+                <?= $content['service_4_description']; ?>
 
             </p>
 

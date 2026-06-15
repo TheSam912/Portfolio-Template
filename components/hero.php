@@ -1,38 +1,50 @@
+<?php
+
+/** @var array $content */
+
+?>
+
 <section id="hero" class="hero">
 
     <div class="hero-left">
 
         <div class="hero-badge">
-            Software Engineer
+
+            <?= $content['hero_badge']; ?>
+
         </div>
 
         <h1 class="hero-title">
 
-            Building Digital Products
+            <?= $content['hero_title_line_1']; ?>
 
             <br>
 
-            <span>With Clean Code</span>
+            <span>
+
+                <?= $content['hero_title_line_2']; ?>
+
+            </span>
 
             <br>
 
-            And Smart Solutions
+            <?= $content['hero_title_line_3']; ?>
 
         </h1>
 
         <p class="hero-description">
 
-            Full Stack Developer focused on building exceptional
-            digital experiences with clean code and modern
-            technologies.
+            <?= $content['hero_description']; ?>
 
         </p>
 
         <div class="hero-buttons">
 
-            <a href="#portfolio" class="hero-btn-primary">
+            <a
+                href="#portfolio"
+                class="hero-btn-primary">
 
-                View My Work
+                <?= $content['hero_btn_primary']; ?>
 
             </a>
 
@@ -41,7 +53,7 @@
                 class="hero-btn-secondary"
                 download>
 
-                Download CV
+                <?= $content['hero_btn_secondary']; ?>
 
             </a>
 

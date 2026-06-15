@@ -1,4 +1,8 @@
+<?php
 
+require_once 'config/content.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,140 +84,136 @@
 
     </div>
 
-<script>
+    <script>
+        // ===========================
+        // MOBILE MENU
+        // ===========================
 
-// ===========================
-// MOBILE MENU
-// ===========================
+        const menuBtn = document.querySelector('.menu-toggle');
 
-const menuBtn = document.querySelector('.menu-toggle');
+        const closeBtn = document.querySelector('.menu-close');
 
-const closeBtn = document.querySelector('.menu-close');
+        const mobileMenu = document.querySelector('.mobile-menu');
 
-const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.nav-overlay');
 
-const overlay = document.querySelector('.nav-overlay');
+        menuBtn.addEventListener('click', () => {
 
-menuBtn.addEventListener('click',()=>{
+            mobileMenu.classList.add('active');
 
-    mobileMenu.classList.add('active');
+            overlay.classList.add('active');
 
-    overlay.classList.add('active');
+        });
 
-});
+        closeBtn.addEventListener('click', () => {
 
-closeBtn.addEventListener('click',()=>{
+            mobileMenu.classList.remove('active');
 
-    mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
 
-    overlay.classList.remove('active');
+        });
 
-});
+        overlay.addEventListener('click', () => {
 
-overlay.addEventListener('click',()=>{
+            mobileMenu.classList.remove('active');
 
-    mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
 
-    overlay.classList.remove('active');
-
-});
+        });
 
 
-// ===========================
-// SUCCESS MODAL
-// ===========================
+        // ===========================
+        // SUCCESS MODAL
+        // ===========================
 
-const modal = document.getElementById("successModal");
+        const modal = document.getElementById("successModal");
 
-const closeModal = document.getElementById("closeModal");
+        const closeModal = document.getElementById("closeModal");
 
-if(closeModal){
+        if (closeModal) {
 
-    // Close Button
+            // Close Button
 
-    closeModal.addEventListener("click",()=>{
-
-        modal.classList.remove("active");
-
-    });
-
-    // Click Outside
-
-    modal.addEventListener("click",(e)=>{
-
-        if(e.target === modal){
-
-            modal.classList.remove("active");
-
-        }
-
-    });
-
-    // ESC Key
-
-    document.addEventListener("keydown",(e)=>{
-
-        if(e.key === "Escape"){
-
-            modal.classList.remove("active");
-
-        }
-
-    });
-
-    // Auto Close
-
-    setTimeout(()=>{
-
-        modal.classList.remove("active");
-
-    },5000);
-
-}
-
-</script>
-
-<script>
-
-const contactForm = document.getElementById("contactForm");
-
-if(contactForm){
-
-    contactForm.addEventListener("submit", async (e) => {
-
-        e.preventDefault();
-
-        const formData = new FormData(contactForm);
-
-        const response = await fetch(
-            "https://api.web3forms.com/submit",
-            {
-                method:"POST",
-                body:formData
-            }
-        );
-
-        const result = await response.json();
-
-        if(result.success){
-
-            modal.classList.add("active");
-
-            contactForm.reset();
-
-            setTimeout(()=>{
+            closeModal.addEventListener("click", () => {
 
                 modal.classList.remove("active");
 
-            },5000);
+            });
+
+            // Click Outside
+
+            modal.addEventListener("click", (e) => {
+
+                if (e.target === modal) {
+
+                    modal.classList.remove("active");
+
+                }
+
+            });
+
+            // ESC Key
+
+            document.addEventListener("keydown", (e) => {
+
+                if (e.key === "Escape") {
+
+                    modal.classList.remove("active");
+
+                }
+
+            });
+
+            // Auto Close
+
+            setTimeout(() => {
+
+                modal.classList.remove("active");
+
+            }, 5000);
 
         }
+    </script>
 
-    });
+    <script>
+        const contactForm = document.getElementById("contactForm");
 
-}
+        if (contactForm) {
 
-</script>
+            contactForm.addEventListener("submit", async (e) => {
+
+                e.preventDefault();
+
+                const formData = new FormData(contactForm);
+
+                const response = await fetch(
+                    "https://api.web3forms.com/submit", {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+                const result = await response.json();
+
+                if (result.success) {
+
+                    modal.classList.add("active");
+
+                    contactForm.reset();
+
+                    setTimeout(() => {
+
+                        modal.classList.remove("active");
+
+                    }, 5000);
+
+                }
+
+            });
+
+        }
+    </script>
 
 </body>
+
 </html>

@@ -1,3 +1,9 @@
+<?php
+
+/** @var array $content */
+
+?>
+
 <section id="about" class="about-section">
 
     <div class="about-wrapper">
@@ -10,31 +16,27 @@
 
                 <span class="tag-dot"></span>
 
-                ABOUT ME
+                <?= $content['about_tag']; ?>
 
             </div>
 
             <h2 class="about-title">
 
-                Passionate About Building
+                <?= $content['about_title_line_1']; ?>
 
-                <span>Modern Digital Solutions</span>
+                <span>
 
-                With Precision.
+                    <?= $content['about_title_line_2']; ?>
+
+                </span>
+
+                <?= $content['about_title_line_3']; ?>
 
             </h2>
 
             <p class="about-text">
 
-                I'm Sobhan (Sam), Motivated and experienced website and mobile app developer 
-                with expertise in Flutter, Android (Java), Laravel, and Veu.JS. Skilled in backend 
-                development, RESTful APIs (Node.js / PHP), and database management (SQL & 
-                NoSQL). I specialize in creating responsive, high-performance applications, boosting 
-                project efficiency by 25% at the initial stage. <br> 
-            
-                Passionate about problem-solving, 
-                innovation, and continuous learning. I thrive in team environments, collaborating 
-                toward shared goals while constantly expanding my technical expertise.
+                <?= nl2br($content['about_description']); ?>
 
             </p>
 
@@ -52,9 +54,17 @@
 
                     <div>
 
-                        <span>Name</span>
+                        <span>
 
-                        <h4>Sam Nolan</h4>
+                            <?= $content['about_name_label']; ?>
+
+                        </span>
+
+                        <h4>
+
+                            <?= $content['about_name_value']; ?>
+
+                        </h4>
 
                     </div>
 
@@ -62,25 +72,29 @@
 
                 <div class="info-item">
 
-    <i class="fa-solid fa-envelope"></i>
+                    <i class="fa-solid fa-envelope"></i>
 
-    <div>
+                    <div>
 
-        <span>Email</span>
+                        <span>
 
-        <h4>
+                            <?= $content['about_email_label']; ?>
 
-            <a href="mailto:The.Sam.Nolan1998@gmail.com">
+                        </span>
 
-                The.Sam.Nolan1998@gmail.com
+                        <h4>
 
-            </a>
+                            <a href="mailto:<?= $content['about_email_value']; ?>">
 
-        </h4>
+                                <?= $content['about_email_value']; ?>
 
-    </div>
+                            </a>
 
-    </div> 
+                        </h4>
+
+                    </div>
+
+                </div>
 
                 <div class="info-item">
 
@@ -88,9 +102,17 @@
 
                     <div>
 
-                        <span>Degree</span>
+                        <span>
 
-                        <h4>Master's in Cybersecurity</h4>
+                            <?= $content['about_degree_label']; ?>
+
+                        </span>
+
+                        <h4>
+
+                            <?= $content['about_degree_value']; ?>
+
+                        </h4>
 
                     </div>
 
@@ -102,9 +124,17 @@
 
                     <div>
 
-                        <span>Location</span>
+                        <span>
 
-                        <h4>Available Worldwide</h4>
+                            <?= $content['about_location_label']; ?>
+
+                        </span>
+
+                        <h4>
+
+                            <?= $content['about_location_value']; ?>
+
+                        </h4>
 
                     </div>
 
@@ -116,9 +146,17 @@
 
                     <div>
 
-                        <span>Availability</span>
+                        <span>
 
-                        <h4>Available For Projects</h4>
+                            <?= $content['about_availability_label']; ?>
+
+                        </span>
+
+                        <h4>
+
+                            <?= $content['about_availability_value']; ?>
+
+                        </h4>
 
                     </div>
 

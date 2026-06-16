@@ -38,3 +38,7 @@ yarn-debug.log*
 # Build / temp
 /tmp/
 /build/
+
+# User uploads (keep directory, ignore files)
+assets/uploads/*
+!assets/uploads/.gitkeep

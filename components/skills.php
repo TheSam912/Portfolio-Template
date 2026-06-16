@@ -1,45 +1,30 @@
 <?php
 
-$skills = [
-    ['name' => 'Flutter',     'icon' => 'flutter.png'],
-    ['name' => 'PHP',         'icon' => 'php.png'],
-    ['name' => 'Laravel',     'icon' => 'laravel.png'],
-    ['name' => 'JavaScript',  'icon' => 'js.png'],
-    ['name' => 'HTML',        'icon' => 'html.png'],
-    ['name' => 'CSS',         'icon' => 'css.png'],
-    ['name' => 'Vue.js',      'icon' => 'vue.png'],
-    ['name' => 'Figma',       'icon' => 'figma.png'],
-    ['name' => 'Java',        'icon' => 'java.png'],
-    ['name' => 'MySQL',       'icon' => 'mysql.png'],
-    ['name' => 'MongoDB',     'icon' => 'mongodb.png'],
-    ['name' => 'Swift',       'icon' => 'swift.png'],
-    ['name' => 'WordPress',   'icon' => 'wordpress.png'],
-    ['name' => 'Git',         'icon' => 'git.png'],
-    ['name' => 'Docker',      'icon' => 'docker.png'],
-    ['name' => 'Node.js',     'icon' => 'nodejs.png'],
-    ['name' => 'AWS',         'icon' => 'aws.png'],
-    ['name' => 'Bootstrap',   'icon' => 'bootstrap.png'],
-];
+/** @var list<array<string, mixed>> $skills */
 
-// Split roughly in half for two opposing rows.
-$rowA = array_slice($skills, 0, 9);
-$rowB = array_slice($skills, 9);
+$half     = (int) ceil(count($skills) / 2);
+$rowA     = array_slice($skills, 0, $half);
+$rowB     = array_slice($skills, $half);
 
-$render_track = function (array $items): string {
-    $tile = static function (array $skill): string {
-        return sprintf(
-            '<div class="skill-item">'
-                . '<img src="assets/images/skills/%s" alt="%s" loading="lazy" decoding="async" width="48" height="48">'
-                . '<span>%s</span>'
-            . '</div>',
-            htmlspecialchars($skill['icon'], ENT_QUOTES),
-            htmlspecialchars($skill['name'], ENT_QUOTES),
-            htmlspecialchars($skill['name'], ENT_QUOTES)
-        );
-    };
+$render_tile = static function (array $skill): string {
+    return sprintf(
+        '<div class="skill-item">'
+            . '<img src="%s" alt="%s" loading="lazy" decoding="async" width="48" height="48">'
+            . '<span>%s</span>'
+        . '</div>',
+        e($skill['icon_path']),
+        e($skill['name']),
+        e($skill['name'])
+    );
+};
 
-    $tiles = array_map($tile, $items);
-    // Duplicate for seamless loop.
+$render_track = static function (array $items) use ($render_tile): string {
+    if (!$items) {
+        return '';
+    }
+
+    $tiles = array_map($render_tile, $items);
+
     return implode('', $tiles) . implode('', $tiles);
 };
 
@@ -55,32 +40,36 @@ $render_track = function (array $items): string {
 
             <span class="tag-dot"></span>
 
-            TECH STACK
+            <?= e(setting('skills_tag', 'TECH STACK')); ?>
 
         </span>
 
         <h2 class="skills-title">
 
-            Technologies I Use To Build
+            <?= e(setting('skills_title_line_1', 'Technologies I Use To Build')); ?>
 
-            <span class="gradient-text">Modern Products.</span>
+            <span class="gradient-text"><?= e(setting('skills_title_line_2', 'Modern Products.')); ?></span>
 
         </h2>
 
     </div>
 
-    <div
-        class="skills-marquee"
-        data-reveal="fade">
+    <?php if ($skills): ?>
 
-        <div class="skills-track">
-            <?= $render_track($rowA); ?>
+        <div
+            class="skills-marquee"
+            data-reveal="fade">
+
+            <?php if ($rowA): ?>
+                <div class="skills-track"><?= $render_track($rowA); ?></div>
+            <?php endif; ?>
+
+            <?php if ($rowB): ?>
+                <div class="skills-track skills-track--reverse"><?= $render_track($rowB); ?></div>
+            <?php endif; ?>
+
         </div>
 
-        <div class="skills-track skills-track--reverse">
-            <?= $render_track($rowB); ?>
-        </div>
-
-    </div>
+    <?php endif; ?>
 
 </section>

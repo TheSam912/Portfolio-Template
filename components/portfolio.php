@@ -43,15 +43,15 @@ if (empty($projects)) {
 
             <span class="tag-dot"></span>
 
-            PORTFOLIO
+            <?= e(setting('portfolio_tag', 'PORTFOLIO')); ?>
 
         </span>
 
         <h2 class="portfolio-title">
 
-            Selected
+            <?= e(setting('portfolio_title_line_1', 'Selected')); ?>
 
-            <span class="gradient-text">Projects.</span>
+            <span class="gradient-text"><?= e(setting('portfolio_title_line_2', 'Projects.')); ?></span>
 
         </h2>
 

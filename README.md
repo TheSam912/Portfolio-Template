@@ -57,6 +57,37 @@ start.bat         # windows
 
 Open [http://localhost:8000](http://localhost:8000).
 
+### 4. Hidden admin panel (manage all content)
+
+After `composer setup`, open:
+
+```
+http://localhost:8000/<ADMIN_PATH>
+```
+
+Default path is in `.env`:
+
+```
+ADMIN_PATH=ctrl-k9m2x7p4
+```
+
+**Change `ADMIN_PATH` to a long random string only you know** — this is your secret URL. Nobody can guess it unless they read your `.env`.
+
+Default login (change immediately):
+
+| Field | Value |
+|---|---|
+| Username | `admin` |
+| Password | `changeme123` |
+
+From the admin panel you can edit:
+
+- All site text (hero, about, contact, footer, SEO…)
+- Images & resume (upload or paste paths)
+- Stats, services, skills (with logos), experience, projects
+- Read/delete contact form messages
+- Change your admin password
+
 ### Available commands
 
 | Command | What it does |
@@ -90,46 +121,55 @@ function pf { Set-Location 'C:\path\to\Portfolio-Template'; composer dev }
 
 ```
 .
-├── api/                    # Backend endpoints (POST handlers)
+├── admin/                  # Hidden CMS (routed via ADMIN_PATH in .env)
+├── api/
 │   └── contact.php         # Saves contact form to DB + forwards to web3forms
 ├── assets/
-│   ├── css/                # style.css, responsive.css
-│   ├── files/              # Resume PDF
+│   ├── css/                # style.css, responsive.css, animations.css, admin.css
+│   ├── uploads/            # Files uploaded via admin panel
+│   ├── files/              # Resume PDF (default)
 │   ├── images/             # Hero, portfolio, skills icons, etc.
-│   └── js/main.js          # Front-end behavior (mobile menu, modal, form)
+│   └── js/main.js
 ├── components/             # PHP includes (one per page section)
 ├── config/
-│   ├── content.php         # All static text content
-│   ├── database.php        # PDO connection (reads from .env)
-│   ├── env.php             # Tiny .env loader
-│   └── helpers.php         # `e()` for HTML escaping, etc.
+│   ├── content.php         # Loads all content from DB
+│   ├── repository.php      # ContentRepository class
+│   ├── database.php
+│   ├── env.php
+│   └── helpers.php
 ├── db/
-│   ├── schema.sql          # Database structure (idempotent)
-│   └── seed.sql            # Sample portfolio rows
-└── index.php               # Entry point
+│   ├── schema.sql
+│   └── seed.sql
+├── router.php              # Dev-server router (site + hidden admin)
+└── index.php
 ```
 
 ## Editing content
 
-- **Text**: `config/content.php` — every string the site displays.
-- **Portfolio projects**: rows in the `projects` table (managed via SQL or a future admin UI). If the table is empty, the site falls back to the 6 hardcoded webp images so it never looks broken.
-- **Images**: drop into `assets/images/` and reference from the relevant component.
+**Everything is dynamic.** Use the hidden admin panel — no PHP files to edit for day-to-day changes.
+
+- **Text & media paths**: Admin → Site Settings
+- **Stats / Services / Skills / Experience / Projects**: dedicated admin pages with add/edit/delete
+- **Contact submissions**: Admin → Messages
+- **Fallback**: if the DB is empty, the site shows minimal fallback content instead of crashing
 
 ## Database schema
 
-See `db/schema.sql`. Two tables:
+See `db/schema.sql`. Main tables:
 
-- `messages` — contact-form submissions.
-- `projects` — portfolio entries (title, description, image, optional URL, sort order, published flag).
+- `settings` — all text labels, contact details, image paths
+- `stats`, `services`, `skills`, `experiences`, `experience_bullets`
+- `projects`, `messages`, `admin_users`
 
 Both `schema.sql` and `seed.sql` are **idempotent** — safe to re-run.
 
 ## Working together
 
 1. Pull `main`, copy `.env.example` → `.env`, fill in your local creds.
-2. Re-run `mysql -u root < db/schema.sql` after every pull (it's idempotent).
+2. Re-run `composer db:reset` after every pull that changes `db/schema.sql` or `db/seed.sql`.
 3. **Never** commit `.env`, secrets, or anything from `vendor/` — see `.gitignore`.
-4. Schema changes go in `db/schema.sql` (and a follow-up `db/migrations/NNN-*.sql` if we ever need versioned migrations).
+4. Both of you should use **different `ADMIN_PATH` values locally** if you want — but agree on one for production.
+5. Schema changes go in `db/schema.sql`.
 
 ## Deployment notes
 

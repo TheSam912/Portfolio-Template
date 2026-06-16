@@ -1,7 +1,7 @@
 <section class="banner-section" data-reveal="scale">
 
     <img
-        src="assets/images/banner3.webp"
+        src="<?= e(setting('banner_image', 'assets/images/banner3.webp')); ?>"
         alt="Tech Banner"
         loading="lazy"
         decoding="async"

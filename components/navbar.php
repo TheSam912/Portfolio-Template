@@ -5,7 +5,7 @@
         <a href="#hero">
 
             <img
-                src="assets/images/textlogo.png"
+                src="<?= e(setting('text_logo_image', 'assets/images/textlogo.png')); ?>"
                 alt="Logo">
 
         </a>
@@ -32,11 +32,11 @@
 
     <a href="#contact" class="talk-btn" data-magnetic>
 
-        Get In Touch
+        <?= e(setting('navbar_cta_text', 'Get In Touch')); ?>
 
     </a>
 
-    <button class="menu-toggle">
+    <button class="menu-toggle" aria-label="Open menu">
 
         <span></span>
 
@@ -54,7 +54,7 @@
 
 <div class="mobile-menu">
 
-    <button class="menu-close">
+    <button class="menu-close" aria-label="Close menu">
 
         <i class="fa-solid fa-xmark"></i>
 
@@ -76,7 +76,7 @@
 
     <a href="#contact" class="mobile-talk-btn">
 
-        Get In Touch
+        <?= e(setting('navbar_cta_text', 'Get In Touch')); ?>
 
     </a>
 

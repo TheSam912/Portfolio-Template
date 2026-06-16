@@ -1,6 +1,6 @@
 <?php
 
-/** @var array $content */
+/** @var list<array<string, mixed>> $experiences */
 
 ?>
 
@@ -14,15 +14,15 @@
 
             <span class="tag-dot"></span>
 
-            EXPERIENCE
+            <?= e(setting('experience_tag', 'EXPERIENCE')); ?>
 
         </span>
 
         <h2 class="experience-title">
 
-            Professional
+            <?= e(setting('experience_title_line_1', 'Professional')); ?>
 
-            <span class="gradient-text">Journey.</span>
+            <span class="gradient-text"><?= e(setting('experience_title_line_2', 'Journey.')); ?></span>
 
         </h2>
 
@@ -30,7 +30,7 @@
 
     <div class="timeline">
 
-        <?php foreach ($content['experiences'] as $i => $experience): ?>
+        <?php foreach ($experiences as $i => $experience): ?>
 
             <div
                 class="timeline-item"
@@ -42,24 +42,20 @@
                 <div class="timeline-card">
 
                     <span class="experience-date">
-                        <?= $experience['date']; ?>
+                        <?= e($experience['date_range']); ?>
                     </span>
 
-                    <h3>
-                        <?= $experience['position']; ?>
-                    </h3>
+                    <h3><?= e($experience['position']); ?></h3>
 
-                    <h4>
-                        <?= $experience['company']; ?>
-                    </h4>
+                    <h4><?= e($experience['company']); ?></h4>
 
-                    <ul>
-                        <?php foreach ($experience['items'] as $item): ?>
-                            <li>
-                                <?= $item; ?>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if (!empty($experience['items'])): ?>
+                        <ul>
+                            <?php foreach ($experience['items'] as $item): ?>
+                                <li><?= e($item); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
 
                 </div>
 

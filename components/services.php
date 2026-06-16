@@ -1,6 +1,6 @@
 <?php
 
-/** @var array $content */
+/** @var list<array<string, mixed>> $services */
 
 ?>
 
@@ -14,17 +14,17 @@
 
             <span class="tag-dot"></span>
 
-            <?= $content['services_tag']; ?>
+            <?= e(setting('services_tag')); ?>
 
         </span>
 
         <h2 class="services-title">
 
-            <?= $content['services_title_line_1']; ?>
+            <?= e(setting('services_title_line_1')); ?>
 
             <span class="gradient-text">
 
-                <?= $content['services_title_line_2']; ?>
+                <?= e(setting('services_title_line_2')); ?>
 
             </span>
 
@@ -37,117 +37,25 @@
         data-reveal-stagger
         data-reveal="fade">
 
-        <!-- CARD 1 -->
+        <?php foreach ($services as $service): ?>
 
-        <div class="service-card">
+            <div class="service-card">
 
-            <div class="service-top">
+                <div class="service-top">
 
-                <div class="service-icon">
+                    <div class="service-icon">
+                        <i class="<?= e($service['icon_class']); ?>"></i>
+                    </div>
 
-                    <i class="fa-solid fa-mobile-screen"></i>
-
-                </div>
-
-                <h3>
-
-                    <?= $content['service_1_title']; ?>
-
-                </h3>
-
-            </div>
-
-            <p>
-
-                <?= $content['service_1_description']; ?>
-
-            </p>
-
-        </div>
-
-        <!-- CARD 2 -->
-
-        <div class="service-card">
-
-            <div class="service-top">
-
-                <div class="service-icon">
-
-                    <i class="fa-solid fa-code"></i>
+                    <h3><?= e($service['title']); ?></h3>
 
                 </div>
 
-                <h3>
-
-                    <?= $content['service_2_title']; ?>
-
-                </h3>
+                <p><?= e($service['description']); ?></p>
 
             </div>
 
-            <p>
-
-                <?= $content['service_2_description']; ?>
-
-            </p>
-
-        </div>
-
-        <!-- CARD 3 -->
-
-        <div class="service-card">
-
-            <div class="service-top">
-
-                <div class="service-icon">
-
-                    <i class="fa-solid fa-database"></i>
-
-                </div>
-
-                <h3>
-
-                    <?= $content['service_3_title']; ?>
-
-                </h3>
-
-            </div>
-
-            <p>
-
-                <?= $content['service_3_description']; ?>
-
-            </p>
-
-        </div>
-
-        <!-- CARD 4 -->
-
-        <div class="service-card">
-
-            <div class="service-top">
-
-                <div class="service-icon">
-
-                    <i class="fa-solid fa-gears"></i>
-
-                </div>
-
-                <h3>
-
-                    <?= $content['service_4_title']; ?>
-
-                </h3>
-
-            </div>
-
-            <p>
-
-                <?= $content['service_4_description']; ?>
-
-            </p>
-
-        </div>
+        <?php endforeach; ?>
 
     </div>
 

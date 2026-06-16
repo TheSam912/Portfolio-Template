@@ -17,8 +17,11 @@ if not exist ".env" (
 )
 
 echo.
-echo   Sam Nolan Portfolio  -^>  http://localhost:%PORT%
+echo   Portfolio site  -^>  http://localhost:%PORT%
+echo   Admin panel     -^>  http://localhost:%PORT%/%ADMIN_PATH%
 echo   Press Ctrl+C to stop.
 echo.
 
-php -S localhost:%PORT%
+if "%ADMIN_PATH%"=="" set "ADMIN_PATH=ctrl-k9m2x7p4"
+
+php -S localhost:%PORT% router.php

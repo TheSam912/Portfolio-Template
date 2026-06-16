@@ -14,8 +14,8 @@
     "scripts": {
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "@php -r \"echo \\\"\\n  Sam Nolan Portfolio  →  http://localhost:8000\\n  Press Ctrl+C to stop.\\n\\n\\\";\"",
-            "@php -S localhost:8000"
+            "@php -r \"$p=getenv('ADMIN_PATH')?:'ctrl-k9m2x7p4'; echo \\\"\\n  Portfolio site  →  http://localhost:8000\\n  Admin panel     →  http://localhost:8000/$p\\n  Press Ctrl+C to stop.\\n\\n\\\";\"",
+            "@php -S localhost:8000 router.php"
         ],
         "start": "@dev",
         "setup": [

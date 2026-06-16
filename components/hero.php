@@ -12,7 +12,7 @@
             class="hero-badge"
             data-reveal="fade">
 
-            <?= $content['hero_badge']; ?>
+            <?= e(setting('hero_badge')); ?>
 
         </div>
 
@@ -21,19 +21,19 @@
             data-reveal="up"
             data-reveal-delay="80">
 
-            <?= $content['hero_title_line_1']; ?>
+            <?= e(setting('hero_title_line_1')); ?>
 
             <br>
 
             <span class="gradient-text">
 
-                <?= $content['hero_title_line_2']; ?>
+                <?= e(setting('hero_title_line_2')); ?>
 
             </span>
 
             <br>
 
-            <?= $content['hero_title_line_3']; ?>
+            <?= e(setting('hero_title_line_3')); ?>
 
         </h1>
 
@@ -42,7 +42,7 @@
             data-reveal="up"
             data-reveal-delay="180">
 
-            <?= $content['hero_description']; ?>
+            <?= e(setting('hero_description')); ?>
 
         </p>
 
@@ -56,16 +56,16 @@
                 class="hero-btn-primary"
                 data-magnetic>
 
-                <?= $content['hero_btn_primary']; ?>
+                <?= e(setting('hero_btn_primary')); ?>
 
             </a>
 
             <a
-                href="assets/files/Sobhan-Resume.pdf"
+                href="<?= e(setting('resume_file', 'assets/files/Sobhan-Resume.pdf')); ?>"
                 class="hero-btn-secondary"
                 download>
 
-                <?= $content['hero_btn_secondary']; ?>
+                <?= e(setting('hero_btn_secondary')); ?>
 
             </a>
 
@@ -79,7 +79,7 @@
         data-reveal-delay="200">
 
         <img
-            src="assets/images/hero.webp"
+            src="<?= e(setting('hero_image', 'assets/images/hero.webp')); ?>"
             alt="Sobhan (Sam) Nolan"
             fetchpriority="high"
             decoding="async"

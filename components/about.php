@@ -18,27 +18,27 @@
 
                 <span class="tag-dot"></span>
 
-                <?= $content['about_tag']; ?>
+                <?= e(setting('about_tag')); ?>
 
             </div>
 
             <h2 class="about-title">
 
-                <?= $content['about_title_line_1']; ?>
+                <?= e(setting('about_title_line_1')); ?>
 
                 <span class="gradient-text">
 
-                    <?= $content['about_title_line_2']; ?>
+                    <?= e(setting('about_title_line_2')); ?>
 
                 </span>
 
-                <?= $content['about_title_line_3']; ?>
+                <?= e(setting('about_title_line_3')); ?>
 
             </h2>
 
             <p class="about-text">
 
-                <?= nl2br($content['about_description']); ?>
+                <?= nl2br(e(setting('about_description'))); ?>
 
             </p>
 
@@ -61,13 +61,13 @@
 
                         <span>
 
-                            <?= $content['about_name_label']; ?>
+                            <?= e(setting('about_name_label')); ?>
 
                         </span>
 
                         <h4>
 
-                            <?= $content['about_name_value']; ?>
+                            <?= e(setting('about_name_value')); ?>
 
                         </h4>
 
@@ -83,15 +83,15 @@
 
                         <span>
 
-                            <?= $content['about_email_label']; ?>
+                            <?= e(setting('about_email_label')); ?>
 
                         </span>
 
                         <h4>
 
-                            <a href="mailto:<?= $content['about_email_value']; ?>">
+                            <a href="mailto:<?= e(setting('about_email_value')); ?>">
 
-                                <?= $content['about_email_value']; ?>
+                                <?= e(setting('about_email_value')); ?>
 
                             </a>
 
@@ -109,13 +109,13 @@
 
                         <span>
 
-                            <?= $content['about_degree_label']; ?>
+                            <?= e(setting('about_degree_label')); ?>
 
                         </span>
 
                         <h4>
 
-                            <?= $content['about_degree_value']; ?>
+                            <?= e(setting('about_degree_value')); ?>
 
                         </h4>
 
@@ -131,13 +131,13 @@
 
                         <span>
 
-                            <?= $content['about_location_label']; ?>
+                            <?= e(setting('about_location_label')); ?>
 
                         </span>
 
                         <h4>
 
-                            <?= $content['about_location_value']; ?>
+                            <?= e(setting('about_location_value')); ?>
 
                         </h4>
 
@@ -153,13 +153,13 @@
 
                         <span>
 
-                            <?= $content['about_availability_label']; ?>
+                            <?= e(setting('about_availability_label')); ?>
 
                         </span>
 
                         <h4>
 
-                            <?= $content['about_availability_value']; ?>
+                            <?= e(setting('about_availability_value')); ?>
 
                         </h4>
 

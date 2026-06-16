@@ -1,17 +1,7 @@
-<?php
-
-/** @var array $content */
-
-?>
-
-<!-- ===================================
-     FOOTER IMAGE
-=================================== -->
-
 <section class="footer-wave">
 
     <img
-        src="./assets/images/footer-wave.webp"
+        src="<?= e(setting('footer_wave_image', 'assets/images/footer-wave.webp')); ?>"
         alt="Footer Wave"
         loading="lazy"
         decoding="async"
@@ -20,60 +10,34 @@
 
 </section>
 
-
-<!-- ===================================
-     FOOTER
-=================================== -->
-
 <footer class="footer-section" data-reveal="up">
 
     <div class="footer-wrapper">
 
-        <!-- LOGO -->
-
         <a href="#hero" class="footer-logo">
 
             <img
-                src="./assets/images/logo.png"
+                src="<?= e(setting('logo_image', 'assets/images/logo.png')); ?>"
                 alt="Sam Nolan Logo">
 
         </a>
 
-
-        <!-- COPYRIGHT -->
-
         <div class="footer-copy">
-
-            <?= $content['footer_copyright']; ?>
-
+            <?= e(setting('footer_copyright')); ?>
         </div>
-
-
-        <!-- SOCIALS -->
 
         <div class="footer-socials">
 
-            <a
-                href="<?= $content['footer_github']; ?>"
-                target="_blank">
-
+            <a href="<?= e(setting('footer_github')); ?>" target="_blank" rel="noopener noreferrer">
                 <i class="fa-brands fa-github"></i>
-
             </a>
 
-            <a
-                href="<?= $content['footer_linkedin']; ?>"
-                target="_blank">
-
+            <a href="<?= e(setting('footer_linkedin')); ?>" target="_blank" rel="noopener noreferrer">
                 <i class="fa-brands fa-linkedin-in"></i>
-
             </a>
 
-            <a
-                href="mailto:<?= $content['footer_email']; ?>">
-
+            <a href="mailto:<?= e(setting('footer_email')); ?>">
                 <i class="fa-solid fa-envelope"></i>
-
             </a>
 
         </div>

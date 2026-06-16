@@ -1,6 +1,6 @@
 <?php
 
-/** @var array $content */
+/** @var list<array<string, mixed>> $stats */
 
 ?>
 
@@ -10,57 +10,22 @@
         class="stats-wrapper"
         data-reveal-stagger>
 
-        <div class="stats-item" data-reveal="up">
+        <?php foreach ($stats as $stat): ?>
 
-            <div class="stats-icon">
-                <i class="fa-solid fa-code"></i>
+            <div class="stats-item" data-reveal="up">
+
+                <div class="stats-icon">
+                    <i class="<?= e($stat['icon_class']); ?>"></i>
+                </div>
+
+                <div class="stats-content">
+                    <h3><?= e($stat['count_value']); ?></h3>
+                    <p><?= e($stat['label_text']); ?></p>
+                </div>
+
             </div>
 
-            <div class="stats-content">
-                <h3><?= $content['stats_projects_count']; ?></h3>
-                <p><?= $content['stats_projects_text']; ?></p>
-            </div>
-
-        </div>
-
-        <div class="stats-item" data-reveal="up">
-
-            <div class="stats-icon">
-                <i class="fa-solid fa-star"></i>
-            </div>
-
-            <div class="stats-content">
-                <h3><?= $content['stats_satisfaction_count']; ?></h3>
-                <p><?= $content['stats_satisfaction_text']; ?></p>
-            </div>
-
-        </div>
-
-        <div class="stats-item" data-reveal="up">
-
-            <div class="stats-icon">
-                <i class="fa-solid fa-users"></i>
-            </div>
-
-            <div class="stats-content">
-                <h3><?= $content['stats_clients_count']; ?></h3>
-                <p><?= $content['stats_clients_text']; ?></p>
-            </div>
-
-        </div>
-
-        <div class="stats-item" data-reveal="up">
-
-            <div class="stats-icon">
-                <i class="fa-solid fa-briefcase"></i>
-            </div>
-
-            <div class="stats-content">
-                <h3><?= $content['stats_experience_count']; ?></h3>
-                <p><?= $content['stats_experience_text']; ?></p>
-            </div>
-
-        </div>
+        <?php endforeach; ?>
 
     </div>
 

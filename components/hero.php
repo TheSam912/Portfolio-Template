@@ -65,7 +65,11 @@
 
         <img
             src="assets/images/hero.webp"
-            alt="Hero Image">
+            alt="Sobhan (Sam) Nolan"
+            fetchpriority="high"
+            decoding="async"
+            width="600"
+            height="600">
 
     </div>
 

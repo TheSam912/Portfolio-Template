@@ -34,13 +34,18 @@
 
             <form
                 id="contactForm"
-                action="https://api.web3forms.com/submit"
-                method="POST">
+                action="api/contact.php"
+                method="POST"
+                novalidate>
 
+                <!-- Honeypot: hidden from humans, attractive to bots. -->
                 <input
-                    type="hidden"
-                    name="access_key"
-                    value="6e41a5b2-6296-4585-a17c-d138aff39817">
+                    type="text"
+                    name="_hp"
+                    tabindex="-1"
+                    autocomplete="off"
+                    style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
+                    aria-hidden="true">
 
                 <div class="input-box">
 
@@ -50,6 +55,7 @@
                         type="text"
                         name="name"
                         placeholder="<?= $content['contact_name_placeholder']; ?>"
+                        maxlength="255"
                         required>
 
                 </div>

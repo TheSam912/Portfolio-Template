@@ -1,10 +1,38 @@
 <?php
 
-require_once "config/database.php";
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/helpers.php';
 
-$stmt = $pdo->query("SELECT * FROM projects");
+$projects = [];
 
-$projects = $stmt->fetchAll();
+try {
+
+    $stmt = $pdo->query(
+        "SELECT id, title, image_path, project_url
+         FROM projects
+         WHERE is_published = 1
+         ORDER BY sort_order ASC, id ASC"
+    );
+
+    $projects = $stmt->fetchAll();
+
+} catch (PDOException $e) {
+
+    error_log('[portfolio] ' . $e->getMessage());
+}
+
+// Fallback: if the DB returned no rows, render the original 6 hardcoded tiles
+// so the section never looks empty / broken.
+if (empty($projects)) {
+    for ($i = 1; $i <= 6; $i++) {
+        $projects[] = [
+            'id'          => $i,
+            'title'       => 'Project ' . $i,
+            'image_path'  => "assets/images/portfolio/project-{$i}.webp",
+            'project_url' => null,
+        ];
+    }
+}
 
 ?>
 
@@ -32,59 +60,34 @@ $projects = $stmt->fetchAll();
 
     <div class="portfolio-grid">
 
-        <div class="portfolio-item">
+        <?php foreach ($projects as $project): ?>
 
-            <img
-                src="assets/images/portfolio/project-1.webp"
-                alt="Project"
-            >
+            <?php
+                $tile = '<div class="portfolio-item">'
+                    . '<img src="' . e($project['image_path']) . '"'
+                    . ' alt="' . e($project['title']) . '"'
+                    . ' loading="lazy" decoding="async"'
+                    . ' width="800" height="600">'
+                    . '</div>';
+            ?>
 
-        </div>
+            <?php if (!empty($project['project_url'])): ?>
 
-        <div class="portfolio-item">
+                <a
+                    href="<?= e($project['project_url']); ?>"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="portfolio-link">
+                    <?= $tile; ?>
+                </a>
 
-            <img
-                src="assets/images/portfolio/project-2.webp"
-                alt="Project"
-            >
+            <?php else: ?>
 
-        </div>
+                <?= $tile; ?>
 
-        <div class="portfolio-item">
+            <?php endif; ?>
 
-            <img
-                src="assets/images/portfolio/project-3.webp"
-                alt="Project"
-            >
-
-        </div>
-
-        <div class="portfolio-item">
-
-            <img
-                src="assets/images/portfolio/project-4.webp"
-                alt="Project"
-            >
-
-        </div>
-
-        <div class="portfolio-item">
-
-            <img
-                src="assets/images/portfolio/project-5.webp"
-                alt="Project"
-            >
-
-        </div>
-
-        <div class="portfolio-item">
-
-            <img
-                src="assets/images/portfolio/project-6.webp"
-                alt="Project"
-            >
-
-        </div>
+        <?php endforeach; ?>
 
     </div>
 

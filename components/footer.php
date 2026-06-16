@@ -12,7 +12,11 @@
 
     <img
         src="./assets/images/footer-wave.webp"
-        alt="Footer Wave">
+        alt="Footer Wave"
+        loading="lazy"
+        decoding="async"
+        width="1920"
+        height="200">
 
 </section>
 

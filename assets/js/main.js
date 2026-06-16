@@ -199,7 +199,7 @@
 
             const target = parseFloat(match[1]);
             const suffix = raw.slice(match[1].length);
-            const dur    = reduced ? 1 : 1400;
+            const dur    = reduced ? 1 : 2200;
             const start  = performance.now();
 
             numEl.dataset.counted = "1";

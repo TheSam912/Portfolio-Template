@@ -12,8 +12,8 @@
     --ease-out-back:  cubic-bezier(0.34, 1.56, 0.64, 1);
     --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
 
-    --reveal-distance: 28px;
-    --reveal-duration: 800ms;
+    --reveal-distance: 32px;
+    --reveal-duration: 1200ms;
 
     --primary-glow:   rgba(52, 211, 153, 0.45);
     --primary-glow-soft: rgba(52, 211, 153, 0.18);
@@ -63,7 +63,7 @@ body::before {
         radial-gradient(800px circle at 15% 12%, rgba(52, 211, 153, 0.10), transparent 50%),
         radial-gradient(600px circle at 85% 88%, rgba(16, 185, 129, 0.08), transparent 55%);
     opacity: 0.9;
-    animation: aura-drift 18s ease-in-out infinite alternate;
+    animation: aura-drift 26s ease-in-out infinite alternate;
 }
 
 @keyframes aura-drift {
@@ -103,12 +103,12 @@ body > *:not(script) { position: relative; z-index: 1; }
 /* Stagger child reveals: any direct child with [data-reveal-child] */
 [data-reveal-stagger].is-in-view > [data-reveal-child] {
     --i: 0;
-    animation: reveal-up 700ms var(--ease-out-expo) both;
-    animation-delay: calc(var(--i) * 80ms);
+    animation: reveal-up 1100ms var(--ease-out-expo) both;
+    animation-delay: calc(var(--i) * 140ms);
 }
 
 @keyframes reveal-up {
-    from { opacity: 0; transform: translate3d(0, 24px, 0); }
+    from { opacity: 0; transform: translate3d(0, 28px, 0); }
     to   { opacity: 1; transform: none; }
 }
 
@@ -117,7 +117,7 @@ body > *:not(script) { position: relative; z-index: 1; }
 ===================================================== */
 
 body {
-    animation: page-intro 700ms var(--ease-out-expo) both;
+    animation: page-intro 1100ms var(--ease-out-expo) both;
 }
 
 @keyframes page-intro {
@@ -143,7 +143,7 @@ body {
             background-clip: text;
     -webkit-text-fill-color: transparent;
             color: transparent;
-    animation: gradient-shimmer 6s linear infinite;
+    animation: gradient-shimmer 9s linear infinite;
 }
 
 @keyframes gradient-shimmer {
@@ -168,8 +168,8 @@ body {
         rgba(52, 211, 153, 0.35) 50%,
         transparent 70%);
     transform: translateX(-100%);
-    animation: badge-shine 3.5s ease-in-out infinite;
-    animation-delay: 1.2s;
+    animation: badge-shine 5s ease-in-out infinite;
+    animation-delay: 1.6s;
     pointer-events: none;
 }
 
@@ -180,7 +180,7 @@ body {
 
 /* Floating bob on the hero portrait */
 .hero-right img {
-    animation: hero-float 7s ease-in-out infinite;
+    animation: hero-float 10s ease-in-out infinite;
     will-change: transform;
 }
 
@@ -200,7 +200,7 @@ body {
     border-radius: 50%;
     background: radial-gradient(circle, rgba(52, 211, 153, 0.20), transparent 60%);
     filter: blur(40px);
-    animation: hero-glow 5s ease-in-out infinite alternate;
+    animation: hero-glow 8s ease-in-out infinite alternate;
     z-index: -1;
 }
 
@@ -218,10 +218,10 @@ body {
     top: 12px;
     z-index: 50;
     transition:
-        margin    400ms var(--ease-out-expo),
-        padding   400ms var(--ease-out-expo),
-        box-shadow 400ms ease,
-        backdrop-filter 400ms ease;
+        margin    600ms var(--ease-out-expo),
+        padding   600ms var(--ease-out-expo),
+        box-shadow 600ms ease,
+        backdrop-filter 600ms ease;
 }
 
 .navbar.scrolled {
@@ -250,7 +250,7 @@ body {
     background: linear-gradient(90deg, #34D399, #6EE7B7);
     transform: scaleX(0);
     transform-origin: center;
-    transition: transform 320ms var(--ease-out-expo);
+    transition: transform 500ms var(--ease-out-expo);
 }
 
 .nav-links li a.active::after,
@@ -282,7 +282,7 @@ body {
         rgba(255, 255, 255, 0.35) 50%,
         transparent 70%);
     transform: translateX(-150%);
-    transition: transform 700ms var(--ease-out-expo);
+    transition: transform 1000ms var(--ease-out-expo);
     pointer-events: none;
     z-index: 1;
 }
@@ -305,9 +305,9 @@ body {
 .service-card {
     transform-style: preserve-3d;
     transition:
-        transform 400ms var(--ease-out-expo),
-        border-color 400ms ease,
-        box-shadow 400ms ease;
+        transform 600ms var(--ease-out-expo),
+        border-color 600ms ease,
+        box-shadow 600ms ease;
 }
 
 .service-card::before {
@@ -334,7 +334,7 @@ body {
 
 .service-card:hover::before {
     opacity: 1;
-    animation: card-spin 4s linear infinite;
+    animation: card-spin 6s linear infinite;
 }
 
 @property --card-angle {
@@ -348,7 +348,7 @@ body {
 }
 
 .service-card:hover .service-icon {
-    animation: icon-pop 600ms var(--ease-out-back);
+    animation: icon-pop 900ms var(--ease-out-back);
 }
 
 @keyframes icon-pop {
@@ -366,7 +366,7 @@ body {
 }
 
 .stats-item.is-in-view .stats-icon {
-    animation: stats-pulse 1.6s ease-in-out;
+    animation: stats-pulse 2.2s ease-in-out;
 }
 
 @keyframes stats-pulse {
@@ -411,13 +411,13 @@ body {
     display: flex;
     gap: var(--gap);
     width: max-content;
-    animation: marquee 38s linear infinite;
+    animation: marquee 60s linear infinite;
 }
 
 .skills-track--reverse {
     animation-direction: reverse;
     margin-top: 16px;
-    animation-duration: 46s;
+    animation-duration: 72s;
 }
 
 .skills-marquee:hover .skills-track {
@@ -441,7 +441,7 @@ body {
 ===================================================== */
 
 .timeline-item:first-child .timeline-dot {
-    animation: dot-pulse 2.4s ease-in-out infinite;
+    animation: dot-pulse 3.2s ease-in-out infinite;
 }
 
 @keyframes dot-pulse {
@@ -451,9 +451,9 @@ body {
 
 .timeline-card {
     transition:
-        transform 400ms var(--ease-out-expo),
-        border-color 400ms ease,
-        box-shadow 400ms ease;
+        transform 600ms var(--ease-out-expo),
+        border-color 600ms ease,
+        box-shadow 600ms ease;
 }
 
 /* =====================================================
@@ -473,7 +473,7 @@ body {
     align-items: flex-end;
     padding: 24px;
     opacity: 0;
-    transition: opacity 400ms ease;
+    transition: opacity 600ms ease;
     pointer-events: none;
 }
 
@@ -485,7 +485,7 @@ body {
     font-size: 22px;
     color: #F8FAFC;
     transform: translateY(12px);
-    transition: transform 500ms var(--ease-out-expo);
+    transition: transform 700ms var(--ease-out-expo);
     margin: 0;
 }
 
@@ -502,7 +502,7 @@ body {
 ===================================================== */
 
 .input-box {
-    transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms var(--ease-out-expo);
+    transition: border-color 450ms ease, box-shadow 450ms ease, transform 450ms var(--ease-out-expo);
 }
 
 .input-box:focus-within {
@@ -522,15 +522,15 @@ body {
 ===================================================== */
 
 .success-modal {
-    transition: opacity 300ms ease, backdrop-filter 300ms ease;
+    transition: opacity 450ms ease, backdrop-filter 450ms ease;
 }
 
 .success-modal-content {
     transform: scale(0.9) translateY(12px);
     opacity: 0;
     transition:
-        transform 500ms var(--ease-out-back),
-        opacity 350ms ease;
+        transform 750ms var(--ease-out-back),
+        opacity 500ms ease;
 }
 
 .success-modal.active .success-modal-content {
@@ -539,7 +539,7 @@ body {
 }
 
 .success-icon i {
-    animation: check-pop 700ms var(--ease-out-back) 120ms both;
+    animation: check-pop 1000ms var(--ease-out-back) 200ms both;
 }
 
 @keyframes check-pop {

@@ -1,0 +1,39 @@
+{
+    "name": "samnolan/portfolio",
+    "description": "Personal portfolio site (PHP + MySQL).",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -r \"echo \\\"\\n  Sam Nolan Portfolio  →  http://localhost:8000\\n  Press Ctrl+C to stop.\\n\\n\\\";\"",
+            "@php -S localhost:8000"
+        ],
+        "start": "@dev",
+        "setup": [
+            "@php bin/setup.php",
+            "@db:reset"
+        ],
+        "db:schema": "@php bin/db.php schema",
+        "db:seed":   "@php bin/db.php seed",
+        "db:reset":  "@php bin/db.php reset",
+        "db:fresh":  "@php bin/db.php fresh"
+    },
+    "scripts-descriptions": {
+        "dev":       "Start the local PHP dev server on http://localhost:8000",
+        "start":     "Alias of `dev`",
+        "setup":     "First-time setup: copy .env.example, then build & seed the DB",
+        "db:schema": "Apply db/schema.sql (idempotent)",
+        "db:seed":   "Apply db/seed.sql (idempotent sample rows)",
+        "db:reset":  "Apply schema + seed",
+        "db:fresh":  "DROP database, then schema + seed (DANGEROUS — destroys data)"
+    }
+}

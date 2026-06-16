@@ -28,27 +28,63 @@ Make sure you have:
 > brew services restart mysql
 > ```
 
-### 2. Configure environment
+### 2. One-time setup
+
+Pick whichever fits your machine — both do the same thing:
+
+| Option | Command | Works on |
+|---|---|---|
+| **Composer** (recommended) | `composer setup` | macOS · Linux · Windows |
+| Plain shell — Mac / Linux | `./start.sh` (after editing `.env` and seeding manually) | macOS · Linux |
+| Plain shell — Windows | `start.bat` | Windows |
+
+`composer setup` does three things in order: copies `.env.example` → `.env`, applies `db/schema.sql`, and seeds sample data. It is **idempotent** — safe to re-run after a `git pull`.
+
+> Edit `.env` afterwards if your local MySQL credentials differ from the defaults.
+
+### 3. Run the dev server
 
 ```bash
-cp .env.example .env
-# Edit .env with your local DB credentials.
+composer dev
 ```
 
-### 3. Create the database
+…or, without Composer:
 
 ```bash
-mysql -u root < db/schema.sql
-mysql -u root < db/seed.sql      # optional: sample data
-```
-
-### 4. Run the dev server
-
-```bash
-php -S localhost:8000
+./start.sh        # mac / linux
+start.bat         # windows
 ```
 
 Open [http://localhost:8000](http://localhost:8000).
+
+### Available commands
+
+| Command | What it does |
+|---|---|
+| `composer dev` | Start the local PHP server on `:8000` (alias: `composer start`) |
+| `composer setup` | First-time setup — creates `.env` and builds & seeds the DB |
+| `composer db:schema` | Apply `db/schema.sql` |
+| `composer db:seed` | Apply `db/seed.sql` |
+| `composer db:reset` | schema + seed |
+| `composer db:fresh` | **DROP** the database, then schema + seed (destructive) |
+
+### Optional: shorter terminal command
+
+If you want an even shorter one-liner from anywhere on your machine, add a personal alias.
+
+**macOS / Linux** — append to `~/.zshrc` or `~/.bashrc`:
+
+```bash
+alias pf='cd ~/Desktop/development/theSam_Portfolio/Portfolio-Template && composer dev'
+```
+
+Then just run `pf` from any terminal.
+
+**Windows (PowerShell)** — add to your `$PROFILE`:
+
+```powershell
+function pf { Set-Location 'C:\path\to\Portfolio-Template'; composer dev }
+```
 
 ## Project structure
 

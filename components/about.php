@@ -10,7 +10,9 @@
 
         <!-- LEFT -->
 
-        <div class="about-left">
+        <div
+            class="about-left"
+            data-reveal="left">
 
             <div class="section-tag">
 
@@ -24,7 +26,7 @@
 
                 <?= $content['about_title_line_1']; ?>
 
-                <span>
+                <span class="gradient-text">
 
                     <?= $content['about_title_line_2']; ?>
 
@@ -44,7 +46,10 @@
 
         <!-- RIGHT -->
 
-        <div class="about-right">
+        <div
+            class="about-right"
+            data-reveal="right"
+            data-reveal-delay="120">
 
             <div class="info-card">
 

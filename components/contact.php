@@ -10,7 +10,9 @@
 
         <!-- FORM -->
 
-        <div class="contact-form">
+        <div
+            class="contact-form"
+            data-reveal="left">
 
             <span class="section-tag">
 
@@ -24,7 +26,7 @@
 
                 <?= $content['contact_title_line_1']; ?>
 
-                <span>
+                <span class="gradient-text">
 
                     <?= $content['contact_title_line_2']; ?>
 
@@ -85,7 +87,8 @@
 
                 <button
                     type="submit"
-                    class="primary-btn">
+                    class="primary-btn"
+                    data-magnetic>
 
                     <?= $content['contact_button']; ?>
 
@@ -98,7 +101,10 @@
 
         <!-- INFO BOX -->
 
-        <div class="contact-info">
+        <div
+            class="contact-info"
+            data-reveal="right"
+            data-reveal-delay="120">
 
             <span class="section-tag">
 

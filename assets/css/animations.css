@@ -1,0 +1,640 @@
+/* =====================================================
+   MOTION LAYER
+   --------------------------------------------------------
+   All "pro max" animations and micro-interactions.
+   Layered on top of style.css — no existing rules altered.
+   Honors prefers-reduced-motion.
+===================================================== */
+
+/* Custom design tokens that complement the existing system */
+:root {
+    --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-back:  cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+
+    --reveal-distance: 28px;
+    --reveal-duration: 800ms;
+
+    --primary-glow:   rgba(52, 211, 153, 0.45);
+    --primary-glow-soft: rgba(52, 211, 153, 0.18);
+}
+
+/* Smooth native scrolling for in-page anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Subtle custom scrollbar that matches the brand */
+@supports (scrollbar-color: auto) {
+    html {
+        scrollbar-color: rgba(52, 211, 153, 0.35) transparent;
+        scrollbar-width: thin;
+    }
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.35), rgba(16, 185, 129, 0.55));
+    border-radius: 10px;
+    border: 2px solid #000203;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.55), rgba(16, 185, 129, 0.85));
+}
+
+/* Selection */
+::selection {
+    background: rgba(52, 211, 153, 0.35);
+    color: #F8FAFC;
+}
+
+/* =====================================================
+   AMBIENT BACKGROUND AURA
+===================================================== */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(800px circle at 15% 12%, rgba(52, 211, 153, 0.10), transparent 50%),
+        radial-gradient(600px circle at 85% 88%, rgba(16, 185, 129, 0.08), transparent 55%);
+    opacity: 0.9;
+    animation: aura-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes aura-drift {
+    0%   { transform: translate3d(0, 0, 0)        scale(1);   }
+    50%  { transform: translate3d(20px, -10px, 0) scale(1.05); }
+    100% { transform: translate3d(-15px, 15px, 0) scale(1);   }
+}
+
+/* keep all real content above the aura */
+body > *:not(script) { position: relative; z-index: 1; }
+
+/* =====================================================
+   SCROLL-DRIVEN REVEALS
+   Add data-reveal[="up"|"left"|"right"|"scale"] to any
+   element. JS toggles `.is-in-view` once visible.
+===================================================== */
+
+[data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-distance), 0);
+    transition:
+        opacity var(--reveal-duration) var(--ease-out-expo),
+        transform var(--reveal-duration) var(--ease-out-expo);
+    will-change: opacity, transform;
+}
+
+[data-reveal="left"]  { transform: translate3d(calc(-1 * var(--reveal-distance)), 0, 0); }
+[data-reveal="right"] { transform: translate3d(var(--reveal-distance), 0, 0); }
+[data-reveal="scale"] { transform: scale(0.92); }
+[data-reveal="fade"]  { transform: none; }
+
+[data-reveal].is-in-view {
+    opacity: 1;
+    transform: none;
+}
+
+/* Stagger child reveals: any direct child with [data-reveal-child] */
+[data-reveal-stagger].is-in-view > [data-reveal-child] {
+    --i: 0;
+    animation: reveal-up 700ms var(--ease-out-expo) both;
+    animation-delay: calc(var(--i) * 80ms);
+}
+
+@keyframes reveal-up {
+    from { opacity: 0; transform: translate3d(0, 24px, 0); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* =====================================================
+   PAGE INTRO
+===================================================== */
+
+body {
+    animation: page-intro 700ms var(--ease-out-expo) both;
+}
+
+@keyframes page-intro {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* =====================================================
+   GRADIENT TEXT (used on hero/section title accents)
+===================================================== */
+
+.gradient-text {
+    background: linear-gradient(
+        92deg,
+        #34D399 0%,
+        #6EE7B7 30%,
+        #A7F3D0 50%,
+        #34D399 75%,
+        #10B981 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+            color: transparent;
+    animation: gradient-shimmer 6s linear infinite;
+}
+
+@keyframes gradient-shimmer {
+    from { background-position:   0% 50%; }
+    to   { background-position: 200% 50%; }
+}
+
+/* =====================================================
+   HERO POLISH
+===================================================== */
+
+.hero-badge {
+    position: relative;
+    overflow: hidden;
+}
+.hero-badge::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg,
+        transparent 30%,
+        rgba(52, 211, 153, 0.35) 50%,
+        transparent 70%);
+    transform: translateX(-100%);
+    animation: badge-shine 3.5s ease-in-out infinite;
+    animation-delay: 1.2s;
+    pointer-events: none;
+}
+
+@keyframes badge-shine {
+    0%, 60%, 100% { transform: translateX(-110%); }
+    80%           { transform: translateX(110%); }
+}
+
+/* Floating bob on the hero portrait */
+.hero-right img {
+    animation: hero-float 7s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes hero-float {
+    0%, 100% { transform: translateY(0)    rotate(0deg);   }
+    50%      { transform: translateY(-12px) rotate(0.4deg); }
+}
+
+/* Soft glow ring behind the hero portrait */
+.hero-right {
+    position: relative;
+}
+.hero-right::before {
+    content: "";
+    position: absolute;
+    inset: 5%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(52, 211, 153, 0.20), transparent 60%);
+    filter: blur(40px);
+    animation: hero-glow 5s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes hero-glow {
+    from { opacity: 0.6; transform: scale(0.95); }
+    to   { opacity: 1.0; transform: scale(1.05); }
+}
+
+/* =====================================================
+   NAVBAR — compact-on-scroll
+===================================================== */
+
+.navbar {
+    position: sticky;
+    top: 12px;
+    z-index: 50;
+    transition:
+        margin    400ms var(--ease-out-expo),
+        padding   400ms var(--ease-out-expo),
+        box-shadow 400ms ease,
+        backdrop-filter 400ms ease;
+}
+
+.navbar.scrolled {
+    margin: 8px 3%;
+    padding: 6px 18px;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 0 30px rgba(52, 211, 153, 0.12);
+}
+
+/* Active link underline that slides */
+.nav-links li a {
+    position: relative;
+    transition: color 250ms ease;
+}
+
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: -4px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #34D399, #6EE7B7);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 320ms var(--ease-out-expo);
+}
+
+.nav-links li a.active::after,
+.nav-links li a:hover::after {
+    transform: scaleX(1);
+}
+
+/* =====================================================
+   BUTTON SHINE & MAGNETIC
+===================================================== */
+
+.hero-btn-primary,
+.primary-btn,
+.talk-btn,
+.mobile-talk-btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.hero-btn-primary::before,
+.primary-btn::before,
+.talk-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.35) 50%,
+        transparent 70%);
+    transform: translateX(-150%);
+    transition: transform 700ms var(--ease-out-expo);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-btn-primary:hover::before,
+.primary-btn:hover::before,
+.talk-btn:hover::before {
+    transform: translateX(150%);
+}
+
+[data-magnetic] {
+    transition: transform 250ms var(--ease-out-back);
+    will-change: transform;
+}
+
+/* =====================================================
+   SERVICE CARDS — 3D tilt + animated border
+===================================================== */
+
+.service-card {
+    transform-style: preserve-3d;
+    transition:
+        transform 400ms var(--ease-out-expo),
+        border-color 400ms ease,
+        box-shadow 400ms ease;
+}
+
+.service-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+        from var(--card-angle, 0deg),
+        transparent 0deg,
+        rgba(52, 211, 153, 0.55) 60deg,
+        transparent 120deg
+    );
+    -webkit-mask:
+        linear-gradient(#000, #000) content-box,
+        linear-gradient(#000, #000);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 350ms ease;
+    pointer-events: none;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+    animation: card-spin 4s linear infinite;
+}
+
+@property --card-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes card-spin {
+    to { --card-angle: 360deg; }
+}
+
+.service-card:hover .service-icon {
+    animation: icon-pop 600ms var(--ease-out-back);
+}
+
+@keyframes icon-pop {
+    0%   { transform: scale(1)    rotate(0);    }
+    50%  { transform: scale(1.15) rotate(-8deg); }
+    100% { transform: scale(1)    rotate(0);    }
+}
+
+/* =====================================================
+   STATS — counter pulse on reveal
+===================================================== */
+
+.stats-content h3 {
+    font-variant-numeric: tabular-nums;
+}
+
+.stats-item.is-in-view .stats-icon {
+    animation: stats-pulse 1.6s ease-in-out;
+}
+
+@keyframes stats-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--primary-glow); }
+    50%      { box-shadow: 0 0 0 12px transparent; }
+}
+
+/* =====================================================
+   SKILLS — infinite marquee
+===================================================== */
+
+.skills-marquee {
+    --gap: 24px;
+    position: relative;
+    overflow: hidden;
+    padding: 24px 0;
+    border-radius: 24px;
+    background:
+        linear-gradient(180deg, rgba(8, 12, 16, 0.98), rgba(4, 7, 10, 1));
+    border: 1px solid rgba(52, 211, 153, 0.12);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+        0 24px 60px rgba(0, 0, 0, 0.55),
+        0 0 30px rgba(52, 211, 153, 0.025);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.skills-marquee::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 15%;
+    width: 70%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.45), transparent);
+    z-index: 2;
+}
+
+.skills-track {
+    display: flex;
+    gap: var(--gap);
+    width: max-content;
+    animation: marquee 38s linear infinite;
+}
+
+.skills-track--reverse {
+    animation-direction: reverse;
+    margin-top: 16px;
+    animation-duration: 46s;
+}
+
+.skills-marquee:hover .skills-track {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(calc(-50% - (var(--gap) / 2)), 0, 0); }
+}
+
+.skills-track .skill-item {
+    flex: 0 0 auto;
+    min-width: 150px;
+    background: rgba(52, 211, 153, 0.025);
+    border: 1px solid rgba(52, 211, 153, 0.08);
+}
+
+/* =====================================================
+   TIMELINE — current dot pulse, line trace
+===================================================== */
+
+.timeline-item:first-child .timeline-dot {
+    animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0    var(--primary-glow); }
+    50%      { box-shadow: 0 0 0 14px transparent; }
+}
+
+.timeline-card {
+    transition:
+        transform 400ms var(--ease-out-expo),
+        border-color 400ms ease,
+        box-shadow 400ms ease;
+}
+
+/* =====================================================
+   PORTFOLIO — image zoom + overlay reveal
+===================================================== */
+
+.portfolio-item {
+    cursor: pointer;
+}
+
+.portfolio-item .portfolio-overlay {
+    position: absolute;
+    inset: 20px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, transparent 35%, rgba(2, 6, 9, 0.85));
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 400ms ease;
+    pointer-events: none;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-overlay h4 {
+    font-size: 22px;
+    color: #F8FAFC;
+    transform: translateY(12px);
+    transition: transform 500ms var(--ease-out-expo);
+    margin: 0;
+}
+
+.portfolio-item:hover .portfolio-overlay h4 {
+    transform: none;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   CONTACT FORM polish
+===================================================== */
+
+.input-box {
+    transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms var(--ease-out-expo);
+}
+
+.input-box:focus-within {
+    box-shadow:
+        0 0 0 3px var(--primary-glow-soft),
+        0 12px 30px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
+}
+
+#contactForm button[disabled] {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+/* =====================================================
+   SUCCESS MODAL — scale-in
+===================================================== */
+
+.success-modal {
+    transition: opacity 300ms ease, backdrop-filter 300ms ease;
+}
+
+.success-modal-content {
+    transform: scale(0.9) translateY(12px);
+    opacity: 0;
+    transition:
+        transform 500ms var(--ease-out-back),
+        opacity 350ms ease;
+}
+
+.success-modal.active .success-modal-content {
+    transform: none;
+    opacity: 1;
+}
+
+.success-icon i {
+    animation: check-pop 700ms var(--ease-out-back) 120ms both;
+}
+
+@keyframes check-pop {
+    from { transform: scale(0) rotate(-90deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0);      opacity: 1; }
+}
+
+/* =====================================================
+   CUSTOM CURSOR (desktop, pointer-fine only)
+===================================================== */
+
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    mix-blend-mode: difference;
+    will-change: transform, width, height;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: #34D399;
+    transition: width 200ms ease, height 200ms ease, opacity 200ms ease;
+    opacity: 0;
+}
+
+.cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(52, 211, 153, 0.7);
+    transition:
+        width 280ms var(--ease-out-back),
+        height 280ms var(--ease-out-back),
+        background 200ms ease,
+        border-color 200ms ease,
+        opacity 200ms ease;
+    opacity: 0;
+}
+
+body.cursor-ready .cursor-dot,
+body.cursor-ready .cursor-ring {
+    opacity: 1;
+}
+
+body.cursor-hover .cursor-ring {
+    width: 56px;
+    height: 56px;
+    background: rgba(52, 211, 153, 0.10);
+    border-color: rgba(52, 211, 153, 1);
+}
+
+body.cursor-hover .cursor-dot {
+    width: 0;
+    height: 0;
+}
+
+/* Hide custom cursor on touch / coarse pointers */
+@media (hover: none), (pointer: coarse) {
+    .cursor-dot,
+    .cursor-ring { display: none !important; }
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    body::before,
+    .hero-right img,
+    .skills-track,
+    .gradient-text {
+        animation: none !important;
+    }
+
+    .cursor-dot,
+    .cursor-ring { display: none !important; }
+}

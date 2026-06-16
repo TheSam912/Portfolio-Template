@@ -1,6 +1,55 @@
+<?php
+
+$skills = [
+    ['name' => 'Flutter',     'icon' => 'flutter.png'],
+    ['name' => 'PHP',         'icon' => 'php.png'],
+    ['name' => 'Laravel',     'icon' => 'laravel.png'],
+    ['name' => 'JavaScript',  'icon' => 'js.png'],
+    ['name' => 'HTML',        'icon' => 'html.png'],
+    ['name' => 'CSS',         'icon' => 'css.png'],
+    ['name' => 'Vue.js',      'icon' => 'vue.png'],
+    ['name' => 'Figma',       'icon' => 'figma.png'],
+    ['name' => 'Java',        'icon' => 'java.png'],
+    ['name' => 'MySQL',       'icon' => 'mysql.png'],
+    ['name' => 'MongoDB',     'icon' => 'mongodb.png'],
+    ['name' => 'Swift',       'icon' => 'swift.png'],
+    ['name' => 'WordPress',   'icon' => 'wordpress.png'],
+    ['name' => 'Git',         'icon' => 'git.png'],
+    ['name' => 'Docker',      'icon' => 'docker.png'],
+    ['name' => 'Node.js',     'icon' => 'nodejs.png'],
+    ['name' => 'AWS',         'icon' => 'aws.png'],
+    ['name' => 'Bootstrap',   'icon' => 'bootstrap.png'],
+];
+
+// Split roughly in half for two opposing rows.
+$rowA = array_slice($skills, 0, 9);
+$rowB = array_slice($skills, 9);
+
+$render_track = function (array $items): string {
+    $tile = static function (array $skill): string {
+        return sprintf(
+            '<div class="skill-item">'
+                . '<img src="assets/images/skills/%s" alt="%s" loading="lazy" decoding="async" width="48" height="48">'
+                . '<span>%s</span>'
+            . '</div>',
+            htmlspecialchars($skill['icon'], ENT_QUOTES),
+            htmlspecialchars($skill['name'], ENT_QUOTES),
+            htmlspecialchars($skill['name'], ENT_QUOTES)
+        );
+    };
+
+    $tiles = array_map($tile, $items);
+    // Duplicate for seamless loop.
+    return implode('', $tiles) . implode('', $tiles);
+};
+
+?>
+
 <section id="skills" class="skills-section">
 
-    <div class="skills-head">
+    <div
+        class="skills-head"
+        data-reveal="up">
 
         <span class="section-tag">
 
@@ -14,222 +63,23 @@
 
             Technologies I Use To Build
 
-            <span>Modern Products.</span>
+            <span class="gradient-text">Modern Products.</span>
 
         </h2>
 
     </div>
 
-    <div class="skills-wrapper">
+    <div
+        class="skills-marquee"
+        data-reveal="fade">
 
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/flutter.png"
-                alt="Flutter"
-            >
-
-            <span>Flutter</span>
-
+        <div class="skills-track">
+            <?= $render_track($rowA); ?>
         </div>
 
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/php.png"
-                alt="PHP"
-            >
-
-            <span>PHP</span>
-
+        <div class="skills-track skills-track--reverse">
+            <?= $render_track($rowB); ?>
         </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/laravel.png"
-                alt="Laravel"
-            >
-
-            <span>Laravel</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/js.png"
-                alt="JavaScript"
-            >
-
-            <span>JavaScript</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/html.png"
-                alt="HTML"
-            >
-
-            <span>HTML</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/css.png"
-                alt="CSS"
-            >
-
-            <span>CSS</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/vue.png"
-                alt="Vue.js"
-            >
-
-            <span>Vue.js</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/figma.png"
-                alt="figma"
-            >
-
-            <span>figma</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/java.png"
-                alt="Java"
-            >
-
-            <span>Java</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/mysql.png"
-                alt="MySQL"
-            >
-
-            <span>MySQL</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/mongodb.png"
-                alt="MongoDB"
-            >
-
-            <span>MongoDB</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/swift.png"
-                alt="Swift"
-            >
-
-            <span>Swift</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/wordpress.png"
-                alt="WordPress"
-            >
-
-            <span>WordPress</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/git.png"
-                alt="Git"
-            >
-
-            <span>Git</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/docker.png"
-                alt="Docker"
-            >
-
-            <span>Docker</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/nodejs.png"
-                alt="Node.js"
-            >
-
-            <span>Node.js</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/aws.png"
-                alt="AWS"
-            >
-
-            <span>AWS</span>
-
-        </div>
-
-        <div class="skill-item">
-
-            <img
-                src="assets/images/skills/bootstrap.png"
-                alt="Bootstrap"
-            >
-
-            <span>Bootstrap</span>
-
-        </div>
-
-
-
-
-
-        
-
-
-
-
-        
 
     </div>
 

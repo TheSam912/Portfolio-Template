@@ -6,7 +6,9 @@
 
 <section id="services" class="services-section">
 
-    <div class="services-head">
+    <div
+        class="services-head"
+        data-reveal="up">
 
         <span class="section-tag">
 
@@ -20,7 +22,7 @@
 
             <?= $content['services_title_line_1']; ?>
 
-            <span>
+            <span class="gradient-text">
 
                 <?= $content['services_title_line_2']; ?>
 
@@ -30,7 +32,10 @@
 
     </div>
 
-    <div class="services-grid">
+    <div
+        class="services-grid"
+        data-reveal-stagger
+        data-reveal="fade">
 
         <!-- CARD 1 -->
 

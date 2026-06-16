@@ -25,7 +25,7 @@
      FOOTER
 =================================== -->
 
-<footer class="footer-section">
+<footer class="footer-section" data-reveal="up">
 
     <div class="footer-wrapper">
 

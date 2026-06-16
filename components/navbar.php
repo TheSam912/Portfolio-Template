@@ -30,7 +30,7 @@
 
     </ul>
 
-    <a href="#contact" class="talk-btn">
+    <a href="#contact" class="talk-btn" data-magnetic>
 
         Get In Touch
 

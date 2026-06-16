@@ -1,4 +1,4 @@
-<section class="banner-section">
+<section class="banner-section" data-reveal="scale">
 
     <img
         src="assets/images/banner3.webp"

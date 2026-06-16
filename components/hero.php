@@ -8,19 +8,24 @@
 
     <div class="hero-left">
 
-        <div class="hero-badge">
+        <div
+            class="hero-badge"
+            data-reveal="fade">
 
             <?= $content['hero_badge']; ?>
 
         </div>
 
-        <h1 class="hero-title">
+        <h1
+            class="hero-title"
+            data-reveal="up"
+            data-reveal-delay="80">
 
             <?= $content['hero_title_line_1']; ?>
 
             <br>
 
-            <span>
+            <span class="gradient-text">
 
                 <?= $content['hero_title_line_2']; ?>
 
@@ -32,17 +37,24 @@
 
         </h1>
 
-        <p class="hero-description">
+        <p
+            class="hero-description"
+            data-reveal="up"
+            data-reveal-delay="180">
 
             <?= $content['hero_description']; ?>
 
         </p>
 
-        <div class="hero-buttons">
+        <div
+            class="hero-buttons"
+            data-reveal="up"
+            data-reveal-delay="280">
 
             <a
                 href="#portfolio"
-                class="hero-btn-primary">
+                class="hero-btn-primary"
+                data-magnetic>
 
                 <?= $content['hero_btn_primary']; ?>
 
@@ -61,7 +73,10 @@
 
     </div>
 
-    <div class="hero-right">
+    <div
+        class="hero-right"
+        data-reveal="scale"
+        data-reveal-delay="200">
 
         <img
             src="assets/images/hero.webp"

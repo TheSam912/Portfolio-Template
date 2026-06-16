@@ -33,6 +33,7 @@ if (is_debug()) {
 
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
 
     <script defer src="assets/js/main.js"></script>
 

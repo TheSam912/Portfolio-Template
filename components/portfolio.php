@@ -17,12 +17,9 @@ try {
     $projects = $stmt->fetchAll();
 
 } catch (PDOException $e) {
-
     error_log('[portfolio] ' . $e->getMessage());
 }
 
-// Fallback: if the DB returned no rows, render the original 6 hardcoded tiles
-// so the section never looks empty / broken.
 if (empty($projects)) {
     for ($i = 1; $i <= 6; $i++) {
         $projects[] = [
@@ -38,7 +35,9 @@ if (empty($projects)) {
 
 <section id="portfolio" class="portfolio-section">
 
-    <div class="portfolio-head">
+    <div
+        class="portfolio-head"
+        data-reveal="up">
 
         <span class="section-tag">
 
@@ -52,23 +51,27 @@ if (empty($projects)) {
 
             Selected
 
-            <span>Projects.</span>
+            <span class="gradient-text">Projects.</span>
 
         </h2>
 
     </div>
 
-    <div class="portfolio-grid">
+    <div
+        class="portfolio-grid"
+        data-reveal-stagger
+        data-reveal="fade">
 
         <?php foreach ($projects as $project): ?>
 
             <?php
-                $tile = '<div class="portfolio-item">'
-                    . '<img src="' . e($project['image_path']) . '"'
-                    . ' alt="' . e($project['title']) . '"'
-                    . ' loading="lazy" decoding="async"'
-                    . ' width="800" height="600">'
-                    . '</div>';
+                $tile  = '<div class="portfolio-item">';
+                $tile .=     '<img src="' . e($project['image_path']) . '"'
+                          . ' alt="' . e($project['title']) . '"'
+                          . ' loading="lazy" decoding="async"'
+                          . ' width="800" height="600">';
+                $tile .=     '<div class="portfolio-overlay"><h4>' . e($project['title']) . '</h4></div>';
+                $tile .= '</div>';
             ?>
 
             <?php if (!empty($project['project_url'])): ?>

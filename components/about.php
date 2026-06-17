@@ -1,6 +1,7 @@
 <?php
 
 /** @var array $content */
+/** @var array $profile */
 
 ?>
 
@@ -8,163 +9,71 @@
 
     <div class="about-wrapper">
 
-        <!-- LEFT -->
-
-        <div
-            class="about-left"
-            data-reveal="left">
+        <div class="about-left" data-reveal="left">
 
             <div class="section-tag">
-
                 <span class="tag-dot"></span>
-
                 <?= e(setting('about_tag')); ?>
-
             </div>
 
             <h2 class="about-title">
-
                 <?= e(setting('about_title_line_1')); ?>
-
-                <span class="gradient-text">
-
-                    <?= e(setting('about_title_line_2')); ?>
-
-                </span>
-
+                <span class="gradient-text"><?= e(setting('about_title_line_2')); ?></span>
                 <?= e(setting('about_title_line_3')); ?>
-
             </h2>
 
             <p class="about-text">
-
-                <?= nl2br(e(setting('about_description'))); ?>
-
+                <?= nl2br(e(profile('about_summary'))); ?>
             </p>
 
         </div>
 
-        <!-- RIGHT -->
-
-        <div
-            class="about-right"
-            data-reveal="right"
-            data-reveal-delay="120">
+        <div class="about-right" data-reveal="right" data-reveal-delay="120">
 
             <div class="info-card">
 
                 <div class="info-item">
-
                     <i class="fa-solid fa-user"></i>
-
                     <div>
-
-                        <span>
-
-                            <?= e(setting('about_name_label')); ?>
-
-                        </span>
-
-                        <h4>
-
-                            <?= e(setting('about_name_value')); ?>
-
-                        </h4>
-
+                        <span><?= e(setting('about_name_label')); ?></span>
+                        <h4><?= e(setting('about_name_value')); ?></h4>
                     </div>
-
                 </div>
 
                 <div class="info-item">
-
                     <i class="fa-solid fa-envelope"></i>
-
                     <div>
-
-                        <span>
-
-                            <?= e(setting('about_email_label')); ?>
-
-                        </span>
-
+                        <span><?= e(setting('about_email_label')); ?></span>
                         <h4>
-
-                            <a href="mailto:<?= e(setting('about_email_value')); ?>">
-
-                                <?= e(setting('about_email_value')); ?>
-
+                            <a href="mailto:<?= e(profile('contact_email')); ?>">
+                                <?= e(profile('contact_email')); ?>
                             </a>
-
                         </h4>
-
                     </div>
-
                 </div>
 
                 <div class="info-item">
-
                     <i class="fa-solid fa-graduation-cap"></i>
-
                     <div>
-
-                        <span>
-
-                            <?= e(setting('about_degree_label')); ?>
-
-                        </span>
-
-                        <h4>
-
-                            <?= e(setting('about_degree_value')); ?>
-
-                        </h4>
-
+                        <span><?= e(setting('about_degree_label')); ?></span>
+                        <h4><?= e(setting('about_degree_value')); ?></h4>
                     </div>
-
                 </div>
 
                 <div class="info-item">
-
                     <i class="fa-solid fa-earth-americas"></i>
-
                     <div>
-
-                        <span>
-
-                            <?= e(setting('about_location_label')); ?>
-
-                        </span>
-
-                        <h4>
-
-                            <?= e(setting('about_location_value')); ?>
-
-                        </h4>
-
+                        <span><?= e(setting('about_location_label')); ?></span>
+                        <h4><?= e(setting('about_location_value')); ?></h4>
                     </div>
-
                 </div>
 
                 <div class="info-item">
-
                     <i class="fa-solid fa-briefcase"></i>
-
                     <div>
-
-                        <span>
-
-                            <?= e(setting('about_availability_label')); ?>
-
-                        </span>
-
-                        <h4>
-
-                            <?= e(setting('about_availability_value')); ?>
-
-                        </h4>
-
+                        <span><?= e(setting('about_availability_label')); ?></span>
+                        <h4><?= e(setting('about_availability_value')); ?></h4>
                     </div>
-
                 </div>
 
             </div>

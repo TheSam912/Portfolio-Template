@@ -15,7 +15,7 @@ require_once __DIR__ . '/config/env.php';
 $uri  = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $path = __DIR__ . rawurldecode($uri);
 
-$adminPath = '/' . trim((string) env('ADMIN_PATH', 'ctrl-k9m2x7p4'), '/');
+$adminPath = '/' . trim((string) env('ADMIN_PATH', 'samadminpanel'), '/');
 
 if ($uri === $adminPath || str_starts_with($uri, $adminPath . '/')) {
     $_SERVER['ADMIN_SUBPATH'] = substr($uri, strlen($adminPath)) ?: '/';

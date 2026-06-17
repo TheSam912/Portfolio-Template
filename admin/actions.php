@@ -6,9 +6,8 @@ function admin_handle_post(string $path): void
 {
     match ($path) {
         '/login'       => admin_action_login(),
-        '/settings'    => admin_action_settings(),
-        '/stats'       => admin_action_stats(),
-        '/services'    => admin_action_services(),
+        '/profile'     => admin_action_profile(),
+        '/settings'    => admin_action_profile(),
         '/skills'      => admin_action_skills(),
         '/experiences' => admin_action_experiences(),
         '/projects'    => admin_action_projects(),
@@ -43,87 +42,21 @@ function admin_action_login(): void
     admin_redirect('', 'success', 'Welcome back.');
 }
 
-function admin_action_settings(): void
+function admin_action_profile(): void
 {
     admin_require_auth();
     admin_verify_post();
 
-    $groups = [
-        'site_title' => ['group' => 'seo'],
-        'meta_description' => ['group' => 'seo'],
-        'hero_badge' => ['group' => 'hero'],
-        'hero_title_line_1' => ['group' => 'hero'],
-        'hero_title_line_2' => ['group' => 'hero'],
-        'hero_title_line_3' => ['group' => 'hero'],
-        'hero_description' => ['group' => 'hero'],
-        'hero_btn_primary' => ['group' => 'hero'],
-        'hero_btn_secondary' => ['group' => 'hero'],
-        'about_tag' => ['group' => 'about'],
-        'about_title_line_1' => ['group' => 'about'],
-        'about_title_line_2' => ['group' => 'about'],
-        'about_title_line_3' => ['group' => 'about'],
-        'about_description' => ['group' => 'about'],
-        'about_name_label' => ['group' => 'about'],
-        'about_name_value' => ['group' => 'about'],
-        'about_email_label' => ['group' => 'about'],
-        'about_email_value' => ['group' => 'about'],
-        'about_degree_label' => ['group' => 'about'],
-        'about_degree_value' => ['group' => 'about'],
-        'about_location_label' => ['group' => 'about'],
-        'about_location_value' => ['group' => 'about'],
-        'about_availability_label' => ['group' => 'about'],
-        'about_availability_value' => ['group' => 'about'],
-        'services_tag' => ['group' => 'services'],
-        'services_title_line_1' => ['group' => 'services'],
-        'services_title_line_2' => ['group' => 'services'],
-        'skills_tag' => ['group' => 'skills'],
-        'skills_title_line_1' => ['group' => 'skills'],
-        'skills_title_line_2' => ['group' => 'skills'],
-        'experience_tag' => ['group' => 'experience'],
-        'experience_title_line_1' => ['group' => 'experience'],
-        'experience_title_line_2' => ['group' => 'experience'],
-        'portfolio_tag' => ['group' => 'portfolio'],
-        'portfolio_title_line_1' => ['group' => 'portfolio'],
-        'portfolio_title_line_2' => ['group' => 'portfolio'],
-        'contact_tag' => ['group' => 'contact'],
-        'contact_title_line_1' => ['group' => 'contact'],
-        'contact_title_line_2' => ['group' => 'contact'],
-        'contact_name_placeholder' => ['group' => 'contact'],
-        'contact_email_placeholder' => ['group' => 'contact'],
-        'contact_message_placeholder' => ['group' => 'contact'],
-        'contact_button' => ['group' => 'contact'],
-        'contact_info_tag' => ['group' => 'contact'],
-        'contact_email' => ['group' => 'contact'],
-        'contact_linkedin' => ['group' => 'contact'],
-        'contact_linkedin_text' => ['group' => 'contact'],
-        'contact_github' => ['group' => 'contact'],
-        'contact_github_text' => ['group' => 'contact'],
-        'contact_location' => ['group' => 'contact'],
-        'footer_copyright' => ['group' => 'footer'],
-        'footer_github' => ['group' => 'footer'],
-        'footer_linkedin' => ['group' => 'footer'],
-        'footer_email' => ['group' => 'footer'],
-        'navbar_cta_text' => ['group' => 'navbar'],
-        'modal_success_title' => ['group' => 'modal'],
-        'modal_success_text' => ['group' => 'modal'],
-        'modal_success_button' => ['group' => 'modal'],
-        'hero_image' => ['group' => 'media'],
-        'text_logo_image' => ['group' => 'media'],
-        'logo_image' => ['group' => 'media'],
-        'banner_image' => ['group' => 'media'],
-        'footer_wave_image' => ['group' => 'media'],
-        'resume_file' => ['group' => 'media'],
-    ];
-
-    admin_save_settings($groups);
-
-    $uploads = [
-        'hero_image_upload'        => ['key' => 'hero_image',        'subdir' => 'hero'],
-        'text_logo_image_upload'   => ['key' => 'text_logo_image',   'subdir' => 'logos'],
-        'logo_image_upload'        => ['key' => 'logo_image',        'subdir' => 'logos'],
-        'banner_image_upload'      => ['key' => 'banner_image',      'subdir' => 'banner'],
-        'footer_wave_image_upload' => ['key' => 'footer_wave_image', 'subdir' => 'footer'],
-        'resume_file_upload'       => ['key' => 'resume_file',       'subdir' => 'files', 'types' => ['application/pdf']],
+    $fields = [
+        'short_summary',
+        'about_summary',
+        'resume_file',
+        'contact_email',
+        'contact_linkedin',
+        'contact_linkedin_text',
+        'contact_github',
+        'contact_github_text',
+        'contact_location',
     ];
 
     global $pdo;
@@ -133,20 +66,19 @@ function admin_action_settings(): void
          ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)'
     );
 
-    foreach ($uploads as $field => $meta) {
-        if (empty($_FILES[$field]['tmp_name'])) {
-            continue;
-        }
+    foreach ($fields as $key) {
+        $value = trim((string) ($_POST[$key] ?? ''));
+        $stmt->execute([$key, $value, 'profile']);
+    }
 
-        $allowed = $meta['types'] ?? ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-        $result  = handle_upload($field, $meta['subdir'], $allowed);
-
-        if ($result['ok']) {
-            $stmt->execute([$meta['key'], $result['path'], 'media']);
+    if (!empty($_FILES['resume_upload']['tmp_name'])) {
+        $upload = handle_upload('resume_upload', 'files', ['application/pdf']);
+        if ($upload['ok']) {
+            $stmt->execute(['resume_file', $upload['path'], 'profile']);
         }
     }
 
-    admin_redirect('settings', 'success', 'Settings saved.');
+    admin_redirect('profile', 'success', 'Profile saved.');
 }
 
 function admin_action_stats(): void

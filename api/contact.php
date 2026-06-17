@@ -4,12 +4,13 @@
  * Contact form handler.
  *  1. Validate input
  *  2. Save to `messages` table
- *  3. (Optional) forward to web3forms for email delivery
+ *  3. Email the site owner (browser web3forms preferred; PHP mail() fallback)
  *  4. Reply with JSON { success: bool, message?: string }
  */
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/helpers.php';
+require_once __DIR__ . '/../config/mail.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     json_response(['success' => false, 'message' => 'Method not allowed.'], 405);
@@ -17,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Honeypot — bots typically fill every field. Real users never see this one.
 if (!empty($_POST['_hp'] ?? '')) {
-    // Pretend success so spammers don't retry.
     json_response(['success' => true]);
 }
 
@@ -73,40 +73,15 @@ try {
     ], 500);
 }
 
-// ---- Optional: forward to web3forms for email notification ----
-$web3formsKey = env('WEB3FORMS_ACCESS_KEY', '');
+// When web3forms is configured, email is delivered from the browser.
+if (trim((string) env('WEB3FORMS_ACCESS_KEY', '')) === '') {
+    if (!send_contact_notification($name, $email, $message)) {
+        error_log('[contact] mail() failed for submission from ' . $email);
 
-if ($web3formsKey !== '' && function_exists('curl_init')) {
-
-    $payload = json_encode([
-        'access_key' => $web3formsKey,
-        'subject'    => 'New portfolio contact: ' . $name,
-        'name'       => $name,
-        'email'      => $email,
-        'message'    => $message,
-    ], JSON_UNESCAPED_UNICODE);
-
-    $ch = curl_init('https://api.web3forms.com/submit');
-
-    curl_setopt_array($ch, [
-        CURLOPT_POST           => true,
-        CURLOPT_POSTFIELDS     => $payload,
-        CURLOPT_HTTPHEADER     => [
-            'Content-Type: application/json',
-            'Accept: application/json',
-        ],
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT        => 5,
-        CURLOPT_CONNECTTIMEOUT => 3,
-    ]);
-
-    $response = curl_exec($ch);
-    $errno    = curl_errno($ch);
-    curl_close($ch);
-
-    if ($errno !== 0) {
-        // The DB save still succeeded — log and continue.
-        error_log('[contact] web3forms forward failed: curl errno ' . $errno);
+        json_response([
+            'success' => false,
+            'message' => 'Your message could not be sent. Please try again or email me directly.',
+        ], 500);
     }
 }
 

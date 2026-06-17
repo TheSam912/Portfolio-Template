@@ -5,103 +5,20 @@
 
 USE portfolio_db;
 
--- ---- Settings (all text + media paths) --------------
+-- ---- Profile (only editable text/contact fields) ----
 INSERT INTO settings (setting_key, setting_value, setting_group) VALUES
-('site_title', 'Sam Nolan — Portfolio', 'seo'),
-('meta_description', 'Full Stack Developer focused on building exceptional digital experiences with clean code and modern technologies.', 'seo'),
-
-('hero_badge', 'Software Engineer', 'hero'),
-('hero_title_line_1', 'Building Digital Products', 'hero'),
-('hero_title_line_2', 'With Clean Code', 'hero'),
-('hero_title_line_3', 'And Smart Solutions', 'hero'),
-('hero_description', 'Full Stack Developer focused on building exceptional digital experiences with clean code and modern technologies.', 'hero'),
-('hero_btn_primary', 'View My Work', 'hero'),
-('hero_btn_secondary', 'Download CV', 'hero'),
-('hero_image', 'assets/images/hero.webp', 'media'),
-
-('stats_section_visible', '1', 'stats'),
-
-('about_tag', 'ABOUT ME', 'about'),
-('about_title_line_1', 'Passionate About Building', 'about'),
-('about_title_line_2', 'Modern Digital Solutions', 'about'),
-('about_title_line_3', 'With Precision.', 'about'),
-('about_description', 'I''m Sobhan (Sam), Motivated and experienced website and mobile app developer with expertise in Flutter, Android (Java), Laravel, and Vue.JS. Skilled in backend development, RESTful APIs (Node.js / PHP), and database management (SQL & NoSQL). I specialize in creating responsive, high-performance applications, boosting project efficiency by 25% at the initial stage.\n\nPassionate about problem-solving, innovation, and continuous learning. I thrive in team environments, collaborating toward shared goals while constantly expanding my technical expertise.', 'about'),
-('about_name_label', 'Name', 'about'),
-('about_name_value', 'Sam Nolan', 'about'),
-('about_email_label', 'Email', 'about'),
-('about_email_value', 'The.Sam.Nolan1998@gmail.com', 'about'),
-('about_degree_label', 'Degree', 'about'),
-('about_degree_value', 'Master''s in Cybersecurity', 'about'),
-('about_location_label', 'Location', 'about'),
-('about_location_value', 'Available Worldwide', 'about'),
-('about_availability_label', 'Availability', 'about'),
-('about_availability_value', 'Available For Projects', 'about'),
-
-('services_tag', 'WHAT I DO', 'services'),
-('services_title_line_1', 'Turning ideas into powerful', 'services'),
-('services_title_line_2', 'digital products.', 'services'),
-
-('skills_tag', 'TECH STACK', 'skills'),
-('skills_title_line_1', 'Technologies I Use To Build', 'skills'),
-('skills_title_line_2', 'Modern Products.', 'skills'),
-
-('experience_tag', 'EXPERIENCE', 'experience'),
-('experience_title_line_1', 'Professional', 'experience'),
-('experience_title_line_2', 'Journey.', 'experience'),
-
-('portfolio_tag', 'PORTFOLIO', 'portfolio'),
-('portfolio_title_line_1', 'Selected', 'portfolio'),
-('portfolio_title_line_2', 'Projects.', 'portfolio'),
-
-('contact_tag', 'LET''S WORK TOGETHER', 'contact'),
-('contact_title_line_1', 'Have a project in mind?', 'contact'),
-('contact_title_line_2', 'Let''s build it together.', 'contact'),
-('contact_name_placeholder', 'Your Name', 'contact'),
-('contact_email_placeholder', 'Your Email', 'contact'),
-('contact_message_placeholder', 'Tell me about your project...', 'contact'),
-('contact_button', 'Send Message', 'contact'),
-('contact_info_tag', 'CONTACT INFO', 'contact'),
-('contact_email', 'The.Sam.Nolan1998@gmail.com', 'contact'),
-('contact_linkedin', 'https://linkedin.com/in/sam912', 'contact'),
-('contact_linkedin_text', 'Linkedin.com/in/sam912', 'contact'),
-('contact_github', 'https://github.com/TheSam912', 'contact'),
-('contact_github_text', 'Github.com/TheSam912', 'contact'),
-('contact_location', 'Remote / Worldwide', 'contact'),
-
-('footer_copyright', '© 2025 Sam Nolan. All rights reserved.', 'footer'),
-('footer_github', 'https://github.com/TheSam912', 'footer'),
-('footer_linkedin', 'https://linkedin.com/in/sam912', 'footer'),
-('footer_email', 'The.Sam.Nolan1998@gmail.com', 'footer'),
-
-('navbar_cta_text', 'Get In Touch', 'navbar'),
-('text_logo_image', 'assets/images/textlogo.png', 'media'),
-('logo_image', 'assets/images/logo.png', 'media'),
-('banner_image', 'assets/images/banner3.webp', 'media'),
-('footer_wave_image', 'assets/images/footer-wave.webp', 'media'),
-('resume_file', 'assets/files/Sobhan-Resume.pdf', 'media'),
-
-('modal_success_title', 'Message Sent Successfully', 'modal'),
-('modal_success_text', 'Thank you for your message. I will get back to you as soon as possible.', 'modal'),
-('modal_success_button', 'Awesome', 'modal')
+('short_summary', 'Full Stack Developer focused on building exceptional digital experiences with clean code and modern technologies.', 'profile'),
+('about_summary', 'I''m Sobhan (Sam), Motivated and experienced website and mobile app developer with expertise in Flutter, Android (Java), Laravel, and Vue.JS. Skilled in backend development, RESTful APIs (Node.js / PHP), and database management (SQL & NoSQL). I specialize in creating responsive, high-performance applications, boosting project efficiency by 25% at the initial stage.\n\nPassionate about problem-solving, innovation, and continuous learning. I thrive in team environments, collaborating toward shared goals while constantly expanding my technical expertise.', 'profile'),
+('resume_file', 'assets/files/Sobhan-Resume.pdf', 'profile'),
+('contact_email', 'The.Sam.Nolan1998@gmail.com', 'profile'),
+('contact_linkedin', 'https://linkedin.com/in/sam912', 'profile'),
+('contact_linkedin_text', 'Linkedin.com/in/sam912', 'profile'),
+('contact_github', 'https://github.com/TheSam912', 'profile'),
+('contact_github_text', 'Github.com/TheSam912', 'profile'),
+('contact_location', 'Remote / Worldwide', 'profile')
 ON DUPLICATE KEY UPDATE
     setting_value = VALUES(setting_value),
     setting_group = VALUES(setting_group);
-
--- ---- Stats -------------------------------------------
-DELETE FROM stats WHERE id BETWEEN 1 AND 4;
-INSERT INTO stats (id, icon_class, count_value, label_text, sort_order) VALUES
-(1, 'fa-solid fa-code',      '80+', 'Projects Completed',   10),
-(2, 'fa-solid fa-star',      '98%', 'Client Satisfaction',  20),
-(3, 'fa-solid fa-users',     '20+', 'Happy Clients',        30),
-(4, 'fa-solid fa-briefcase', '7+',  'Years Experience',     40);
-
--- ---- Services ----------------------------------------
-DELETE FROM services WHERE id BETWEEN 1 AND 4;
-INSERT INTO services (id, title, description, icon_class, sort_order) VALUES
-(1, 'Cross-Platform Apps', 'Developing high-performance applications using Flutter for both Android and iOS, ensuring a consistent user experience across platforms.', 'fa-solid fa-mobile-screen', 10),
-(2, 'Native Apps', 'Building robust and feature-rich native Android apps with Java, tailored to meet your specific requirements.', 'fa-solid fa-code', 20),
-(3, 'Backend Development', 'Creating secure and scalable RESTful APIs and managing databases (SQL and NoSQL) to build a reliable backend for your applications.', 'fa-solid fa-database', 30),
-(4, 'App Redesign & Optimization', 'Redesigning, optimizing, and upgrading existing apps with modern methods to enhance performance and usability.', 'fa-solid fa-gears', 40);
 
 -- ---- Skills ------------------------------------------
 DELETE FROM skills WHERE id BETWEEN 1 AND 18;
@@ -126,20 +43,43 @@ INSERT INTO skills (id, name, icon_path, sort_order) VALUES
 (18, 'Bootstrap',  'assets/images/skills/bootstrap.png', 180);
 
 -- ---- Experiences + bullets ---------------------------
-DELETE FROM experience_bullets WHERE experience_id IN (1, 2);
-DELETE FROM experiences WHERE id IN (1, 2);
+DELETE FROM experience_bullets;
+DELETE FROM experiences;
 
 INSERT INTO experiences (id, date_range, position, company, sort_order) VALUES
-(1, 'Oct 2023 — Present', 'PHP Laravel & Vue.js Developer', 'Corefinity (Destinology)', 10),
-(2, 'Jan 2025 — Mar 2025', 'Fullstack Developer', 'WooCom Ecommerce (Startup)', 20);
+(1, 'Oct 2025 — Apr 2026', 'PHP Laravel & Vue.js Developer', 'Corefinity (Destinology)', 10),
+(2, 'Jan 2025 — Mar 2025', 'Fullstack Developer', 'WooCom Ecommerce (Startup)', 20),
+(3, 'Sep 2023 — Mar 2024', 'Flutter Application Developer', 'NIU Nature Application', 30),
+(4, 'Oct 2018 — Oct 2019', 'Flutter Application Developer', 'IRIC', 40),
+(5, 'Oct 2018 — Oct 2019', 'Android Application Developer', 'Dade Gostar GHOMES', 50),
+(6, 'Oct 2016 — Oct 2017', 'Android Application Developer', 'Graph', 60);
 
 INSERT INTO experience_bullets (experience_id, content, sort_order) VALUES
 (1, 'Developed and maintained a holiday search and booking platform using Laravel and Vue.js.', 10),
-(1, 'Built destination discovery, filtering, and booking flows for flights and accommodations.', 20),
-(1, 'Integrated Laravel APIs and reusable Vue.js components to improve performance and user experience.', 30),
-(2, 'Built a responsive e-commerce platform across web, mobile, and tablet devices.', 10),
-(2, 'Converted Figma designs into adaptive and production-ready interfaces.', 20),
-(2, 'Developed a Firebase-powered admin panel with Auth and Firestore integration.', 30);
+(1, 'Built core flows for destination discovery, search/filtering, and selecting flights, accommodation, and holiday extras.', 20),
+(1, 'Implemented responsive, reusable UI components in Vue.js to improve UX across desktop and mobile.', 30),
+(1, 'Integrated backend APIs and database logic in Laravel to support dynamic content and booking-related data.', 40),
+(1, 'Collaborated with the Corefinity team in an agile workflow, delivering features, bug fixes, and production support.', 50),
+(2, 'Built a responsive e-commerce website and mobile app for a startup.', 10),
+(2, 'Converted Figma designs into a cross-platform experience (web/mobile/tablet) with adaptive layouts.', 20),
+(2, 'Developed a custom Firebase-powered admin panel for real-time data management.', 30),
+(2, 'Implemented Firebase Auth and Firestore for secure login and order/customer data storage.', 40),
+(2, 'Delivered a dynamic, device-optimized UI for a smooth user experience.', 50),
+(3, 'Collaborated with a team to launch a healthcare app offering daily programs from esteemed German physicians.', 10),
+(3, 'Developed daily schedules with top German doctors, optimizing patient treatment plans and contributing to a 30% rise in positive patient feedback.', 20),
+(3, 'Rolled out a health monitoring dashboard, driving a 45% surge in user engagement and a 20% boost in app revenue in the first half-year.', 30),
+(3, 'Integrated Apple & Google authentication and in-app purchases, increasing user engagement by 30%.', 40),
+(3, 'Introduced in-app purchase options for iOS and Android, contributing to a 35% growth in digital sales revenue.', 50),
+(4, 'Enhanced the smart home kit app UX through iterative design improvements and user testing, achieving a 35% increase in positive reviews and 60% rise in daily active users.', 10),
+(4, 'Rolled out user-focused enhancements including gamification and social sharing, resulting in a 15% increase in daily active users over six months.', 20),
+(4, 'Executed a robust user training program, decreasing support tickets by 20% and enhancing platform satisfaction by 35%.', 30),
+(5, 'Directed a multidisciplinary team in creating a telemedicine platform, reducing patient no-show rates by 20% and increasing satisfaction scores by 15%.', 10),
+(5, 'Led hospital management app design and development.', 20),
+(5, 'Delivered e-commerce solutions for healthcare clients.', 30),
+(5, 'Built drug store and blood donation center applications.', 40),
+(6, 'Mentored two colleagues in Android programming while enhancing company management systems.', 10),
+(6, 'Led development of an e-commerce app and updated a legacy Basic4Android application.', 20),
+(6, 'Designed UI for a card management app without backend support.', 30);
 
 -- ---- Projects ----------------------------------------
 INSERT IGNORE INTO projects (title, slug, description, image_path, project_url, sort_order) VALUES
@@ -151,7 +91,6 @@ INSERT IGNORE INTO projects (title, slug, description, image_path, project_url, 
 ('Backend API', 'project-6', 'Secure RESTful API with managed SQL & NoSQL stores.', 'assets/images/portfolio/project-6.webp', NULL, 60);
 
 -- ---- Admin user (password: changeme123) --------------
--- Change immediately after first login via Admin → Account.
 INSERT INTO admin_users (username, password_hash) VALUES
 ('admin', '$2y$12$KdmmC6uhEStJA96QkNSZQe2gOz4yVjotsU67CBbNnIt68O6Rw7fnq')
 ON DUPLICATE KEY UPDATE username = username;

@@ -3,20 +3,14 @@
 declare(strict_types=1);
 
 /**
- * Loads all site content from MySQL and exposes it to the frontend.
+ * Loads only the editable profile fields + list data (skills, experience) from MySQL.
  */
 final class ContentRepository
 {
     private PDO $pdo;
 
-    /** @var array<string, mixed>|null */
-    private ?array $content = null;
-
-    /** @var list<array<string, mixed>>|null */
-    private ?array $stats = null;
-
-    /** @var list<array<string, mixed>>|null */
-    private ?array $services = null;
+    /** @var array<string, string>|null */
+    private ?array $profile = null;
 
     /** @var list<array<string, mixed>>|null */
     private ?array $skills = null;
@@ -24,39 +18,32 @@ final class ContentRepository
     /** @var list<array<string, mixed>>|null */
     private ?array $experiences = null;
 
+    /** Keys stored in settings table that the admin can edit. */
+    private const PROFILE_KEYS = [
+        'short_summary',
+        'about_summary',
+        'resume_file',
+        'contact_email',
+        'contact_linkedin',
+        'contact_linkedin_text',
+        'contact_github',
+        'contact_github_text',
+        'contact_location',
+    ];
+
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
     }
 
-    /** @return array<string, mixed> */
-    public function getContent(): array
+    /** @return array<string, string> */
+    public function getProfile(): array
     {
-        if ($this->content === null) {
-            $this->content = $this->loadSettings();
+        if ($this->profile === null) {
+            $this->profile = $this->loadProfile();
         }
 
-        return $this->content;
-    }
-
-    /** @return list<array<string, mixed>> */
-    public function getStats(): array
-    {
-        if ($this->stats === null) {
-            $this->stats = $this->loadStats();
-        }
-
-        return $this->stats;
-    }
-
-    /** @return list<array<string, mixed>> */
-    public function getServices(): array
-    {
-        if ($this->services === null) {
-            $this->services = $this->loadServices();
-        }
-
-        return $this->services;
+        return $this->profile;
     }
 
     /** @return list<array<string, mixed>> */
@@ -79,52 +66,39 @@ final class ContentRepository
         return $this->experiences;
     }
 
-    /** @return array<string, mixed> */
-    private function loadSettings(): array
+    /** @return array<string, string> */
+    private function loadProfile(): array
     {
-        try {
-            $rows = $this->pdo
-                ->query('SELECT setting_key, setting_value FROM settings')
-                ->fetchAll(PDO::FETCH_KEY_PAIR);
-        } catch (PDOException) {
-            return $this->fallbackContent();
-        }
+        $defaults = [
+            'short_summary' => 'Full Stack Developer focused on building exceptional digital experiences with clean code and modern technologies.',
+            'about_summary' => "I'm Sobhan (Sam), Motivated and experienced website and mobile app developer with expertise in Flutter, Android (Java), Laravel, and Vue.JS. Skilled in backend development, RESTful APIs (Node.js / PHP), and database management (SQL & NoSQL).",
+            'resume_file' => 'assets/files/Sobhan-Resume.pdf',
+            'contact_email' => 'The.Sam.Nolan1998@gmail.com',
+            'contact_linkedin' => 'https://linkedin.com/in/sam912',
+            'contact_linkedin_text' => 'Linkedin.com/in/sam912',
+            'contact_github' => 'https://github.com/TheSam912',
+            'contact_github_text' => 'Github.com/TheSam912',
+            'contact_location' => 'Remote / Worldwide',
+        ];
 
-        return is_array($rows) ? $rows : $this->fallbackContent();
-    }
-
-    /** @return list<array<string, mixed>> */
-    private function loadStats(): array
-    {
         try {
-            $stmt = $this->pdo->query(
-                'SELECT id, icon_class, count_value, label_text
-                 FROM stats
-                 WHERE is_published = 1
-                 ORDER BY sort_order ASC, id ASC'
+            $placeholders = implode(',', array_fill(0, count(self::PROFILE_KEYS), '?'));
+            $stmt = $this->pdo->prepare(
+                "SELECT setting_key, setting_value FROM settings WHERE setting_key IN ($placeholders)"
             );
+            $stmt->execute(self::PROFILE_KEYS);
+            $rows = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
 
-            return $stmt->fetchAll() ?: [];
+            foreach ($defaults as $key => $value) {
+                if (!empty($rows[$key])) {
+                    $defaults[$key] = (string) $rows[$key];
+                }
+            }
         } catch (PDOException) {
-            return [];
+            // Use defaults if DB unavailable.
         }
-    }
 
-    /** @return list<array<string, mixed>> */
-    private function loadServices(): array
-    {
-        try {
-            $stmt = $this->pdo->query(
-                'SELECT id, title, description, icon_class
-                 FROM services
-                 WHERE is_published = 1
-                 ORDER BY sort_order ASC, id ASC'
-            );
-
-            return $stmt->fetchAll() ?: [];
-        } catch (PDOException) {
-            return [];
-        }
+        return $defaults;
     }
 
     /** @return list<array<string, mixed>> */
@@ -132,10 +106,8 @@ final class ContentRepository
     {
         try {
             $stmt = $this->pdo->query(
-                'SELECT id, name, icon_path
-                 FROM skills
-                 WHERE is_published = 1
-                 ORDER BY sort_order ASC, id ASC'
+                'SELECT id, name, icon_path FROM skills
+                 WHERE is_published = 1 ORDER BY sort_order ASC, id ASC'
             );
 
             return $stmt->fetchAll() ?: [];
@@ -149,26 +121,20 @@ final class ContentRepository
     {
         try {
             $stmt = $this->pdo->query(
-                'SELECT id, date_range, position, company
-                 FROM experiences
-                 WHERE is_published = 1
-                 ORDER BY sort_order ASC, id ASC'
+                'SELECT id, date_range, position, company FROM experiences
+                 WHERE is_published = 1 ORDER BY sort_order ASC, id ASC'
             );
 
             $experiences = $stmt->fetchAll() ?: [];
-
             if (!$experiences) {
                 return [];
             }
 
             $ids = array_column($experiences, 'id');
             $placeholders = implode(',', array_fill(0, count($ids), '?'));
-
             $bulletStmt = $this->pdo->prepare(
-                "SELECT experience_id, content
-                 FROM experience_bullets
-                 WHERE experience_id IN ($placeholders)
-                 ORDER BY sort_order ASC, id ASC"
+                "SELECT experience_id, content FROM experience_bullets
+                 WHERE experience_id IN ($placeholders) ORDER BY sort_order ASC, id ASC"
             );
             $bulletStmt->execute($ids);
             $bullets = $bulletStmt->fetchAll();
@@ -187,28 +153,5 @@ final class ContentRepository
         } catch (PDOException) {
             return [];
         }
-    }
-
-    /** Minimal fallback if DB is empty or unavailable. */
-    /** @return array<string, mixed> */
-    private function fallbackContent(): array
-    {
-        return [
-            'site_title'           => 'Sam Nolan — Portfolio',
-            'hero_badge'           => 'Software Engineer',
-            'hero_title_line_1'    => 'Building Digital Products',
-            'hero_title_line_2'    => 'With Clean Code',
-            'hero_title_line_3'    => 'And Smart Solutions',
-            'hero_description'     => 'Full Stack Developer focused on building exceptional digital experiences.',
-            'hero_btn_primary'     => 'View My Work',
-            'hero_btn_secondary'   => 'Download CV',
-            'hero_image'           => 'assets/images/hero.webp',
-            'text_logo_image'      => 'assets/images/textlogo.png',
-            'logo_image'           => 'assets/images/logo.png',
-            'banner_image'         => 'assets/images/banner3.webp',
-            'footer_wave_image'    => 'assets/images/footer-wave.webp',
-            'resume_file'          => 'assets/files/Sobhan-Resume.pdf',
-            'navbar_cta_text'      => 'Get In Touch',
-        ];
     }
 }

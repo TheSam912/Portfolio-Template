@@ -38,6 +38,7 @@ yarn-debug.log*
 # Build / temp
 /tmp/
 /build/
+/dist/
 
 # User uploads (keep directory, ignore files)
 assets/uploads/*

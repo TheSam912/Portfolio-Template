@@ -40,7 +40,7 @@ if (!function_exists('is_debug')) {
 
 if (!function_exists('setting')) {
 
-    /** Read a key from the global $content array loaded by config/content.php. */
+    /** Read a static key from config/static.php ($content). */
     function setting(string $key, string $default = ''): string
     {
         global $content;
@@ -49,11 +49,22 @@ if (!function_exists('setting')) {
     }
 }
 
+if (!function_exists('profile')) {
+
+    /** Read an editable profile field from the database ($profile). */
+    function profile(string $key, string $default = ''): string
+    {
+        global $profile;
+
+        return (string) ($profile[$key] ?? $default);
+    }
+}
+
 if (!function_exists('admin_path')) {
 
     function admin_path(): string
     {
-        return trim((string) env('ADMIN_PATH', 'ctrl-k9m2x7p4'), '/');
+        return trim((string) env('ADMIN_PATH', 'samadminpanel'), '/');
     }
 }
 

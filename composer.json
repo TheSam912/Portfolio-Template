@@ -14,7 +14,7 @@
     "scripts": {
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "@php -r \"$p=getenv('ADMIN_PATH')?:'ctrl-k9m2x7p4'; echo \\\"\\n  Portfolio site  →  http://localhost:8000\\n  Admin panel     →  http://localhost:8000/$p\\n  Press Ctrl+C to stop.\\n\\n\\\";\"",
+            "@php bin/dev-banner.php",
             "@php -S localhost:8000 router.php"
         ],
         "start": "@dev",
@@ -25,7 +25,12 @@
         "db:schema": "@php bin/db.php schema",
         "db:seed":   "@php bin/db.php seed",
         "db:reset":  "@php bin/db.php reset",
-        "db:fresh":  "@php bin/db.php fresh"
+        "db:fresh":  "@php bin/db.php fresh",
+        "build:pages": "@php bin/build-static.php",
+        "deploy:pages": [
+            "@build:pages",
+            "@php bin/deploy-pages.php"
+        ]
     },
     "scripts-descriptions": {
         "dev":       "Start the local PHP dev server on http://localhost:8000",

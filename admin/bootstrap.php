@@ -105,7 +105,44 @@ function admin_save_settings(array $keys): void
 function admin_render(string $view, array $data = []): void
 {
     extract($data, EXTR_SKIP);
-    $flash = flash_get();
-    $user  = admin_user();
+    $flash       = flash_get();
+    $user        = admin_user();
+    $currentPath = admin_subpath();
     require __DIR__ . '/views/layout.php';
+}
+
+function admin_nav_is(string $segment): bool
+{
+    $path = admin_subpath();
+
+    if ($segment === '' || $segment === 'dashboard') {
+        return $path === '/' || $path === '/dashboard';
+    }
+
+    return $path === '/' . $segment || str_starts_with($path, '/' . $segment . '/');
+}
+
+function admin_nav_class(string $segment): string
+{
+    return admin_nav_is($segment) ? ' active' : '';
+}
+
+function asset_url(string $path): string
+{
+    return '/' . ltrim($path, '/');
+}
+
+function admin_excerpt(?string $text, int $length = 140): string
+{
+    $text = trim((string) $text);
+
+    if ($text === '') {
+        return '';
+    }
+
+    if (mb_strlen($text) <= $length) {
+        return $text;
+    }
+
+    return mb_strimwidth($text, 0, $length, '…');
 }

@@ -14,28 +14,38 @@
                 <span class="gradient-text"><?= e(setting('contact_title_line_2')); ?></span>
             </h2>
 
-            <form id="contactForm" action="api/contact.php" method="POST" novalidate>
+            <form
+                id="contactForm"
+                action="<?= defined('STATIC_BUILD') ? '#' : 'api/contact.php'; ?>"
+                method="POST"
+                novalidate
+                <?php if (defined('STATIC_BUILD')): ?>data-static-site="1" <?php endif; ?>
+                data-web3forms-key="<?= e(env('WEB3FORMS_ACCESS_KEY', '')); ?>">
 
                 <input type="text" name="_hp" tabindex="-1" autocomplete="off"
                     style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
 
+                <p class="form-feedback" id="contactFormFeedback" role="alert" hidden></p>
+
                 <div class="input-box">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="name"
+                    <input type="text" id="contactName" name="name"
                         placeholder="<?= e(setting('contact_name_placeholder')); ?>"
-                        maxlength="255" required>
+                        maxlength="255" required autocomplete="name">
                 </div>
 
                 <div class="input-box">
                     <i class="fa-regular fa-envelope"></i>
-                    <input type="email" name="email"
-                        placeholder="<?= e(setting('contact_email_placeholder')); ?>" required>
+                    <input type="email" id="contactEmail" name="email"
+                        placeholder="<?= e(setting('contact_email_placeholder')); ?>"
+                        maxlength="255" required autocomplete="email">
                 </div>
 
                 <div class="input-box textarea-box">
                     <i class="fa-regular fa-message"></i>
-                    <textarea name="message"
-                        placeholder="<?= e(setting('contact_message_placeholder')); ?>" required></textarea>
+                    <textarea id="contactMessage" name="message"
+                        placeholder="<?= e(setting('contact_message_placeholder')); ?>"
+                        maxlength="5000" required></textarea>
                 </div>
 
                 <button type="submit" class="primary-btn" data-magnetic>
@@ -55,24 +65,24 @@
 
             <div class="contact-links">
 
-                <a href="mailto:<?= e(setting('contact_email')); ?>" class="contact-link">
+                <a href="mailto:<?= e(profile('contact_email')); ?>" class="contact-link">
                     <i class="fa-regular fa-envelope"></i>
-                    <span><?= e(setting('contact_email')); ?></span>
+                    <span><?= e(profile('contact_email')); ?></span>
                 </a>
 
-                <a href="<?= e(setting('contact_linkedin')); ?>" target="_blank" rel="noopener noreferrer" class="contact-link">
+                <a href="<?= e(profile('contact_linkedin')); ?>" target="_blank" rel="noopener noreferrer" class="contact-link">
                     <i class="fa-brands fa-linkedin-in"></i>
-                    <span><?= e(setting('contact_linkedin_text')); ?></span>
+                    <span><?= e(profile('contact_linkedin_text')); ?></span>
                 </a>
 
-                <a href="<?= e(setting('contact_github')); ?>" target="_blank" rel="noopener noreferrer" class="contact-link">
+                <a href="<?= e(profile('contact_github')); ?>" target="_blank" rel="noopener noreferrer" class="contact-link">
                     <i class="fa-brands fa-github"></i>
-                    <span><?= e(setting('contact_github_text')); ?></span>
+                    <span><?= e(profile('contact_github_text')); ?></span>
                 </a>
 
                 <div class="contact-link">
                     <i class="fa-solid fa-location-dot"></i>
-                    <span><?= e(setting('contact_location')); ?></span>
+                    <span><?= e(profile('contact_location')); ?></span>
                 </div>
 
             </div>

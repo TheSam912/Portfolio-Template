@@ -22,37 +22,28 @@ match (true) {
 
     $path === '/' || $path === '/dashboard' => (function () {
         admin_require_auth();
+        require_once __DIR__ . '/../config/repository.php';
         global $pdo;
+        $repo = new ContentRepository($pdo);
         $counts = [
-            'messages'   => (int) $pdo->query('SELECT COUNT(*) FROM messages')->fetchColumn(),
-            'projects'   => (int) $pdo->query('SELECT COUNT(*) FROM projects')->fetchColumn(),
-            'skills'     => (int) $pdo->query('SELECT COUNT(*) FROM skills')->fetchColumn(),
-            'services'   => (int) $pdo->query('SELECT COUNT(*) FROM services')->fetchColumn(),
+            'messages'    => (int) $pdo->query('SELECT COUNT(*) FROM messages')->fetchColumn(),
+            'projects'    => (int) $pdo->query('SELECT COUNT(*) FROM projects')->fetchColumn(),
+            'skills'      => (int) $pdo->query('SELECT COUNT(*) FROM skills')->fetchColumn(),
+            'experiences' => (int) $pdo->query('SELECT COUNT(*) FROM experiences')->fetchColumn(),
         ];
-        admin_render('dashboard', compact('counts'));
+        $profile  = $repo->getProfile();
+        $skills   = $pdo->query('SELECT * FROM skills ORDER BY sort_order ASC, id ASC LIMIT 8')->fetchAll();
+        $projects = $pdo->query('SELECT * FROM projects ORDER BY sort_order ASC, id ASC LIMIT 4')->fetchAll();
+        $latestMessage = $pdo->query('SELECT * FROM messages ORDER BY created_at DESC LIMIT 1')->fetch() ?: null;
+        admin_render('dashboard', compact('counts', 'profile', 'skills', 'projects', 'latestMessage'));
     })(),
 
-    $path === '/settings' => (function () {
+    $path === '/profile' || $path === '/settings' => (function () {
         admin_require_auth();
+        require_once __DIR__ . '/../config/repository.php';
         global $pdo;
-        $rows = $pdo->query('SELECT setting_key, setting_value, setting_group FROM settings ORDER BY setting_group, setting_key')->fetchAll();
-        admin_render('settings', ['rows' => $rows]);
-    })(),
-
-    $path === '/stats' => (function () {
-        admin_require_auth();
-        global $pdo;
-        $items = $pdo->query('SELECT * FROM stats ORDER BY sort_order ASC, id ASC')->fetchAll();
-        $edit  = isset($_GET['edit']) ? (int) $_GET['edit'] : null;
-        admin_render('stats', compact('items', 'edit'));
-    })(),
-
-    $path === '/services' => (function () {
-        admin_require_auth();
-        global $pdo;
-        $items = $pdo->query('SELECT * FROM services ORDER BY sort_order ASC, id ASC')->fetchAll();
-        $edit  = isset($_GET['edit']) ? (int) $_GET['edit'] : null;
-        admin_render('services', compact('items', 'edit'));
+        $profile = (new ContentRepository($pdo))->getProfile();
+        admin_render('profile', compact('profile'));
     })(),
 
     $path === '/skills' => (function () {
@@ -69,12 +60,17 @@ match (true) {
         $items = $pdo->query('SELECT * FROM experiences ORDER BY sort_order ASC, id ASC')->fetchAll();
         $edit  = isset($_GET['edit']) ? (int) $_GET['edit'] : null;
         $bullets = [];
+        $allBullets = [];
         if ($edit) {
             $stmt = $pdo->prepare('SELECT content FROM experience_bullets WHERE experience_id = ? ORDER BY sort_order ASC, id ASC');
             $stmt->execute([$edit]);
             $bullets = array_column($stmt->fetchAll(), 'content');
         }
-        admin_render('experiences', compact('items', 'edit', 'bullets'));
+        $stmt = $pdo->query('SELECT experience_id, content FROM experience_bullets ORDER BY sort_order ASC, id ASC');
+        foreach ($stmt->fetchAll() as $row) {
+            $allBullets[(int) $row['experience_id']][] = $row['content'];
+        }
+        admin_render('experiences', compact('items', 'edit', 'bullets', 'allBullets'));
     })(),
 
     $path === '/projects' => (function () {

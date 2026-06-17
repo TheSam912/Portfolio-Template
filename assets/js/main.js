@@ -13,6 +13,7 @@
         initMobileMenu();
         initSuccessModal();
         initContactForm();
+        initSmoothAnchors();
         initRevealOnScroll();
         initStaggerChildren();
         initStatsCounters();
@@ -96,11 +97,132 @@
 
         const form     = document.getElementById("contactForm");
         const button   = form?.querySelector('button[type="submit"]');
+        const feedback = document.getElementById("contactFormFeedback");
 
         if (!form) return;
 
+        const fields = {
+            name:    form.querySelector("#contactName"),
+            email:   form.querySelector("#contactEmail"),
+            message: form.querySelector("#contactMessage"),
+        };
+
+        const web3formsKey = form.dataset.web3formsKey || "";
+
+        const clearFieldErrors = () => {
+            Object.values(fields).forEach((field) => {
+                field?.closest(".input-box")?.classList.remove("input-box--error");
+                field?.removeAttribute("aria-invalid");
+            });
+            if (feedback) {
+                feedback.hidden = true;
+                feedback.textContent = "";
+            }
+        };
+
+        const showFormError = (message) => {
+            if (!feedback) {
+                alert(message);
+                return;
+            }
+
+            feedback.textContent = message;
+            feedback.hidden = false;
+        };
+
+        const validateForm = () => {
+            clearFieldErrors();
+
+            const name    = fields.name?.value.trim()    ?? "";
+            const email   = fields.email?.value.trim()   ?? "";
+            const message = fields.message?.value.trim() ?? "";
+            const issues  = [];
+
+            if (!name) {
+                issues.push({ field: fields.name, message: "Please enter your name." });
+            } else if (name.length > 255) {
+                issues.push({ field: fields.name, message: "Name is too long (max 255 characters)." });
+            }
+
+            if (!email) {
+                issues.push({ field: fields.email, message: "Please enter your email address." });
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                issues.push({ field: fields.email, message: "Please enter a valid email address." });
+            }
+
+            if (!message) {
+                issues.push({ field: fields.message, message: "Please enter a message." });
+            } else if (message.length > 5000) {
+                issues.push({ field: fields.message, message: "Message is too long (max 5000 characters)." });
+            }
+
+            if (issues.length) {
+                issues.forEach(({ field }) => {
+                    field?.closest(".input-box")?.classList.add("input-box--error");
+                    field?.setAttribute("aria-invalid", "true");
+                });
+                showFormError(issues.map((item) => item.message).join(" "));
+                issues[0]?.field?.focus();
+                return null;
+            }
+
+            return { name, email, message };
+        };
+
+        const sendViaWeb3forms = async ({ name, email, message }) => {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method:  "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept:         "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: web3formsKey,
+                    subject:    `New portfolio contact: ${name}`,
+                    name,
+                    email,
+                    message,
+                    replyto:    email,
+                }),
+            });
+
+            let result = {};
+            try { result = await response.json(); } catch (_) { /* not json */ }
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || "Could not deliver your email. Please try again.");
+            }
+        };
+
+        const saveToBackend = async ({ name, email, message }) => {
+            const payload = new FormData(form);
+            payload.set("name", name);
+            payload.set("email", email);
+            payload.set("message", message);
+
+            const response = await fetch(form.action, {
+                method:  "POST",
+                body:    payload,
+                headers: { Accept: "application/json" },
+            });
+
+            let result = {};
+            try { result = await response.json(); } catch (_) { /* not json */ }
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || "Something went wrong. Please try again.");
+            }
+        };
+
+        Object.values(fields).forEach((field) => {
+            field?.addEventListener("input", clearFieldErrors);
+        });
+
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
+
+            const values = validateForm();
+            if (!values) return;
 
             const originalLabel = button?.textContent;
 
@@ -110,30 +232,49 @@
             }
 
             try {
-                const response = await fetch(form.action, {
-                    method:  "POST",
-                    body:    new FormData(form),
-                    headers: { Accept: "application/json" },
-                });
-
-                let result = {};
-                try { result = await response.json(); } catch (_) { /* not json */ }
-
-                if (response.ok && result.success) {
-                    openSuccessModal();
-                    form.reset();
-                } else {
-                    alert(result.message || "Something went wrong. Please try again.");
+                if (web3formsKey) {
+                    await sendViaWeb3forms(values);
+                } else if (form.dataset.staticSite === "1") {
+                    throw new Error("Contact form is not configured. Please email me directly.");
                 }
+
+                if (form.dataset.staticSite !== "1") {
+                    await saveToBackend(values);
+                }
+
+                clearFieldErrors();
+                openSuccessModal();
+                form.reset();
             } catch (err) {
                 console.error("[contact]", err);
-                alert("Network error. Please try again.");
+                showFormError(err.message || "Network error. Please try again.");
             } finally {
                 if (button) {
                     button.disabled    = false;
                     button.textContent = originalLabel || "Send Message";
                 }
             }
+        });
+    }
+
+    // ===========================
+    //  SMOOTH ANCHOR SCROLL  (nav links only)
+    // ===========================
+
+    function initSmoothAnchors() {
+
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener("click", (event) => {
+                const id = link.getAttribute("href").slice(1);
+                if (!id) return;
+
+                const target = document.getElementById(id);
+                if (!target) return;
+
+                event.preventDefault();
+                target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+                history.replaceState(null, "", `#${id}`);
+            });
         });
     }
 
@@ -160,6 +301,10 @@
 
                         el.classList.add("is-in-view");
                         io.unobserve(el);
+
+                        el.addEventListener("transitionend", () => {
+                            el.style.transitionDelay = "";
+                        }, { once: true });
                     }
                 }
             },
@@ -372,17 +517,13 @@
 
         if (!fine || reduced) return;
 
-        const dot  = document.createElement("div");
-        const ring = document.createElement("div");
-        dot.className  = "cursor-dot";
-        ring.className = "cursor-ring";
+        const dot = document.createElement("div");
+        dot.className = "cursor-dot";
         dot.setAttribute("aria-hidden", "true");
-        ring.setAttribute("aria-hidden", "true");
-        document.body.append(dot, ring);
+        document.body.append(dot);
 
-        let dx = 0, dy = 0;   // dot
-        let rx = 0, ry = 0;   // ring (lags slightly)
-        let mx = 0, my = 0;   // pointer
+        let dx = 0, dy = 0;
+        let mx = 0, my = 0;
 
         const onMove = (e) => {
             mx = e.clientX;
@@ -395,31 +536,17 @@
         document.addEventListener("mousemove", onMove, { passive: true });
 
         const tick = () => {
-            // dot follows pointer almost exactly
+            if (document.hidden || !document.body.classList.contains("cursor-ready")) {
+                requestAnimationFrame(tick);
+                return;
+            }
+
             dx += (mx - dx) * 0.6;
             dy += (my - dy) * 0.6;
-            // ring lags for nice trail
-            rx += (mx - rx) * 0.18;
-            ry += (my - ry) * 0.18;
-            dot.style.transform  = `translate3d(${dx}px, ${dy}px, 0) translate(-50%, -50%)`;
-            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+            dot.style.transform = `translate3d(${dx}px, ${dy}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
-
-        const hoverSelector = "a, button, [role='button'], .service-card, .portfolio-item, .skill-item, input, textarea, select, label, .info-card";
-
-        document.addEventListener("mouseover", (e) => {
-            if (e.target.closest(hoverSelector)) {
-                document.body.classList.add("cursor-hover");
-            }
-        });
-
-        document.addEventListener("mouseout", (e) => {
-            if (e.target.closest(hoverSelector)) {
-                document.body.classList.remove("cursor-hover");
-            }
-        });
 
         document.addEventListener("mouseleave", () => {
             document.body.classList.remove("cursor-ready");

@@ -22,6 +22,6 @@ echo   Admin panel     -^>  http://localhost:%PORT%/%ADMIN_PATH%
 echo   Press Ctrl+C to stop.
 echo.
 
-if "%ADMIN_PATH%"=="" set "ADMIN_PATH=ctrl-k9m2x7p4"
+if "%ADMIN_PATH%"=="" set "ADMIN_PATH=samadminpanel"
 
 php -S localhost:%PORT% router.php

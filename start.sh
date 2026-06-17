@@ -14,6 +14,6 @@ if [ ! -f .env ] && [ -f .env.example ]; then
     echo "  ✓ Created .env from .env.example. Edit it if your DB credentials differ."
 fi
 
-printf '\n  Portfolio site  →  http://localhost:%s\n  Admin panel     →  http://localhost:%s/%s\n  Press Ctrl+C to stop.\n\n' "$PORT" "$PORT" "${ADMIN_PATH:-ctrl-k9m2x7p4}"
+printf '\n  Portfolio site  →  http://localhost:%s\n  Admin panel     →  http://localhost:%s/%s\n  Press Ctrl+C to stop.\n\n' "$PORT" "$PORT" "${ADMIN_PATH:-samadminpanel}"
 
 exec php -S "localhost:${PORT}" router.php

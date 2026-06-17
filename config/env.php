@@ -47,10 +47,7 @@ if (!function_exists('load_env')) {
                 $value = trim(preg_replace('/\s+#.*$/', '', $value));
             }
 
-            if (array_key_exists($key, $_ENV) || getenv($key) !== false) {
-                continue;
-            }
-
+            // .env is the source of truth when the file exists (overrides stale shell vars).
             $_ENV[$key]    = $value;
             $_SERVER[$key] = $value;
             putenv("$key=$value");

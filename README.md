@@ -68,7 +68,7 @@ http://localhost:8000/<ADMIN_PATH>
 Default path is in `.env`:
 
 ```
-ADMIN_PATH=ctrl-k9m2x7p4
+ADMIN_PATH=samadminpanel
 ```
 
 **Change `ADMIN_PATH` to a long random string only you know** — this is your secret URL. Nobody can guess it unless they read your `.env`.

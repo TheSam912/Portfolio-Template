@@ -1,30 +1,32 @@
-<nav class="navbar">
+<div class="nav-shell">
+    <nav class="navbar">
 
-    <div class="logo">
-        <a href="#hero">
-            <img src="<?= e(setting('text_logo_image')); ?>" alt="Logo">
+        <div class="logo">
+            <a href="#hero">
+                <img src="<?= e(setting('text_logo_image')); ?>" alt="Logo">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#contact" class="talk-btn" data-magnetic>
+            <?= e(setting('navbar_cta_text')); ?>
         </a>
-    </div>
 
-    <ul class="nav-links">
-        <li><a href="#hero" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+        <button class="menu-toggle" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
 
-    <a href="#contact" class="talk-btn" data-magnetic>
-        <?= e(setting('navbar_cta_text')); ?>
-    </a>
-
-    <button class="menu-toggle" aria-label="Open menu">
-        <span></span><span></span><span></span>
-    </button>
-
-</nav>
+    </nav>
+</div>
 
 <div class="nav-overlay"></div>
 

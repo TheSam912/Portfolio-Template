@@ -9,7 +9,7 @@ $rowB     = array_slice($skills, $half);
 $render_tile = static function (array $skill): string {
     return sprintf(
         '<div class="skill-item">'
-            . '<img src="%s" alt="%s" loading="lazy" decoding="async" width="48" height="48">'
+            . '<img src="%s" alt="%s" loading="lazy" decoding="async" width="28" height="28">'
             . '<span>%s</span>'
         . '</div>',
         e($skill['icon_path']),

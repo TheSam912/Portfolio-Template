@@ -70,8 +70,8 @@ final class ContentRepository
     private function loadProfile(): array
     {
         $defaults = [
-            'short_summary' => 'Full Stack Developer focused on building exceptional digital experiences with clean code and modern technologies.',
-            'about_summary' => "I'm Sobhan (Sam), Motivated and experienced website and mobile app developer with expertise in Flutter, Android (Java), Laravel, and Vue.JS. Skilled in backend development, RESTful APIs (Node.js / PHP), and database management (SQL & NoSQL).",
+            'short_summary' => 'Software & Website Developer and SEO & GEO Specialist with 8+ years shipping high-performance web and mobile products.',
+            'about_summary' => "I'm Sobhan (Sam), a Software & Website Developer with 8+ years of experience turning product requirements into responsive, high-performance web and mobile applications (Flutter, Laravel, Vue.js, Node.js). I have a track record of shipping production platforms that lifted engagement and revenue by up to 45% and cut delivery time through reusable, well-architected components.\n\nI also bring hands-on SEO and GEO (Generative Engine Optimization), ensuring products are not only well-built but discoverable — in traditional search and in AI-driven answer engines. Backed by a Master's in Cybersecurity and a consistent record of delivering in fast-moving agile teams.",
             'resume_file' => 'assets/files/Sobhan-Resume.pdf',
             'contact_email' => 'The.Sam.Nolan1998@gmail.com',
             'contact_linkedin' => 'https://linkedin.com/in/sam912',

@@ -7,8 +7,8 @@ USE portfolio_db;
 
 -- ---- Profile (only editable text/contact fields) ----
 INSERT INTO settings (setting_key, setting_value, setting_group) VALUES
-('short_summary', 'Full Stack Developer focused on building exceptional digital experiences with clean code and modern technologies.', 'profile'),
-('about_summary', 'I''m Sobhan (Sam), Motivated and experienced website and mobile app developer with expertise in Flutter, Android (Java), Laravel, and Vue.JS. Skilled in backend development, RESTful APIs (Node.js / PHP), and database management (SQL & NoSQL). I specialize in creating responsive, high-performance applications, boosting project efficiency by 25% at the initial stage.\n\nPassionate about problem-solving, innovation, and continuous learning. I thrive in team environments, collaborating toward shared goals while constantly expanding my technical expertise.', 'profile'),
+('short_summary', 'Software & Website Developer and SEO & GEO Specialist with 8+ years shipping high-performance web and mobile products.', 'profile'),
+('about_summary', 'I''m Sobhan (Sam), a Software & Website Developer with 8+ years of experience turning product requirements into responsive, high-performance web and mobile applications (Flutter, Laravel, Vue.js, Node.js). I have a track record of shipping production platforms that lifted engagement and revenue by up to 45% and cut delivery time through reusable, well-architected components.\n\nI also bring hands-on SEO and GEO (Generative Engine Optimization), ensuring products are not only well-built but discoverable — in traditional search and in AI-driven answer engines. Backed by a Master''s in Cybersecurity and a consistent record of delivering in fast-moving agile teams.', 'profile'),
 ('resume_file', 'assets/files/Sobhan-Resume.pdf', 'profile'),
 ('contact_email', 'The.Sam.Nolan1998@gmail.com', 'profile'),
 ('contact_linkedin', 'https://linkedin.com/in/sam912', 'profile'),
@@ -24,22 +24,22 @@ ON DUPLICATE KEY UPDATE
 DELETE FROM skills WHERE id BETWEEN 1 AND 18;
 INSERT INTO skills (id, name, icon_path, sort_order) VALUES
 (1,  'Flutter',    'assets/images/skills/flutter.png',    10),
-(2,  'PHP',        'assets/images/skills/php.png',        20),
-(3,  'Laravel',    'assets/images/skills/laravel.png',    30),
-(4,  'JavaScript', 'assets/images/skills/js.png',         40),
-(5,  'HTML',       'assets/images/skills/html.png',       50),
-(6,  'CSS',        'assets/images/skills/css.png',        60),
-(7,  'Vue.js',     'assets/images/skills/vue.png',        70),
-(8,  'Figma',      'assets/images/skills/figma.png',      80),
-(9,  'Java',       'assets/images/skills/java.png',       90),
-(10, 'MySQL',      'assets/images/skills/mysql.png',     100),
-(11, 'MongoDB',    'assets/images/skills/mongodb.png',   110),
-(12, 'Swift',      'assets/images/skills/swift.png',     120),
-(13, 'WordPress',  'assets/images/skills/wordpress.png',130),
-(14, 'Git',        'assets/images/skills/git.png',       140),
-(15, 'Docker',     'assets/images/skills/docker.png',    150),
-(16, 'Node.js',    'assets/images/skills/nodejs.png',    160),
-(17, 'AWS',        'assets/images/skills/aws.png',       170),
+(2,  'Laravel',    'assets/images/skills/laravel.png',    20),
+(3,  'Vue.js',     'assets/images/skills/vue.png',        30),
+(4,  'PHP',        'assets/images/skills/php.png',        40),
+(5,  'Node.js',    'assets/images/skills/nodejs.png',     50),
+(6,  'JavaScript', 'assets/images/skills/js.png',         60),
+(7,  'MySQL',      'assets/images/skills/mysql.png',      70),
+(8,  'MongoDB',    'assets/images/skills/mongodb.png',    80),
+(9,  'Docker',     'assets/images/skills/docker.png',     90),
+(10, 'AWS',        'assets/images/skills/aws.png',       100),
+(11, 'Git',        'assets/images/skills/git.png',       110),
+(12, 'Figma',      'assets/images/skills/figma.png',     120),
+(13, 'HTML',       'assets/images/skills/html.png',      130),
+(14, 'CSS',        'assets/images/skills/css.png',       140),
+(15, 'Java',       'assets/images/skills/java.png',      150),
+(16, 'Swift',      'assets/images/skills/swift.png',     160),
+(17, 'WordPress',  'assets/images/skills/wordpress.png',170),
 (18, 'Bootstrap',  'assets/images/skills/bootstrap.png', 180);
 
 -- ---- Experiences + bullets ---------------------------
@@ -47,48 +47,47 @@ DELETE FROM experience_bullets;
 DELETE FROM experiences;
 
 INSERT INTO experiences (id, date_range, position, company, sort_order) VALUES
-(1, 'Oct 2025 — Apr 2026', 'PHP Laravel & Vue.js Developer', 'Corefinity (Destinology)', 10),
-(2, 'Jan 2025 — Mar 2025', 'Fullstack Developer', 'WooCom Ecommerce (Startup)', 20),
-(3, 'Sep 2023 — Mar 2024', 'Flutter Application Developer', 'NIU Nature Application', 30),
-(4, 'Oct 2018 — Oct 2019', 'Flutter Application Developer', 'IRIC', 40),
-(5, 'Oct 2018 — Oct 2019', 'Android Application Developer', 'Dade Gostar GHOMES', 50),
-(6, 'Oct 2016 — Oct 2017', 'Android Application Developer', 'Graph', 60);
+(1, 'Sep 2026 — Present', 'Mobile Application Developer (Android & iOS)', 'Fanavaran', 10),
+(2, 'Apr 2026 — Present', 'Freelance Software & Website Developer', 'Self-Employed', 20),
+(3, 'Oct 2025 — Apr 2026', 'PHP Laravel & Vue.js Developer', 'Corefinity (Destinology)', 30),
+(4, 'Jan 2025 — Mar 2025', 'Fullstack Developer', 'WooCom Ecommerce (Startup)', 40),
+(5, 'Sep 2023 — Mar 2024', 'Flutter Application Developer', 'NIU Nature (Healthcare App)', 50),
+(6, 'Oct 2018 — Oct 2019', 'Flutter Application Developer', 'IRIC', 60),
+(7, 'Oct 2018 — Oct 2019', 'Android Application Developer', 'Dade Gostar GHOMES', 70),
+(8, 'Oct 2016 — Oct 2017', 'Android Application Developer', 'Graph', 80);
 
 INSERT INTO experience_bullets (experience_id, content, sort_order) VALUES
-(1, 'Developed and maintained a holiday search and booking platform using Laravel and Vue.js.', 10),
-(1, 'Built core flows for destination discovery, search/filtering, and selecting flights, accommodation, and holiday extras.', 20),
-(1, 'Implemented responsive, reusable UI components in Vue.js to improve UX across desktop and mobile.', 30),
-(1, 'Integrated backend APIs and database logic in Laravel to support dynamic content and booking-related data.', 40),
-(1, 'Collaborated with the Corefinity team in an agile workflow, delivering features, bug fixes, and production support.', 50),
-(2, 'Built a responsive e-commerce website and mobile app for a startup.', 10),
-(2, 'Converted Figma designs into a cross-platform experience (web/mobile/tablet) with adaptive layouts.', 20),
-(2, 'Developed a custom Firebase-powered admin panel for real-time data management.', 30),
-(2, 'Implemented Firebase Auth and Firestore for secure login and order/customer data storage.', 40),
-(2, 'Delivered a dynamic, device-optimized UI for a smooth user experience.', 50),
-(3, 'Collaborated with a team to launch a healthcare app offering daily programs from esteemed German physicians.', 10),
-(3, 'Developed daily schedules with top German doctors, optimizing patient treatment plans and contributing to a 30% rise in positive patient feedback.', 20),
-(3, 'Rolled out a health monitoring dashboard, driving a 45% surge in user engagement and a 20% boost in app revenue in the first half-year.', 30),
-(3, 'Integrated Apple & Google authentication and in-app purchases, increasing user engagement by 30%.', 40),
-(3, 'Introduced in-app purchase options for iOS and Android, contributing to a 35% growth in digital sales revenue.', 50),
-(4, 'Enhanced the smart home kit app UX through iterative design improvements and user testing, achieving a 35% increase in positive reviews and 60% rise in daily active users.', 10),
-(4, 'Rolled out user-focused enhancements including gamification and social sharing, resulting in a 15% increase in daily active users over six months.', 20),
-(4, 'Executed a robust user training program, decreasing support tickets by 20% and enhancing platform satisfaction by 35%.', 30),
-(5, 'Directed a multidisciplinary team in creating a telemedicine platform, reducing patient no-show rates by 20% and increasing satisfaction scores by 15%.', 10),
-(5, 'Led hospital management app design and development.', 20),
-(5, 'Delivered e-commerce solutions for healthcare clients.', 30),
-(5, 'Built drug store and blood donation center applications.', 40),
-(6, 'Mentored two colleagues in Android programming while enhancing company management systems.', 10),
-(6, 'Led development of an e-commerce app and updated a legacy Basic4Android application.', 20),
-(6, 'Designed UI for a card management app without backend support.', 30);
+(1, 'Rebuilding the company''s Android and iOS app from the ground up with React Native, collaborating with the IT team to improve the existing product.', 10),
+(1, 'Developed a dedicated CLI to manage the application project and support development workflows.', 20),
+(1, 'Published the Android app on Google Play and submitted the iOS app to the App Store (currently under review).', 30),
+(1, 'Contribute to website and backend development alongside primary mobile application responsibilities.', 40),
+(2, 'Delivering project-based Laravel, Vue.js, and Flutter development for international clients on a contract basis.', 10),
+(2, 'Founded and currently operate personal business ventures, applying full-stack development and SEO/GEO strategy to build and grow them from the ground up.', 20),
+(3, 'Engineered core booking flows — destination discovery, search/filtering, flights, accommodation and extras — for a large-scale holiday platform used by thousands of travellers.', 10),
+(3, 'Raised UX consistency across devices by building a library of reusable Vue.js components, cutting future feature build-time for the team.', 20),
+(3, 'Kept production stable while shipping new features weekly, integrating backend APIs and database logic in Laravel within a fast-moving agile workflow.', 30),
+(4, 'Took a startup from Figma concept to a live, fully responsive e-commerce site and app across web, mobile and tablet in under three months.', 10),
+(4, 'Built a custom Firebase-powered admin panel with secure auth and Firestore-backed order/customer data for real-time business control.', 20),
+(5, 'Delivered a healthcare app built around daily programs from German physicians, lifting user engagement by 30% through Apple/Google authentication and in-app purchase integration.', 10),
+(5, 'Designed and shipped a health-monitoring dashboard that drove a 45% surge in engagement and a 20% revenue boost within the first six months.', 20),
+(6, 'Redesigned the UX of a smart-home kit app based on user testing, growing positive reviews by 35% and daily active users by 60%.', 10),
+(6, 'Cut support tickets by 20% by pairing gamification and social-sharing features with a structured user-training program.', 20),
+(7, 'Led a multidisciplinary team building a telemedicine platform that reduced patient no-shows by 20% and lifted satisfaction scores by 15%.', 10),
+(7, 'Extended the platform across four verticals: hospital management, e-commerce, drug store, and blood-donation coordination.', 20),
+(8, 'Took ownership of an e-commerce app build end-to-end and modernized a legacy Basic4Android system still in daily use.', 10),
+(8, 'Mentored two junior developers in Android programming while designing the UI for a new card-management product.', 20);
 
 -- ---- Projects ----------------------------------------
-INSERT IGNORE INTO projects (title, slug, description, image_path, project_url, sort_order) VALUES
-('Holiday Booking Platform', 'project-1', 'A holiday search & booking platform built with Laravel and Vue.js.', 'assets/images/portfolio/project-1.webp', NULL, 10),
-('E-commerce Storefront', 'project-2', 'Responsive e-commerce platform across web, mobile and tablet.', 'assets/images/portfolio/project-2.webp', NULL, 20),
-('Admin Dashboard', 'project-3', 'Firebase-powered admin panel with Auth and Firestore integration.', 'assets/images/portfolio/project-3.webp', NULL, 30),
-('Mobile App UI', 'project-4', 'Cross-platform Flutter app — iOS & Android.', 'assets/images/portfolio/project-4.webp', NULL, 40),
-('Native Android App', 'project-5', 'Feature-rich native Android app written in Java.', 'assets/images/portfolio/project-5.webp', NULL, 50),
-('Backend API', 'project-6', 'Secure RESTful API with managed SQL & NoSQL stores.', 'assets/images/portfolio/project-6.webp', NULL, 60);
+DELETE FROM projects;
+
+INSERT INTO projects (id, title, slug, description, image_path, project_url, sort_order) VALUES
+(80, 'Wealthio', 'wealthio', 'Founder-built Progressive Web App with Next.js frontend and PHP/Laravel backend — product ownership from UI/UX design to backend implementation.', 'assets/images/portfolio/project-wealthio.webp', 'https://wealthio.ir', 5),
+(6, 'Destinology', 'destinology', 'Large-scale holiday booking platform (Laravel, Vue.js) with dynamic destination search, filtering, and package selection — built with the Corefinity team.', 'assets/images/portfolio/project-6.webp', 'https://destinology.co.uk', 10),
+(2, 'NIU Nature', 'niu-nature', 'Production healthcare app with backend-integrated dynamic content, shipped and maintained for a live App Store audience.', 'assets/images/portfolio/project-2.webp', NULL, 20),
+(1, 'WooCom E-Commerce', 'woocom', 'Fully responsive e-commerce app for web, tablet and mobile, with a Firebase backend for auth, product management and orders.', 'assets/images/portfolio/project-1.webp', NULL, 30),
+(3, 'TimeSync Healthcare AI', 'timesync', 'OpenAI-powered Flutter app delivering personalized health plans, backed by a Node.js/MongoDB service with Firebase real-time notifications.', 'assets/images/portfolio/project-3.webp', NULL, 40),
+(4, 'IRIC Smart Home', 'iric-smart-home', 'Smart home control dashboard for rooms, devices, live camera, and climate — designed for tablet.', 'assets/images/portfolio/project-4.webp', NULL, 50),
+(5, 'Recipe Finder', 'recipe-finder', 'Recipe discovery app with smart search, trending dishes, and an easy cook-friendly browsing experience.', 'assets/images/portfolio/project-5.webp', NULL, 60);
 
 -- ---- Admin user (password: changeme123) --------------
 INSERT INTO admin_users (username, password_hash) VALUES

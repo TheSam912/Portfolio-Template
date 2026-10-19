@@ -25,12 +25,29 @@
             <?= e(profile('short_summary')); ?>
         </p>
 
+        <div class="hero-meta" data-reveal="up" data-reveal-delay="220">
+            <span class="hero-meta__chip">
+                <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+                8+ Years Experience
+            </span>
+            <span class="hero-meta__chip">
+                <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                SEO &amp; GEO
+            </span>
+            <span class="hero-meta__chip">
+                <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                Available Worldwide
+            </span>
+        </div>
+
         <div class="hero-buttons" data-reveal="up" data-reveal-delay="280">
             <a href="#portfolio" class="hero-btn-primary" data-magnetic>
-                <?= e(setting('hero_btn_primary')); ?>
+                <span><?= e(setting('hero_btn_primary')); ?></span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </a>
             <a href="<?= e(profile('resume_file')); ?>" class="hero-btn-secondary" download>
-                <?= e(setting('hero_btn_secondary')); ?>
+                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                <span><?= e(setting('hero_btn_secondary')); ?></span>
             </a>
         </div>
 

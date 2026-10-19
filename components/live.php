@@ -11,11 +11,27 @@ $liveProjects = array_values(array_filter(
 ));
 
 $liveCount = count($liveProjects);
-$typeLabel = static function (string $type): string {
-    return strtolower($type) === 'app' ? 'Application' : 'Website';
+
+$typeLabel = static function (array $project): string {
+    $hasStore = !empty($project['store_android']) || !empty($project['store_ios']);
+    $type = strtolower((string) ($project['type'] ?? 'website'));
+
+    if ($hasStore && $type === 'website') {
+        return 'Website + App';
+    }
+
+    return $type === 'app' ? 'Application' : 'Website';
 };
-$typeIcon = static function (string $type): string {
-    return strtolower($type) === 'app' ? 'fa-solid fa-mobile-screen-button' : 'fa-solid fa-globe';
+
+$typeIcon = static function (array $project): string {
+    $hasStore = !empty($project['store_android']) || !empty($project['store_ios']);
+    $type = strtolower((string) ($project['type'] ?? 'website'));
+
+    if ($hasStore) {
+        return 'fa-solid fa-layer-group';
+    }
+
+    return $type === 'app' ? 'fa-solid fa-mobile-screen-button' : 'fa-solid fa-globe';
 };
 
 ?>
@@ -38,7 +54,7 @@ $typeIcon = static function (string $type): string {
             <p class="live-lead">
                 <?= e(setting(
                     'live_lead',
-                    'Real websites and apps currently online — click through and explore them live.'
+                    'Real websites and apps currently online — tied to roles from my experience.'
                 )); ?>
             </p>
         </div>
@@ -60,10 +76,10 @@ $typeIcon = static function (string $type): string {
 
             <?php foreach ($liveProjects as $i => $project): ?>
                 <?php
-                $type = (string) ($project['type'] ?? 'website');
                 $url  = (string) $project['url'];
                 $host = parse_url($url, PHP_URL_HOST) ?: $url;
                 $host = preg_replace('/^www\./', '', (string) $host);
+                $related = trim((string) ($project['related'] ?? ''));
                 ?>
                 <article class="live-card" data-reveal-child style="--i: <?= (int) $i; ?>">
 
@@ -73,13 +89,20 @@ $typeIcon = static function (string $type): string {
                             Live
                         </span>
                         <span class="live-card__type">
-                            <i class="<?= e($typeIcon($type)); ?>" aria-hidden="true"></i>
-                            <?= e($typeLabel($type)); ?>
+                            <i class="<?= e($typeIcon($project)); ?>" aria-hidden="true"></i>
+                            <?= e($typeLabel($project)); ?>
                         </span>
                     </div>
 
                     <div class="live-card__body">
                         <h3 class="live-card__name"><?= e((string) $project['name']); ?></h3>
+
+                        <?php if ($related !== ''): ?>
+                            <p class="live-card__related">
+                                <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+                                From experience · <?= e($related); ?>
+                            </p>
+                        <?php endif; ?>
 
                         <?php if (!empty($project['blurb'])): ?>
                             <p class="live-card__blurb"><?= e((string) $project['blurb']); ?></p>
@@ -112,7 +135,8 @@ $typeIcon = static function (string $type): string {
                                 href="<?= e((string) $project['store_android']); ?>"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Google Play">
+                                aria-label="<?= e((string) $project['name']); ?> on Google Play"
+                                title="Google Play">
                                 <i class="fa-brands fa-google-play" aria-hidden="true"></i>
                             </a>
                         <?php endif; ?>
@@ -123,7 +147,8 @@ $typeIcon = static function (string $type): string {
                                 href="<?= e((string) $project['store_ios']); ?>"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="App Store">
+                                aria-label="<?= e((string) $project['name']); ?> on App Store"
+                                title="App Store">
                                 <i class="fa-brands fa-apple" aria-hidden="true"></i>
                             </a>
                         <?php endif; ?>

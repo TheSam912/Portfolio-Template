@@ -83,8 +83,8 @@ DELETE FROM projects;
 INSERT INTO projects (id, title, slug, description, image_path, project_url, sort_order) VALUES
 (80, 'Wealthio', 'wealthio', 'Founder-built Progressive Web App with Next.js frontend and PHP/Laravel backend — product ownership from UI/UX design to backend implementation.', 'assets/images/portfolio/project-wealthio.webp', 'https://wealthio.ir', 5),
 (6, 'Destinology', 'destinology', 'Large-scale holiday booking platform (Laravel, Vue.js) with dynamic destination search, filtering, and package selection — built with the Corefinity team.', 'assets/images/portfolio/project-6.webp', 'https://destinology.co.uk', 10),
-(2, 'NIU Nature', 'niu-nature', 'Production healthcare app with backend-integrated dynamic content, shipped and maintained for a live App Store audience.', 'assets/images/portfolio/project-2.webp', NULL, 20),
-(1, 'WooCom E-Commerce', 'woocom', 'Fully responsive e-commerce app for web, tablet and mobile, with a Firebase backend for auth, product management and orders.', 'assets/images/portfolio/project-1.webp', NULL, 30),
+(2, 'NIU Nature', 'niu-nature', 'Production healthcare app with backend-integrated dynamic content, shipped and maintained for a live audience.', 'assets/images/portfolio/project-2.webp', 'https://www.niu-nature.app/', 20),
+(1, 'WooCom E-Commerce', 'woocom', 'Fully responsive e-commerce app for web, tablet and mobile, with a Firebase backend for auth, product management and orders.', 'assets/images/portfolio/project-1.webp', 'https://thesam912.github.io/woocom', 30),
 (3, 'TimeSync Healthcare AI', 'timesync', 'OpenAI-powered Flutter app delivering personalized health plans, backed by a Node.js/MongoDB service with Firebase real-time notifications.', 'assets/images/portfolio/project-3.webp', NULL, 40),
 (4, 'IRIC Smart Home', 'iric-smart-home', 'Smart home control dashboard for rooms, devices, live camera, and climate — designed for tablet.', 'assets/images/portfolio/project-4.webp', NULL, 50),
 (5, 'Recipe Finder', 'recipe-finder', 'Recipe discovery app with smart search, trending dishes, and an easy cook-friendly browsing experience.', 'assets/images/portfolio/project-5.webp', NULL, 60);

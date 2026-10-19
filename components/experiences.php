@@ -30,6 +30,60 @@ $expIcon = static function (string $position): string {
 
 $expCount = count($experiences);
 
+$liveProjects = [];
+$liveFile = __DIR__ . '/../config/live-projects.php';
+if (is_file($liveFile)) {
+    $loaded = require $liveFile;
+    if (is_array($loaded)) {
+        $liveProjects = $loaded;
+    }
+}
+
+$liveForCompany = static function (string $company) use ($liveProjects): array {
+    $matches = [];
+    $companyLower = strtolower($company);
+
+    foreach ($liveProjects as $project) {
+        if (!is_array($project) || empty($project['url']) || empty($project['name'])) {
+            continue;
+        }
+
+        $related = strtolower(trim((string) ($project['related'] ?? '')));
+        if ($related === '') {
+            continue;
+        }
+
+        if (
+            str_contains($companyLower, $related)
+            || str_contains($related, $companyLower)
+            || (
+                str_contains($companyLower, 'corefinity')
+                && str_contains($related, 'corefinity')
+            )
+            || (
+                str_contains($companyLower, 'woocom')
+                && str_contains($related, 'woocom')
+            )
+            || (
+                str_contains($companyLower, 'niu')
+                && str_contains($related, 'niu')
+            )
+            || (
+                str_contains($companyLower, 'self-employed')
+                && str_contains($related, 'self-employed')
+            )
+            || (
+                str_contains($companyLower, 'fanavaran')
+                && str_contains($related, 'fanavaran')
+            )
+        ) {
+            $matches[] = $project;
+        }
+    }
+
+    return $matches;
+};
+
 ?>
 
 <section id="experience" class="experience-section">
@@ -69,19 +123,22 @@ $expCount = count($experiences);
 
             <?php foreach ($experiences as $i => $experience): ?>
                 <?php
-                $icon       = $expIcon($experience['position']);
-                $index      = str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT);
-                $isCurrent  = $i === 0;
-                $hasItems   = !empty($experience['items']);
-                $bodyId     = 'exp-body-' . ($i + 1);
-                $cardClass  = 'exp-card';
+                $icon        = $expIcon($experience['position']);
+                $index       = str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT);
+                $isCurrent   = $i === 0;
+                $hasItems    = !empty($experience['items']);
+                $relatedLive = $liveForCompany((string) $experience['company']);
+                $hasLive     = !empty($relatedLive);
+                $hasBody     = $hasItems || $hasLive;
+                $bodyId      = 'exp-body-' . ($i + 1);
+                $cardClass   = 'exp-card';
                 if ($isCurrent) {
                     $cardClass .= ' exp-card--current';
                 }
-                if ($hasItems) {
+                if ($hasBody) {
                     $cardClass .= ' exp-card--collapsible';
                 }
-                if ($isCurrent || !$hasItems) {
+                if ($isCurrent || !$hasBody) {
                     $cardClass .= ' is-open';
                 }
                 ?>
@@ -89,8 +146,8 @@ $expCount = count($experiences);
                 <article class="<?= e($cardClass); ?>">
 
                     <div
-                        class="exp-card__header<?= $hasItems ? ' exp-card__header--toggle' : ''; ?>"
-                        <?php if ($hasItems): ?>
+                        class="exp-card__header<?= $hasBody ? ' exp-card__header--toggle' : ''; ?>"
+                        <?php if ($hasBody): ?>
                             role="button"
                             tabindex="0"
                             aria-expanded="<?= $isCurrent ? 'true' : 'false'; ?>"
@@ -103,7 +160,7 @@ $expCount = count($experiences);
                             <?php if ($isCurrent): ?>
                                 <span class="exp-card__tag">Current</span>
                             <?php endif; ?>
-                            <?php if ($hasItems): ?>
+                            <?php if ($hasBody): ?>
                                 <span class="exp-card__chevron" aria-hidden="true">
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </span>
@@ -121,14 +178,47 @@ $expCount = count($experiences);
                         </div>
                     </div>
 
-                    <?php if ($hasItems): ?>
+                    <?php if ($hasBody): ?>
                         <div class="exp-card__body" id="<?= e($bodyId); ?>">
                             <div class="exp-card__body-inner">
-                                <ul class="exp-card__list">
-                                    <?php foreach ($experience['items'] as $item): ?>
-                                        <li><?= e($item); ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
+                                <?php if ($hasItems): ?>
+                                    <ul class="exp-card__list">
+                                        <?php foreach ($experience['items'] as $item): ?>
+                                            <li><?= e($item); ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+
+                                <?php if ($hasLive): ?>
+                                    <div class="exp-card__live">
+                                        <span class="exp-card__live-label">
+                                            <span class="live-pulse" aria-hidden="true"></span>
+                                            Live work
+                                        </span>
+                                        <div class="exp-card__live-links">
+                                            <?php foreach ($relatedLive as $live): ?>
+                                                <a
+                                                    href="<?= e((string) $live['url']); ?>"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="exp-card__live-link">
+                                                    <?= e((string) $live['name']); ?>
+                                                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                                </a>
+                                                <?php if (!empty($live['store_android'])): ?>
+                                                    <a
+                                                        href="<?= e((string) $live['store_android']); ?>"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="exp-card__live-link exp-card__live-link--store">
+                                                        Play Store
+                                                        <i class="fa-brands fa-google-play" aria-hidden="true"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endif; ?>

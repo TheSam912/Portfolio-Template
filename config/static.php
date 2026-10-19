@@ -61,7 +61,7 @@ return [
     'live_tag' => 'LIVE NOW',
     'live_title_line_1' => 'Products You Can',
     'live_title_line_2' => 'Open Today.',
-    'live_lead' => 'Real websites and apps currently online — click through and explore them live.',
+    'live_lead' => 'Real websites and apps currently online — each one maps back to a role in my experience.',
 
     'portfolio_tag' => 'PORTFOLIO',
     'portfolio_title_line_1' => 'Selected',

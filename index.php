@@ -27,11 +27,11 @@ if (is_debug()) {
 
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
-    <link rel="stylesheet" href="assets/css/premium.css">
-    <script defer src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css?v=20261019">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=20261019">
+    <link rel="stylesheet" href="assets/css/animations.css?v=20261019">
+    <link rel="stylesheet" href="assets/css/premium.css?v=20261019b">
+    <script defer src="assets/js/main.js?v=20261019"></script>
 </head>
 
 <body>

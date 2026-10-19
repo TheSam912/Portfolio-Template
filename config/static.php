@@ -60,9 +60,9 @@ return [
     'experience_title_line_2' => 'Journey.',
 
     'live_tag' => 'LIVE NOW',
-    'live_title_line_1' => 'Products You Can',
-    'live_title_line_2' => 'Open Today.',
-    'live_lead' => 'Real websites and apps currently online — each one maps back to a role in my experience.',
+    'live_title_line_1' => 'Everything Here Is',
+    'live_title_line_2' => 'Online Right Now.',
+    'live_lead' => 'Seven live websites and apps you can open instantly — each tied to real shipped work.',
 
     'portfolio_tag' => 'PORTFOLIO',
     'portfolio_title_line_1' => 'Selected',

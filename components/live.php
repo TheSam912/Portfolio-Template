@@ -12,26 +12,17 @@ $liveProjects = array_values(array_filter(
 
 $liveCount = count($liveProjects);
 
-$typeLabel = static function (array $project): string {
-    $hasStore = !empty($project['store_android']) || !empty($project['store_ios']);
-    $type = strtolower((string) ($project['type'] ?? 'website'));
-
-    if ($hasStore && $type === 'website') {
-        return 'Website + App';
+$hostOf = static function (string $url): string {
+    $host = parse_url($url, PHP_URL_HOST);
+    if (!$host) {
+        return $url;
     }
 
-    return $type === 'app' ? 'Application' : 'Website';
+    return (string) preg_replace('/^www\./', '', $host);
 };
 
-$typeIcon = static function (array $project): string {
-    $hasStore = !empty($project['store_android']) || !empty($project['store_ios']);
-    $type = strtolower((string) ($project['type'] ?? 'website'));
-
-    if ($hasStore) {
-        return 'fa-solid fa-layer-group';
-    }
-
-    return $type === 'app' ? 'fa-solid fa-mobile-screen-button' : 'fa-solid fa-globe';
+$typeLabel = static function (string $type): string {
+    return strtolower($type) === 'app' ? 'App' : 'Website';
 };
 
 ?>
@@ -39,133 +30,90 @@ $typeIcon = static function (array $project): string {
 <section id="live" class="live-section">
 
     <div class="live-head" data-reveal="up">
+        <div class="live-head__copy">
+            <span class="section-tag">
+                <span class="tag-dot"></span>
+                <?= e(setting('live_tag', 'LIVE NOW')); ?>
+            </span>
 
-        <span class="section-tag">
-            <span class="tag-dot"></span>
-            <?= e(setting('live_tag', 'LIVE NOW')); ?>
-        </span>
-
-        <div class="live-head__row">
             <h2 class="live-title">
-                <?= e(setting('live_title_line_1', 'Products You Can')); ?>
-                <span class="gradient-text"><?= e(setting('live_title_line_2', 'Open Today.')); ?></span>
+                <?= e(setting('live_title_line_1', 'Everything Here Is')); ?>
+                <span class="gradient-text"><?= e(setting('live_title_line_2', 'Online Right Now.')); ?></span>
             </h2>
 
             <p class="live-lead">
                 <?= e(setting(
                     'live_lead',
-                    'Real websites and apps currently online — tied to roles from my experience.'
+                    'Seven live websites and apps you can open instantly — each tied to real shipped work.'
                 )); ?>
             </p>
         </div>
 
-        <?php if ($liveCount > 0): ?>
-            <div class="live-head__stats" aria-hidden="true">
-                <span class="live-head__pill">
-                    <span class="live-pulse"></span>
-                    <?= (int) $liveCount; ?> live
-                </span>
+        <div class="live-head__aside" aria-hidden="true">
+            <div class="live-head__count">
+                <strong><?= (int) $liveCount; ?></strong>
+                <span>live products</span>
             </div>
-        <?php endif; ?>
-
+            <div class="live-head__signal">
+                <span class="live-pulse"></span>
+                Available to visit
+            </div>
+        </div>
     </div>
 
     <?php if ($liveProjects): ?>
-
-        <div class="live-grid" data-reveal-stagger data-reveal="fade">
-
+        <ol class="live-list">
             <?php foreach ($liveProjects as $i => $project): ?>
                 <?php
+                $type = (string) ($project['type'] ?? 'website');
                 $url  = (string) $project['url'];
-                $host = parse_url($url, PHP_URL_HOST) ?: $url;
-                $host = preg_replace('/^www\./', '', (string) $host);
+                $num  = str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT);
+                $host = $hostOf($url);
                 $related = trim((string) ($project['related'] ?? ''));
                 ?>
-                <article class="live-card" data-reveal-child style="--i: <?= (int) $i; ?>">
+                <li class="live-row">
+                    <div class="live-row__index" aria-hidden="true"><?= e($num); ?></div>
 
-                    <div class="live-card__top">
-                        <span class="live-card__status">
-                            <span class="live-pulse" aria-hidden="true"></span>
-                            Live
-                        </span>
-                        <span class="live-card__type">
-                            <i class="<?= e($typeIcon($project)); ?>" aria-hidden="true"></i>
-                            <?= e($typeLabel($project)); ?>
-                        </span>
-                    </div>
+                    <div class="live-row__main">
+                        <div class="live-row__badges">
+                            <span class="live-row__live">
+                                <span class="live-pulse" aria-hidden="true"></span>
+                                Live
+                            </span>
+                            <span class="live-row__type"><?= e($typeLabel($type)); ?></span>
+                            <?php if ($related !== ''): ?>
+                                <span class="live-row__related"><?= e($related); ?></span>
+                            <?php endif; ?>
+                        </div>
 
-                    <div class="live-card__body">
-                        <h3 class="live-card__name"><?= e((string) $project['name']); ?></h3>
-
-                        <?php if ($related !== ''): ?>
-                            <p class="live-card__related">
-                                <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-                                From experience · <?= e($related); ?>
-                            </p>
-                        <?php endif; ?>
+                        <h3 class="live-row__name"><?= e((string) $project['name']); ?></h3>
 
                         <?php if (!empty($project['blurb'])): ?>
-                            <p class="live-card__blurb"><?= e((string) $project['blurb']); ?></p>
+                            <p class="live-row__blurb"><?= e((string) $project['blurb']); ?></p>
                         <?php endif; ?>
 
-                        <?php if (!empty($project['stack'])): ?>
-                            <p class="live-card__stack"><?= e((string) $project['stack']); ?></p>
-                        <?php endif; ?>
-
-                        <p class="live-card__host">
-                            <i class="fa-solid fa-link" aria-hidden="true"></i>
-                            <?= e((string) $host); ?>
-                        </p>
+                        <div class="live-row__meta">
+                            <?php if (!empty($project['stack'])): ?>
+                                <span><?= e((string) $project['stack']); ?></span>
+                            <?php endif; ?>
+                            <span class="live-row__host">
+                                <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                <?= e($host); ?>
+                            </span>
+                        </div>
                     </div>
 
-                    <div class="live-card__actions">
-                        <a
-                            class="live-card__cta"
-                            href="<?= e($url); ?>"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            data-magnetic>
-                            <span><?= e((string) ($project['cta'] ?? 'Open live')); ?></span>
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        </a>
-
-                        <?php if (!empty($project['store_android'])): ?>
-                            <a
-                                class="live-card__store"
-                                href="<?= e((string) $project['store_android']); ?>"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="<?= e((string) $project['name']); ?> on Google Play"
-                                title="Google Play">
-                                <i class="fa-brands fa-google-play" aria-hidden="true"></i>
-                            </a>
-                        <?php endif; ?>
-
-                        <?php if (!empty($project['store_ios'])): ?>
-                            <a
-                                class="live-card__store"
-                                href="<?= e((string) $project['store_ios']); ?>"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="<?= e((string) $project['name']); ?> on App Store"
-                                title="App Store">
-                                <i class="fa-brands fa-apple" aria-hidden="true"></i>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-
-                </article>
+                    <a
+                        class="live-row__cta"
+                        href="<?= e($url); ?>"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        <span><?= e((string) ($project['cta'] ?? 'Open')); ?></span>
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    </a>
+                </li>
             <?php endforeach; ?>
-
-        </div>
-
-    <?php else: ?>
-
-        <div class="live-empty" data-reveal="up">
-            <span class="live-pulse"></span>
-            <p>Live projects will appear here soon.</p>
-        </div>
-
+        </ol>
     <?php endif; ?>
 
 </section>

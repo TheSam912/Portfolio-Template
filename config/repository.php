@@ -70,14 +70,14 @@ final class ContentRepository
     private function loadProfile(): array
     {
         $defaults = [
-            'short_summary' => 'Software & Website Developer and SEO & GEO Specialist with 8+ years shipping high-performance web and mobile products.',
-            'about_summary' => "I'm Sobhan (Sam), a Software & Website Developer with 8+ years of experience turning product requirements into responsive, high-performance web and mobile applications (Flutter, Laravel, Vue.js, Node.js). I have a track record of shipping production platforms that lifted engagement and revenue by up to 45% and cut delivery time through reusable, well-architected components.\n\nI also bring hands-on SEO and GEO (Generative Engine Optimization), ensuring products are not only well-built but discoverable — in traditional search and in AI-driven answer engines. Backed by a Master's in Cybersecurity and a consistent record of delivering in fast-moving agile teams.",
+            'short_summary' => 'Software & Website Developer with 8+ years of experience turning product requirements into responsive, high-performance web and mobile applications (Flutter, Laravel, Vue.js, Node.js).',
+            'about_summary' => "Software & Website Developer with 8+ years of experience turning product requirements into responsive, high-performance web and mobile applications (Flutter, Laravel, Vue.js, Node.js). Track record of shipping production platforms that lifted engagement and revenue by up to 45% and cut delivery time through reusable, well-architected components. Brings a rare second skill set to development teams: hands-on SEO and GEO (Generative Engine Optimization), ensuring products are not only well-built but discoverable — in traditional search and in AI-driven answer engines. Backed by a Master's in Cybersecurity and a consistent record of delivering in fast-moving agile teams.",
             'resume_file' => 'assets/files/Sobhan-Resume.pdf',
             'contact_email' => 'The.Sam.Nolan1998@gmail.com',
             'contact_linkedin' => 'https://linkedin.com/in/sam912',
-            'contact_linkedin_text' => 'Linkedin.com/in/sam912',
+            'contact_linkedin_text' => 'linkedin.com/in/sam912',
             'contact_github' => 'https://github.com/TheSam912',
-            'contact_github_text' => 'Github.com/TheSam912',
+            'contact_github_text' => 'github.com/TheSam912',
             'contact_location' => 'Remote / Worldwide',
         ];
 

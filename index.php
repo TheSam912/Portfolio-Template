@@ -30,7 +30,7 @@ if (is_debug()) {
     <link rel="stylesheet" href="assets/css/style.css?v=20261019">
     <link rel="stylesheet" href="assets/css/responsive.css?v=20261019">
     <link rel="stylesheet" href="assets/css/animations.css?v=20261019">
-    <link rel="stylesheet" href="assets/css/premium.css?v=20261019c">
+    <link rel="stylesheet" href="assets/css/premium.css?v=20261019d">
     <script defer src="assets/js/main.js?v=20261019"></script>
 </head>
 
@@ -44,6 +44,7 @@ if (is_debug()) {
     <?php include __DIR__ . '/components/banner.php'; ?>
     <?php include __DIR__ . '/components/skills.php'; ?>
     <?php include __DIR__ . '/components/experiences.php'; ?>
+    <?php include __DIR__ . '/components/education.php'; ?>
     <?php include __DIR__ . '/components/live.php'; ?>
     <?php include __DIR__ . '/components/portfolio.php'; ?>
     <?php include __DIR__ . '/components/contact.php'; ?>

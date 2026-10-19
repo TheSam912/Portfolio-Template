@@ -1,18 +1,17 @@
 <?php
 
 /**
- * Static site copy — edit here for labels, section titles, footer, stats, services, etc.
- * Only summary, CV, contact info, skills, experience, and projects are managed in admin.
+ * Static site copy — aligned with resume (Sobhan Daroogheh).
  */
 return [
 
-    'site_title' => 'Sam Nolan — Software & Website Developer',
+    'site_title' => 'Sobhan Daroogheh — Software & Website Developer · SEO & GEO Specialist',
 
-    'hero_badge' => 'Software & Website Developer · SEO & GEO',
-    'hero_title_line_1' => 'Craft Digital Products',
-    'hero_title_line_2' => 'That Perform',
-    'hero_title_line_3' => 'And Get Discovered',
-    'hero_btn_primary' => 'View My Work',
+    'hero_badge' => 'Software & Website Developer · SEO & GEO Specialist',
+    'hero_title_line_1' => 'Software & Website',
+    'hero_title_line_2' => 'Developer',
+    'hero_title_line_3' => 'SEO & GEO Specialist',
+    'hero_btn_primary' => 'View Live Work',
     'hero_btn_secondary' => 'Download CV',
 
     'stats_projects_count' => '15+',
@@ -24,48 +23,52 @@ return [
     'stats_experience_count' => '8+',
     'stats_experience_text' => 'Years Experience',
 
-    'about_tag' => 'ABOUT ME',
-    'about_title_line_1' => 'Building Products That',
-    'about_title_line_2' => 'Ship Fast',
-    'about_title_line_3' => 'And Rank Well.',
+    'about_tag' => 'PROFILE',
+    'about_title_line_1' => 'Software & Website Developer',
+    'about_title_line_2' => 'with SEO & GEO',
+    'about_title_line_3' => 'expertise.',
     'about_name_label' => 'Name',
-    'about_name_value' => 'Sam Nolan',
+    'about_name_value' => 'Sobhan Daroogheh',
     'about_email_label' => 'Email',
     'about_degree_label' => 'Degree',
-    'about_degree_value' => "Master's in Cybersecurity",
+    'about_degree_value' => "Master's in Cybersecurity · University of Padua",
     'about_location_label' => 'Location',
     'about_location_value' => 'Available Worldwide',
     'about_availability_label' => 'Availability',
     'about_availability_value' => 'Available For Projects',
 
     'services_tag' => 'WHAT I DO',
-    'services_title_line_1' => 'From idea to production —',
-    'services_title_line_2' => 'built to perform.',
-    'service_1_title' => 'Cross-Platform Apps',
-    'service_1_description' => 'Building high-performance Flutter and React Native apps for Android and iOS with clean architecture, Firebase, and consistent UX across platforms.',
+    'services_title_line_1' => 'From product requirements to',
+    'services_title_line_2' => 'discoverable products.',
+    'service_1_title' => 'Mobile Development',
+    'service_1_description' => 'Flutter, React Native, Android/iOS — clean architecture, Firebase, BLoC/Riverpod, and production app delivery.',
     'service_2_title' => 'Web & Backend',
-    'service_2_description' => 'Shipping responsive websites and platforms with Laravel, Vue.js, Next.js, and Node.js — from booking flows to e-commerce and admin panels.',
-    'service_3_title' => 'Backend & APIs',
-    'service_3_description' => 'Creating secure, scalable RESTful APIs and managing SQL & NoSQL databases (MySQL, MongoDB, Firestore) for reliable production backends.',
+    'service_2_description' => 'Laravel (PHP, Nova), Vue.js, Next.js, TypeScript, Tailwind, Node.js/Express, REST APIs, SQL & NoSQL, Docker.',
+    'service_3_title' => 'AI & Automation',
+    'service_3_description' => 'AI system management, OpenAI API integration, Google ML Kit, and workflow/process automation.',
     'service_4_title' => 'SEO & GEO',
-    'service_4_description' => 'Technical SEO audits, on-page optimization, structured data, Core Web Vitals, and Generative Engine Optimization so products rank in search and AI answers.',
+    'service_4_description' => 'Technical SEO audits, on-page optimization, structured data/schema, Core Web Vitals, and GEO for AI/LLM answer engines.',
 
-    'skills_tag' => 'TECH STACK',
-    'skills_title_line_1' => 'Core Skills From',
-    'skills_title_line_2' => 'The Resume.',
-    'skills_lead' => 'Mobile, web & backend, SEO & GEO, AI, and tools — the same stack I ship with.',
+    'skills_tag' => 'CORE SKILLS',
+    'skills_title_line_1' => 'Technologies And',
+    'skills_title_line_2' => 'Specializations.',
+    'skills_lead' => 'The same core skills listed on my resume — mobile, web & backend, SEO & GEO, AI, and tools & cloud.',
 
-    'experience_tag' => 'EXPERIENCE',
+    'experience_tag' => 'PROFESSIONAL EXPERIENCE',
     'experience_title_line_1' => 'Professional',
-    'experience_title_line_2' => 'Journey.',
+    'experience_title_line_2' => 'Experience.',
+
+    'education_tag' => 'EDUCATION',
+    'education_title_line_1' => 'Academic',
+    'education_title_line_2' => 'Background.',
 
     'live_tag' => 'LIVE NOW',
-    'live_title_line_1' => 'Everything Here Is',
-    'live_title_line_2' => 'Online Right Now.',
-    'live_lead' => 'Seven live websites and apps you can open instantly — each tied to real shipped work.',
+    'live_title_line_1' => 'Featured Work You Can',
+    'live_title_line_2' => 'Open Live.',
+    'live_lead' => 'Live websites and apps from my professional experience and featured projects.',
 
-    'portfolio_tag' => 'PORTFOLIO',
-    'portfolio_title_line_1' => 'Selected',
+    'portfolio_tag' => 'FEATURED PROJECTS',
+    'portfolio_title_line_1' => 'Featured',
     'portfolio_title_line_2' => 'Projects.',
 
     'contact_tag' => "LET'S WORK TOGETHER",
@@ -76,8 +79,10 @@ return [
     'contact_message_placeholder' => 'Tell me about your project...',
     'contact_button' => 'Send Message',
     'contact_info_tag' => 'CONTACT INFO',
+    'contact_phone_ir' => '+98 903 360 0501',
+    'contact_phone_it' => '+39 351 620 0264',
 
-    'footer_copyright' => '© 2026 Sam Nolan. All rights reserved.',
+    'footer_copyright' => '© 2026 Sobhan Daroogheh. All rights reserved.',
     'footer_github' => 'https://github.com/TheSam912',
     'footer_linkedin' => 'https://linkedin.com/in/sam912',
     'footer_email' => 'The.Sam.Nolan1998@gmail.com',
@@ -88,7 +93,6 @@ return [
     'modal_success_text' => 'Thank you for your message. I will get back to you as soon as possible.',
     'modal_success_button' => 'Awesome',
 
-    // Default media paths (change in code if you replace files in assets/)
     'hero_image' => 'assets/images/hero.webp',
     'text_logo_image' => 'assets/images/textlogo.png',
     'logo_image' => 'assets/images/logo.png',

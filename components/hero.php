@@ -32,11 +32,15 @@
             </span>
             <span class="hero-meta__chip">
                 <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-                SEO &amp; GEO
+                45% Peak Engagement Uplift
             </span>
             <span class="hero-meta__chip">
-                <i class="fa-solid fa-globe" aria-hidden="true"></i>
-                Available Worldwide
+                <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                15+ Apps &amp; Platforms
+            </span>
+            <span class="hero-meta__chip">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                SEO/GEO Search &amp; AI Visibility
             </span>
         </div>
 
@@ -56,7 +60,7 @@
     <div class="hero-right" data-reveal="scale" data-reveal-delay="200">
         <img
             src="<?= e(setting('hero_image')); ?>"
-            alt="Sobhan (Sam) Nolan"
+            alt="Sobhan Daroogheh"
             fetchpriority="high"
             decoding="async"
             width="600"

@@ -21,6 +21,14 @@ $expIcon = static function (string $position): string {
         return 'fa-solid fa-globe';
     }
 
+    if (str_contains($p, 'relocation') || str_contains($p, 'academic')) {
+        return 'fa-solid fa-plane';
+    }
+
+    if (str_contains($p, 'internship')) {
+        return 'fa-solid fa-seedling';
+    }
+
     if (str_contains($p, 'fullstack') || str_contains($p, 'full stack')) {
         return 'fa-solid fa-layer-group';
     }

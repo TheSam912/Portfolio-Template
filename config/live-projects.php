@@ -1,20 +1,17 @@
 <?php
 
 /**
- * All live products — keep every entry separate so each link is visible.
- *
- * type: website | app
- * related: matches an experience company label
+ * Live products — user-provided links, copy aligned with resume where applicable.
  */
 return [
 
     [
-        'name'    => 'Destinology',
+        'name'    => 'Destinology.co.uk',
         'type'    => 'website',
         'url'     => 'https://www.destinology.co.uk/',
-        'blurb'   => 'Holiday booking platform — search, packages, flights, stays, and extras.',
+        'blurb'   => 'Large-scale holiday booking platform (PHP Laravel, Vue.js) with dynamic destination search, filtering, and package selection — built with the Corefinity team.',
         'stack'   => 'Laravel · Vue.js',
-        'cta'     => 'Open site',
+        'cta'     => 'Open live website',
         'related' => 'Corefinity (Destinology)',
     ],
 
@@ -22,9 +19,9 @@ return [
         'name'    => 'Wealthio',
         'type'    => 'website',
         'url'     => 'https://wealthio.ir/',
-        'blurb'   => 'Founder-built finance PWA — from UI/UX to Laravel backend.',
+        'blurb'   => 'Founder & FullStack — PWA with Next.js frontend and PHP/Laravel backend, owned from UI/UX to backend.',
         'stack'   => 'Next.js · Laravel',
-        'cta'     => 'Open site',
+        'cta'     => 'Open live platform',
         'related' => 'Self-Employed',
     ],
 
@@ -32,9 +29,9 @@ return [
         'name'    => 'Fanavaran',
         'type'    => 'website',
         'url'     => 'https://fanavaran.ca/',
-        'blurb'   => 'Company website for Fanavaran — current web & product work.',
+        'blurb'   => 'Company website — alongside mobile and backend contributions at Fanavaran.',
         'stack'   => 'Web',
-        'cta'     => 'Open site',
+        'cta'     => 'Open live website',
         'related' => 'Fanavaran',
     ],
 
@@ -42,7 +39,7 @@ return [
         'name'    => 'Fanavaran App',
         'type'    => 'app',
         'url'     => 'https://play.google.com/store/apps/details?id=com.fanavaran.app&hl=en',
-        'blurb'   => 'Android app on Google Play — React Native rebuild in production.',
+        'blurb'   => 'Android app on Google Play — React Native rebuild; iOS currently under App Store review.',
         'stack'   => 'React Native',
         'cta'     => 'Open Play Store',
         'related' => 'Fanavaran',
@@ -52,19 +49,19 @@ return [
         'name'    => 'NIU Nature',
         'type'    => 'website',
         'url'     => 'https://www.niu-nature.app/',
-        'blurb'   => 'Healthcare product with physician-led programs — live web presence.',
+        'blurb'   => 'Production healthcare app with backend-integrated dynamic content — live App Store audience.',
         'stack'   => 'Flutter',
-        'cta'     => 'Open site',
+        'cta'     => 'Open live site',
         'related' => 'NIU Nature (Healthcare App)',
     ],
 
     [
-        'name'    => 'WooCom',
+        'name'    => 'WooCom Flutter E-Commerce',
         'type'    => 'website',
         'url'     => 'https://thesam912.github.io/woocom',
-        'blurb'   => 'Responsive e-commerce demo for web, tablet, and mobile.',
+        'blurb'   => 'Fully responsive e-commerce app for web, tablet and mobile, with Firebase backend for auth, products, and orders.',
         'stack'   => 'Flutter · Firebase',
-        'cta'     => 'Open demo',
+        'cta'     => 'Open live demo',
         'related' => 'WooCom Ecommerce (Startup)',
     ],
 
@@ -72,9 +69,9 @@ return [
         'name'    => 'Corefinity',
         'type'    => 'website',
         'url'     => 'https://www.corefinity.com/',
-        'blurb'   => 'Agency behind Destinology — where the Laravel/Vue booking work shipped.',
+        'blurb'   => 'Agency site for the Corefinity team behind Destinology — Laravel & Vue.js delivery context.',
         'stack'   => 'Laravel · Vue.js',
-        'cta'     => 'Open site',
+        'cta'     => 'Open live website',
         'related' => 'Corefinity (Destinology)',
     ],
 

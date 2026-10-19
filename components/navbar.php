@@ -5,8 +5,9 @@ $navItems = [
     ['href' => '#services',   'label' => 'Services'],
     ['href' => '#skills',     'label' => 'Skills'],
     ['href' => '#experience', 'label' => 'Experience'],
+    ['href' => '#education',  'label' => 'Education'],
     ['href' => '#live',       'label' => 'Live'],
-    ['href' => '#portfolio',  'label' => 'Portfolio'],
+    ['href' => '#portfolio',  'label' => 'Projects'],
     ['href' => '#contact',    'label' => 'Contact'],
 ];
 $ctaText = setting('navbar_cta_text', 'Get In Touch');

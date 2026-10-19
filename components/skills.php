@@ -45,14 +45,14 @@ $renderIcon = static function (array $item): string {
 
         <div class="skills-head__row">
             <h2 class="skills-title">
-                <?= e(setting('skills_title_line_1', 'Core Skills From')); ?>
-                <span class="gradient-text"><?= e(setting('skills_title_line_2', 'The Resume.')); ?></span>
+                <?= e(setting('skills_title_line_1', 'Technologies And')); ?>
+                <span class="gradient-text"><?= e(setting('skills_title_line_2', 'Specializations.')); ?></span>
             </h2>
 
             <p class="skills-lead">
                 <?= e(setting(
                     'skills_lead',
-                    'Mobile, web & backend, SEO & GEO, AI, and tools — the same stack I ship with.'
+                    'The same core skills listed on my resume — mobile, web & backend, SEO & GEO, AI, and tools & cloud.'
                 )); ?>
             </p>
         </div>

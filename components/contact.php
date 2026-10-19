@@ -70,6 +70,16 @@
                     <span><?= e(profile('contact_email')); ?></span>
                 </a>
 
+                <a href="tel:<?= e(preg_replace('/\s+/', '', setting('contact_phone_ir', '+989033600501'))); ?>" class="contact-link">
+                    <i class="fa-solid fa-phone"></i>
+                    <span><?= e(setting('contact_phone_ir', '+98 903 360 0501')); ?></span>
+                </a>
+
+                <a href="tel:<?= e(preg_replace('/\s+/', '', setting('contact_phone_it', '+393516200264'))); ?>" class="contact-link">
+                    <i class="fa-solid fa-phone"></i>
+                    <span><?= e(setting('contact_phone_it', '+39 351 620 0264')); ?></span>
+                </a>
+
                 <a href="<?= e(profile('contact_linkedin')); ?>" target="_blank" rel="noopener noreferrer" class="contact-link">
                     <i class="fa-brands fa-linkedin-in"></i>
                     <span><?= e(profile('contact_linkedin_text')); ?></span>
@@ -78,6 +88,11 @@
                 <a href="<?= e(profile('contact_github')); ?>" target="_blank" rel="noopener noreferrer" class="contact-link">
                     <i class="fa-brands fa-github"></i>
                     <span><?= e(profile('contact_github_text')); ?></span>
+                </a>
+
+                <a href="https://thesam912.github.io/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>TheSam912.github.io</span>
                 </a>
 
                 <div class="contact-link">

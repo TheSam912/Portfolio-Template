@@ -20,27 +20,23 @@ ON DUPLICATE KEY UPDATE
     setting_value = VALUES(setting_value),
     setting_group = VALUES(setting_group);
 
--- ---- Skills ------------------------------------------
-DELETE FROM skills WHERE id BETWEEN 1 AND 18;
+-- ---- Skills (admin mirror; live site uses config/core-skills.php) ----
+DELETE FROM skills;
 INSERT INTO skills (id, name, icon_path, sort_order) VALUES
-(1,  'Flutter',    'assets/images/skills/flutter.png',    10),
-(2,  'Laravel',    'assets/images/skills/laravel.png',    20),
-(3,  'Vue.js',     'assets/images/skills/vue.png',        30),
-(4,  'PHP',        'assets/images/skills/php.png',        40),
-(5,  'Node.js',    'assets/images/skills/nodejs.png',     50),
-(6,  'JavaScript', 'assets/images/skills/js.png',         60),
-(7,  'MySQL',      'assets/images/skills/mysql.png',      70),
-(8,  'MongoDB',    'assets/images/skills/mongodb.png',    80),
-(9,  'Docker',     'assets/images/skills/docker.png',     90),
-(10, 'AWS',        'assets/images/skills/aws.png',       100),
-(11, 'Git',        'assets/images/skills/git.png',       110),
-(12, 'Figma',      'assets/images/skills/figma.png',     120),
-(13, 'HTML',       'assets/images/skills/html.png',      130),
-(14, 'CSS',        'assets/images/skills/css.png',       140),
-(15, 'Java',       'assets/images/skills/java.png',      150),
-(16, 'Swift',      'assets/images/skills/swift.png',     160),
-(17, 'WordPress',  'assets/images/skills/wordpress.png',170),
-(18, 'Bootstrap',  'assets/images/skills/bootstrap.png', 180);
+(1,  'Flutter',              'assets/images/skills/flutter.png',  10),
+(2,  'React Native',         'assets/images/skills/js.png',       20),
+(3,  'Firebase',             'assets/images/skills/js.png',       30),
+(4,  'Laravel',              'assets/images/skills/laravel.png',  40),
+(5,  'Vue.js',               'assets/images/skills/vue.png',      50),
+(6,  'Node.js',              'assets/images/skills/nodejs.png',   60),
+(7,  'MongoDB',              'assets/images/skills/mongodb.png',  70),
+(8,  'Docker',               'assets/images/skills/docker.png',   80),
+(9,  'AWS',                  'assets/images/skills/aws.png',      90),
+(10, 'Git',                  'assets/images/skills/git.png',     100),
+(11, 'Figma',                'assets/images/skills/figma.png',   110),
+(12, 'TypeScript',           'assets/images/skills/js.png',      120),
+(13, 'PHP',                  'assets/images/skills/php.png',     130),
+(14, 'MySQL',                'assets/images/skills/mysql.png',   140);
 
 -- ---- Experiences + bullets ---------------------------
 DELETE FROM experience_bullets;

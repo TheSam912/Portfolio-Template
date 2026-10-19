@@ -1,62 +1,36 @@
 <?php
 
-/** @var list<array<string, mixed>> $skills */
-
-$categoryMeta = [
-    'mobile' => [
-        'label' => 'Mobile',
-        'desc'  => 'Cross-platform & native apps',
-        'icon'  => 'fa-solid fa-mobile-screen-button',
-    ],
-    'web' => [
-        'label' => 'Web & Backend',
-        'desc'  => 'Sites, APIs, and platforms',
-        'icon'  => 'fa-solid fa-code',
-    ],
-    'data' => [
-        'label' => 'Data & Cloud',
-        'desc'  => 'Storage, infra, and delivery',
-        'icon'  => 'fa-solid fa-cloud',
-    ],
-    'design' => [
-        'label' => 'Design & Tools',
-        'desc'  => 'UI craft and workflow',
-        'icon'  => 'fa-solid fa-pen-ruler',
-    ],
-];
-
-$skillCategory = static function (string $name): string {
-    $n = strtolower($name);
-
-    if (preg_match('/flutter|react native|swift|java|android|ios|kotlin/', $n)) {
-        return 'mobile';
-    }
-
-    if (preg_match('/mysql|mongodb|sqlite|docker|aws|git|firebase|cloud/', $n)) {
-        return 'data';
-    }
-
-    if (preg_match('/figma|sketch|adobe|xd|bootstrap/', $n)) {
-        return 'design';
-    }
-
-    return 'web';
-};
-
-$grouped = [
-    'mobile' => [],
-    'web'    => [],
-    'data'   => [],
-    'design' => [],
-];
-
-foreach ($skills as $skill) {
-    $key = $skillCategory((string) ($skill['name'] ?? ''));
-    $grouped[$key][] = $skill;
+$skillGroups = require __DIR__ . '/../config/core-skills.php';
+if (!is_array($skillGroups)) {
+    $skillGroups = [];
 }
 
-$grouped = array_filter($grouped);
-$totalSkills = count($skills);
+$skillGroups = array_values(array_filter(
+    $skillGroups,
+    static fn ($group): bool => is_array($group) && !empty($group['items'])
+));
+
+$totalSkills = 0;
+foreach ($skillGroups as $group) {
+    $totalSkills += count($group['items']);
+}
+
+$renderIcon = static function (array $item): string {
+    $icon = trim((string) ($item['icon'] ?? ''));
+    $name = e((string) ($item['name'] ?? ''));
+
+    if (str_starts_with($icon, 'fa:')) {
+        $fa = e(substr($icon, 3));
+
+        return '<span class="skill-chip__fa" aria-hidden="true"><i class="' . $fa . '"></i></span>';
+    }
+
+    if ($icon !== '') {
+        return '<img src="' . e($icon) . '" alt="" loading="lazy" decoding="async" width="28" height="28">';
+    }
+
+    return '<span class="skill-chip__fa" aria-hidden="true"><i class="fa-solid fa-circle-nodes"></i></span>';
+};
 
 ?>
 
@@ -71,14 +45,14 @@ $totalSkills = count($skills);
 
         <div class="skills-head__row">
             <h2 class="skills-title">
-                <?= e(setting('skills_title_line_1', 'A Clear Stack For')); ?>
-                <span class="gradient-text"><?= e(setting('skills_title_line_2', 'Shipping Real Products.')); ?></span>
+                <?= e(setting('skills_title_line_1', 'Core Skills From')); ?>
+                <span class="gradient-text"><?= e(setting('skills_title_line_2', 'The Resume.')); ?></span>
             </h2>
 
             <p class="skills-lead">
                 <?= e(setting(
                     'skills_lead',
-                    'Organized by how I actually build — mobile, web, data, and the tools around them.'
+                    'Mobile, web & backend, SEO & GEO, AI, and tools — the same stack I ship with.'
                 )); ?>
             </p>
         </div>
@@ -87,54 +61,41 @@ $totalSkills = count($skills);
             <div class="skills-head__meta" aria-hidden="true">
                 <span class="skills-head__pill">
                     <i class="fa-solid fa-layer-group"></i>
-                    <?= (int) $totalSkills; ?> technologies
+                    <?= (int) $totalSkills; ?> skills
                 </span>
                 <span class="skills-head__pill skills-head__pill--soft">
-                    <?= (int) count($grouped); ?> focus areas
+                    <?= (int) count($skillGroups); ?> resume categories
                 </span>
             </div>
         <?php endif; ?>
 
     </div>
 
-    <?php if ($skills): ?>
+    <?php if ($skillGroups): ?>
 
-        <div class="skills-board" data-reveal-stagger data-reveal="fade">
+        <div class="skills-board">
 
-            <?php $i = 0; foreach ($grouped as $key => $items): ?>
-                <?php
-                $meta = $categoryMeta[$key] ?? [
-                    'label' => ucfirst($key),
-                    'desc'  => '',
-                    'icon'  => 'fa-solid fa-cube',
-                ];
-                ?>
-                <article class="skills-panel" data-reveal-child style="--i: <?= (int) $i++; ?>">
+            <?php foreach ($skillGroups as $group): ?>
+                <article class="skills-panel">
 
                     <header class="skills-panel__head">
                         <div class="skills-panel__icon" aria-hidden="true">
-                            <i class="<?= e($meta['icon']); ?>"></i>
+                            <i class="<?= e((string) ($group['icon'] ?? 'fa-solid fa-cube')); ?>"></i>
                         </div>
                         <div class="skills-panel__copy">
-                            <h3><?= e($meta['label']); ?></h3>
-                            <?php if ($meta['desc'] !== ''): ?>
-                                <p><?= e($meta['desc']); ?></p>
+                            <h3><?= e((string) ($group['label'] ?? '')); ?></h3>
+                            <?php if (!empty($group['desc'])): ?>
+                                <p><?= e((string) $group['desc']); ?></p>
                             <?php endif; ?>
                         </div>
-                        <span class="skills-panel__count"><?= (int) count($items); ?></span>
+                        <span class="skills-panel__count"><?= (int) count($group['items']); ?></span>
                     </header>
 
                     <ul class="skills-panel__grid">
-                        <?php foreach ($items as $skill): ?>
+                        <?php foreach ($group['items'] as $item): ?>
                             <li class="skill-chip">
-                                <img
-                                    src="<?= e($skill['icon_path']); ?>"
-                                    alt=""
-                                    loading="lazy"
-                                    decoding="async"
-                                    width="28"
-                                    height="28">
-                                <span><?= e($skill['name']); ?></span>
+                                <?= $renderIcon($item); ?>
+                                <span><?= e((string) ($item['name'] ?? '')); ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>

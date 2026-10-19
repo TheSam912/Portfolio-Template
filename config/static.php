@@ -51,9 +51,9 @@ return [
     'service_4_description' => 'Technical SEO audits, on-page optimization, structured data, Core Web Vitals, and Generative Engine Optimization so products rank in search and AI answers.',
 
     'skills_tag' => 'TECH STACK',
-    'skills_title_line_1' => 'A Clear Stack For',
-    'skills_title_line_2' => 'Shipping Real Products.',
-    'skills_lead' => 'Organized by how I actually build — mobile, web, data, and the tools around them.',
+    'skills_title_line_1' => 'Core Skills From',
+    'skills_title_line_2' => 'The Resume.',
+    'skills_lead' => 'Mobile, web & backend, SEO & GEO, AI, and tools — the same stack I ship with.',
 
     'experience_tag' => 'EXPERIENCE',
     'experience_title_line_1' => 'Professional',

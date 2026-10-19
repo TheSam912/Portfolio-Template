@@ -30,7 +30,7 @@ if (is_debug()) {
     <link rel="stylesheet" href="assets/css/style.css?v=20261019">
     <link rel="stylesheet" href="assets/css/responsive.css?v=20261019">
     <link rel="stylesheet" href="assets/css/animations.css?v=20261019">
-    <link rel="stylesheet" href="assets/css/premium.css?v=20261019b">
+    <link rel="stylesheet" href="assets/css/premium.css?v=20261019c">
     <script defer src="assets/js/main.js?v=20261019"></script>
 </head>
 

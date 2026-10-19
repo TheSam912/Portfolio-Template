@@ -2,71 +2,145 @@
 
 /** @var list<array<string, mixed>> $skills */
 
-$half     = (int) ceil(count($skills) / 2);
-$rowA     = array_slice($skills, 0, $half);
-$rowB     = array_slice($skills, $half);
+$categoryMeta = [
+    'mobile' => [
+        'label' => 'Mobile',
+        'desc'  => 'Cross-platform & native apps',
+        'icon'  => 'fa-solid fa-mobile-screen-button',
+    ],
+    'web' => [
+        'label' => 'Web & Backend',
+        'desc'  => 'Sites, APIs, and platforms',
+        'icon'  => 'fa-solid fa-code',
+    ],
+    'data' => [
+        'label' => 'Data & Cloud',
+        'desc'  => 'Storage, infra, and delivery',
+        'icon'  => 'fa-solid fa-cloud',
+    ],
+    'design' => [
+        'label' => 'Design & Tools',
+        'desc'  => 'UI craft and workflow',
+        'icon'  => 'fa-solid fa-pen-ruler',
+    ],
+];
 
-$render_tile = static function (array $skill): string {
-    return sprintf(
-        '<div class="skill-item">'
-            . '<img src="%s" alt="%s" loading="lazy" decoding="async" width="28" height="28">'
-            . '<span>%s</span>'
-        . '</div>',
-        e($skill['icon_path']),
-        e($skill['name']),
-        e($skill['name'])
-    );
-};
+$skillCategory = static function (string $name): string {
+    $n = strtolower($name);
 
-$render_track = static function (array $items) use ($render_tile): string {
-    if (!$items) {
-        return '';
+    if (preg_match('/flutter|react native|swift|java|android|ios|kotlin/', $n)) {
+        return 'mobile';
     }
 
-    $tiles = array_map($render_tile, $items);
+    if (preg_match('/mysql|mongodb|sqlite|docker|aws|git|firebase|cloud/', $n)) {
+        return 'data';
+    }
 
-    return implode('', $tiles) . implode('', $tiles);
+    if (preg_match('/figma|sketch|adobe|xd|bootstrap/', $n)) {
+        return 'design';
+    }
+
+    return 'web';
 };
+
+$grouped = [
+    'mobile' => [],
+    'web'    => [],
+    'data'   => [],
+    'design' => [],
+];
+
+foreach ($skills as $skill) {
+    $key = $skillCategory((string) ($skill['name'] ?? ''));
+    $grouped[$key][] = $skill;
+}
+
+$grouped = array_filter($grouped);
+$totalSkills = count($skills);
 
 ?>
 
 <section id="skills" class="skills-section">
 
-    <div
-        class="skills-head"
-        data-reveal="up">
+    <div class="skills-head" data-reveal="up">
 
         <span class="section-tag">
-
             <span class="tag-dot"></span>
-
             <?= e(setting('skills_tag', 'TECH STACK')); ?>
-
         </span>
 
-        <h2 class="skills-title">
+        <div class="skills-head__row">
+            <h2 class="skills-title">
+                <?= e(setting('skills_title_line_1', 'A Clear Stack For')); ?>
+                <span class="gradient-text"><?= e(setting('skills_title_line_2', 'Shipping Real Products.')); ?></span>
+            </h2>
 
-            <?= e(setting('skills_title_line_1', 'Technologies I Use To Build')); ?>
+            <p class="skills-lead">
+                <?= e(setting(
+                    'skills_lead',
+                    'Organized by how I actually build — mobile, web, data, and the tools around them.'
+                )); ?>
+            </p>
+        </div>
 
-            <span class="gradient-text"><?= e(setting('skills_title_line_2', 'Modern Products.')); ?></span>
-
-        </h2>
+        <?php if ($totalSkills > 0): ?>
+            <div class="skills-head__meta" aria-hidden="true">
+                <span class="skills-head__pill">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <?= (int) $totalSkills; ?> technologies
+                </span>
+                <span class="skills-head__pill skills-head__pill--soft">
+                    <?= (int) count($grouped); ?> focus areas
+                </span>
+            </div>
+        <?php endif; ?>
 
     </div>
 
     <?php if ($skills): ?>
 
-        <div
-            class="skills-marquee"
-            data-reveal="fade">
+        <div class="skills-board" data-reveal-stagger data-reveal="fade">
 
-            <?php if ($rowA): ?>
-                <div class="skills-track"><?= $render_track($rowA); ?></div>
-            <?php endif; ?>
+            <?php $i = 0; foreach ($grouped as $key => $items): ?>
+                <?php
+                $meta = $categoryMeta[$key] ?? [
+                    'label' => ucfirst($key),
+                    'desc'  => '',
+                    'icon'  => 'fa-solid fa-cube',
+                ];
+                ?>
+                <article class="skills-panel" data-reveal-child style="--i: <?= (int) $i++; ?>">
 
-            <?php if ($rowB): ?>
-                <div class="skills-track skills-track--reverse"><?= $render_track($rowB); ?></div>
-            <?php endif; ?>
+                    <header class="skills-panel__head">
+                        <div class="skills-panel__icon" aria-hidden="true">
+                            <i class="<?= e($meta['icon']); ?>"></i>
+                        </div>
+                        <div class="skills-panel__copy">
+                            <h3><?= e($meta['label']); ?></h3>
+                            <?php if ($meta['desc'] !== ''): ?>
+                                <p><?= e($meta['desc']); ?></p>
+                            <?php endif; ?>
+                        </div>
+                        <span class="skills-panel__count"><?= (int) count($items); ?></span>
+                    </header>
+
+                    <ul class="skills-panel__grid">
+                        <?php foreach ($items as $skill): ?>
+                            <li class="skill-chip">
+                                <img
+                                    src="<?= e($skill['icon_path']); ?>"
+                                    alt=""
+                                    loading="lazy"
+                                    decoding="async"
+                                    width="28"
+                                    height="28">
+                                <span><?= e($skill['name']); ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+
+                </article>
+            <?php endforeach; ?>
 
         </div>
 

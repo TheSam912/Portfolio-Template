@@ -13,7 +13,7 @@
     <div class="footer-wrapper">
 
         <a href="#hero" class="footer-logo">
-            <img src="<?= e(setting('logo_image')); ?>" alt="Sam Nolan Logo">
+            <img src="<?= e(setting('logo_image')); ?>" alt="Sobhan Daroogheh">
         </a>
 
         <div class="footer-copy">

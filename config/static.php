@@ -58,6 +58,11 @@ return [
     'experience_title_line_1' => 'Professional',
     'experience_title_line_2' => 'Journey.',
 
+    'live_tag' => 'LIVE NOW',
+    'live_title_line_1' => 'Products You Can',
+    'live_title_line_2' => 'Open Today.',
+    'live_lead' => 'Real websites and apps currently online — click through and explore them live.',
+
     'portfolio_tag' => 'PORTFOLIO',
     'portfolio_title_line_1' => 'Selected',
     'portfolio_title_line_2' => 'Projects.',

@@ -44,6 +44,7 @@ if (is_debug()) {
     <?php include __DIR__ . '/components/banner.php'; ?>
     <?php include __DIR__ . '/components/skills.php'; ?>
     <?php include __DIR__ . '/components/experiences.php'; ?>
+    <?php include __DIR__ . '/components/live.php'; ?>
     <?php include __DIR__ . '/components/portfolio.php'; ?>
     <?php include __DIR__ . '/components/contact.php'; ?>
     <?php include __DIR__ . '/components/footer.php'; ?>

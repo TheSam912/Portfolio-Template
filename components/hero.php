@@ -41,7 +41,7 @@
         </div>
 
         <div class="hero-buttons" data-reveal="up" data-reveal-delay="280">
-            <a href="#portfolio" class="hero-btn-primary" data-magnetic>
+            <a href="#live" class="hero-btn-primary" data-magnetic>
                 <span><?= e(setting('hero_btn_primary')); ?></span>
                 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </a>

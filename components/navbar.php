@@ -5,6 +5,7 @@ $navItems = [
     ['href' => '#services',   'label' => 'Services'],
     ['href' => '#skills',     'label' => 'Skills'],
     ['href' => '#experience', 'label' => 'Experience'],
+    ['href' => '#live',       'label' => 'Live'],
     ['href' => '#portfolio',  'label' => 'Portfolio'],
     ['href' => '#contact',    'label' => 'Contact'],
 ];

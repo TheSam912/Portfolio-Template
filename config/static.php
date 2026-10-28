@@ -65,7 +65,7 @@ return [
     'live_tag' => 'LIVE NOW',
     'live_title_line_1' => 'Featured Work You Can',
     'live_title_line_2' => 'Open Live.',
-    'live_lead' => 'Live websites and apps from my professional experience and featured projects.',
+    'live_lead' => 'Live websites and apps from professional work plus premium e-commerce demos you can open instantly.',
 
     'portfolio_tag' => 'FEATURED PROJECTS',
     'portfolio_title_line_1' => 'Featured',

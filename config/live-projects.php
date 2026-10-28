@@ -6,6 +6,26 @@
 return [
 
     [
+        'name'    => 'Onzyro',
+        'type'    => 'website',
+        'url'     => 'https://ecommerce-shoes-swart.vercel.app/',
+        'blurb'   => 'Premium Persian footwear storefront + admin — Next.js RTL commerce demo with catalog, checkout flow, and mock CMS (live showcase).',
+        'stack'   => 'Next.js · TypeScript',
+        'cta'     => 'Open live demo',
+        'related' => 'Self-Employed',
+    ],
+
+    [
+        'name'    => 'Vesta',
+        'type'    => 'website',
+        'url'     => 'https://ecommerce-watch-swart.vercel.app/',
+        'blurb'   => 'Premium Persian watch e-commerce — Next.js RTL storefront with rich catalog, studio product media, and admin demo (live showcase).',
+        'stack'   => 'Next.js · TypeScript',
+        'cta'     => 'Open live demo',
+        'related' => 'Self-Employed',
+    ],
+
+    [
         'name'    => 'Destinology.co.uk',
         'type'    => 'website',
         'url'     => 'https://www.destinology.co.uk/',

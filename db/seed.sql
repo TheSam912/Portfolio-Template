@@ -83,7 +83,7 @@ DELETE FROM projects;
 
 INSERT INTO projects (id, title, slug, description, image_path, project_url, sort_order) VALUES
 (1, 'Onzyro', 'onzyro', 'Premium Persian footwear e-commerce — RTL Next.js storefront with catalog, checkout, wishlist, and admin showcase. Live demo on Vercel.', 'assets/images/portfolio/project-onzyro.webp', 'https://ecommerce-shoes-swart.vercel.app/', 5),
-(2, 'Vesta', 'vesta', 'Premium Persian watch e-commerce — RTL Next.js storefront with studio catalog media, product detail, and admin demo. Live showcase on Vercel.', 'assets/images/portfolio/project-vesta.webp', 'https://ecommerce-watch-swart.vercel.app/', 8),
+(2, 'Vesta', 'vesta', 'Premium Persian watch e-commerce — RTL Next.js storefront with studio catalog media, product detail, and admin demo. Live showcase on Vercel.', 'assets/images/portfolio/project-vesta.webp', 'https://ecommerce-watch-five.vercel.app/', 8),
 (3, 'Destinology.co.uk', 'destinology', 'Large-scale holiday booking platform (PHP Laravel, Vue.js) with dynamic destination search, filtering, and package selection, built and maintained alongside the Corefinity team.', 'assets/images/portfolio/project-6.webp', 'https://www.destinology.co.uk/', 10),
 (4, 'NIU Nature', 'niu-nature', 'Production healthcare app with backend-integrated dynamic content, shipped and maintained for a live App Store audience.', 'assets/images/portfolio/project-2.webp', 'https://www.niu-nature.app/', 20),
 (5, 'WooCom Flutter E-Commerce', 'woocom', 'Fully responsive e-commerce app for web, tablet and mobile, with a Firebase backend for auth, product management and orders.', 'assets/images/portfolio/project-1.webp', 'https://thesam912.github.io/woocom', 30),

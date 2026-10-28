@@ -18,7 +18,7 @@ return [
     [
         'name'    => 'Vesta',
         'type'    => 'website',
-        'url'     => 'https://ecommerce-watch-swart.vercel.app/',
+        'url'     => 'https://ecommerce-watch-five.vercel.app/',
         'blurb'   => 'Premium Persian watch e-commerce — Next.js RTL storefront with rich catalog, studio product media, and admin demo (live showcase).',
         'stack'   => 'Next.js · TypeScript',
         'cta'     => 'Open live demo',

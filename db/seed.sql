@@ -87,8 +87,7 @@ INSERT INTO projects (id, title, slug, description, image_path, project_url, sor
 (3, 'Destinology.co.uk', 'destinology', 'Large-scale holiday booking platform (PHP Laravel, Vue.js) with dynamic destination search, filtering, and package selection, built and maintained alongside the Corefinity team.', 'assets/images/portfolio/project-6.webp', 'https://www.destinology.co.uk/', 10),
 (4, 'NIU Nature', 'niu-nature', 'Production healthcare app with backend-integrated dynamic content, shipped and maintained for a live App Store audience.', 'assets/images/portfolio/project-2.webp', 'https://www.niu-nature.app/', 20),
 (5, 'WooCom Flutter E-Commerce', 'woocom', 'Fully responsive e-commerce app for web, tablet and mobile, with a Firebase backend for auth, product management and orders.', 'assets/images/portfolio/project-1.webp', 'https://thesam912.github.io/woocom', 30),
-(6, 'TimeSync Healthcare AI', 'timesync', 'OpenAI-powered Flutter app delivering personalized health plans, backed by a Node.js/MongoDB service with Firebase real-time notifications.', 'assets/images/portfolio/project-3.webp', 'https://github.com/TheSam912', 40),
-(7, 'Wealthio', 'wealthio', 'Founded and built Wealthio as a personal business venture, owning product development from UI/UX design to backend implementation. Progressive Web App with a Next.js frontend and a PHP/Laravel backend.', 'assets/images/portfolio/project-wealthio.webp', 'https://wealthio.ir/', 50);
+(6, 'Wealthio', 'wealthio', 'Founded and built Wealthio as a personal business venture, owning product development from UI/UX design to backend implementation. Progressive Web App with a Next.js frontend and a PHP/Laravel backend.', 'assets/images/portfolio/project-wealthio.webp', 'https://wealthio.ir/', 50);
 
 -- ---- Admin user (password: changeme123) --------------
 INSERT INTO admin_users (username, password_hash) VALUES
